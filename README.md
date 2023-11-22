@@ -2,22 +2,22 @@
 
 ---
 
-## Basics
+## Course
 
-Full GitHub code: https://github.com/matheusbattisti/curso_node
-Next video: 29
+Full GitHub code: https://github.com/matheusbattisti/curso_node \
+Next video: 29 \
 folders until 10. next 11
 
-## Modules
+## Basics
 
-modules content here
+Several basic JS topics are covered.
 
 ---
 
 ## md styling help
 
 1.  numbered list item 1
-1.  numbered list item 2
+1.  numbered list item 2\
     wrapped text example
 1.  numbered list item 3
 1.  numbered list item 4
@@ -25,7 +25,7 @@ modules content here
 - bulleted list it 1
 - bulleted list it 2
 
-One line code example
+One line code example \
 `console.log("One line of code")`
 
 Multiline code example
