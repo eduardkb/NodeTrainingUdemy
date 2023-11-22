@@ -132,3 +132,4 @@ dist
 #manual
 *.md.swp
 package-lock.json
+*.tmp
