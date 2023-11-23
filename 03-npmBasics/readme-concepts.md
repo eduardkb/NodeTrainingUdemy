@@ -8,3 +8,7 @@
 
 - $> npm init -y
 - // creates a project with default options selected
+
+## Installing packages
+
+- $> npm install lodash //utility library
