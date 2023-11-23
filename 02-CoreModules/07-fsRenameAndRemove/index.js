@@ -8,8 +8,7 @@ fs.appendFile("arquivo.log", "String to write.", (err) => {
 
 // rename file name
 fs.rename("arquivo.log", "NewArquivo.log", function (err) {
-  if (err) throw err;
-  console.log("File Renamed!");
+  err ? console.log(err) : console.log("File Renamed!");
 });
 
 // delete file after timeout
