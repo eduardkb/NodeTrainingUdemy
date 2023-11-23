@@ -29,7 +29,7 @@ function fOperations() {
     .then((answer) => {
       const action = answer["action"];
       if (action === "Create Account") {
-        fGetAccountInfo();
+        fCreateAccount();
       }
     })
     .catch((err) => console.log(err));
@@ -37,7 +37,7 @@ function fOperations() {
 
 // CODE: CREATE ACCOUNTS OPERATION
 
-function fGetAccountInfo() {
+function fCreateAccount() {
   fClearScreen();
   console.log(
     chalk.green.bold.underline("Congratulations for choosing our bank!")
@@ -57,6 +57,18 @@ function fBuildAccount() {
     .then((answer) => {
       const accountName = answer["accountName"];
       // verify if name entered and between 3 and 15 chars
+      if (accountName.length < 3 || accountName.length > 15) {
+        console.log(
+          chalk.bgRed.black(
+            "Invalid account name. Must be from 3 to 15 characters."
+          )
+        );
+        setTimeout(() => {
+          fClearScreen();
+          fBuildAccount();
+        }, 2000);
+        return;
+      }
 
       // create database directory if it doesn't exist
       if (!fs.existsSync("accountsDB")) {
@@ -71,7 +83,6 @@ function fBuildAccount() {
           fClearScreen();
           fBuildAccount();
         }, 2000);
-
         return;
       }
       // create account file
