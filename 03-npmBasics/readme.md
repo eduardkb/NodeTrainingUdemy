@@ -12,3 +12,8 @@
 ## Installing packages
 
 - $> npm install lodash //utility library
+
+## Find modules
+
+- GoTo www.npmjs.com
+- Search modules
