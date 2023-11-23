@@ -15,15 +15,23 @@ const server = http.createServer((req, res) => {
     });
   } else {
     dDate = new Date();
-    let dStamp = dDate.toUTCString();
+    let dStamp = dDate.toISOString();
     const sWrite = `|${dStamp}| --> ${name}\n`;
     fs.appendFile("arquivo.log", sWrite, (err, data) => {
       res.writeHead(302, {
         Location: "/",
       });
-      console.log(
-        `DEB_LOG: File written at:${dDate.toLocaleDateString()} ${dDate.toTimeString()}`
-      );
+      console.log("Date format 1:", dDate.toLocaleDateString());
+      console.log("Date format 2:", dDate.toLocaleString());
+      console.log("Date format 3:", dDate.toLocaleTimeString());
+      console.log("Date format 4:", dDate.toTimeString());
+      console.log("Date format 5:", dDate.getTime());
+      console.log("Date format 6:", dDate.toISOString());
+      console.log("Date format 7:", dDate.toString());
+      console.log("Date format 8:", dDate.toUTCString());
+      //console.log("Date format 9:", dDate.UTC());
+      console.log("Date format 1:", dDate.valueOf());
+
       return res.end();
     });
   }
