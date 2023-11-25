@@ -22,14 +22,31 @@ function fOperations() {
           "Verify Balance",
           "Withdraw",
           "Deposit",
-          "End",
+          "Exit",
         ],
       },
     ])
     .then((answer) => {
       const action = answer["action"];
-      if (action === "Create Account") {
-        fCreateAccount();
+      switch (action) {
+        case "Create Account":
+          fCreateAccount();
+          break;
+        case "Verify Balance":
+          fGetBalance();
+          break;
+        case "Withdraw":
+          fWithdraw();
+          break;
+        case "Deposit":
+          fDeposit();
+          break;
+        case "Exit":
+          console.log(chalk.bgBlue.black("Thanks for using the Accounts"));
+          setTimeout(() => {
+            process.exit;
+          }, 3000);
+          break;
       }
     })
     .catch((err) => console.log(err));
@@ -103,7 +120,195 @@ function fBuildAccount() {
     });
 }
 
-// General Functions
+function fGetBalance() {
+  console.log(chalk.green.bold.underline("Getting My Account Balance!"));
+
+  inquirer
+    .prompt([
+      {
+        name: "accntName",
+        message: "Type your account name:",
+      },
+    ])
+    .then((answer) => {
+      const accntName = answer["accntName"];
+
+      if (!fAccountExists(accntName)) {
+        console.log(chalk.red.bold("This accont does not exist. Try again."));
+        setTimeout(() => {
+          fClearScreen();
+          fGetBalance();
+        }, 2000);
+        return;
+      }
+
+      const jRes = getAccount(accntName);
+      console.log(chalk.green("Your balance is : US$ ", jRes.balance));
+      setTimeout(() => {
+        fOperations();
+      }, 3000);
+    })
+    .catch((err) => console.log(err));
+}
+
+function fWithdraw() {
+  inquirer
+    .prompt([
+      {
+        name: "accountName",
+        message: "Type your account name:",
+      },
+    ])
+    .then((answer) => {
+      const accountName = answer["accountName"];
+      // verify if account exists
+      if (!fAccountExists(accountName)) {
+        console.log(chalk.red.bold("This accont does not exist. Try again."));
+        setTimeout(() => {
+          fClearScreen();
+          fWithdraw();
+        }, 2000);
+        return;
+      }
+
+      inquirer
+        .prompt([
+          {
+            name: "withdrawValue",
+            message: "Ammount to withdraw: ",
+          },
+        ])
+        .then((answer) => {
+          const iValue = answer["withdrawValue"];
+          if (!fWithdrawAmount(accountName, iValue)) {
+            setTimeout(() => {
+              fClearScreen();
+              fWithdraw();
+            }, 2000);
+            return;
+          }
+
+          console.log(
+            chalk.green.bold(
+              `Withdraw of US$ ${iValue} completed successfully.`
+            )
+          );
+          setTimeout(() => {
+            fClearScreen();
+            fOperations();
+          }, 2000);
+          return;
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
+}
+
+function fDeposit() {
+  inquirer
+    .prompt([
+      {
+        name: "accountName",
+        message: "Type your account name:",
+      },
+    ])
+    .then((answer) => {
+      const accountName = answer["accountName"];
+      // verify if account exists
+      if (!fAccountExists(accountName)) {
+        console.log(chalk.red.bold("This accont does not exist. Try again."));
+        setTimeout(() => {
+          fClearScreen();
+          fDeposit();
+        }, 2000);
+        return;
+      }
+
+      inquirer
+        .prompt([
+          {
+            name: "depositValue",
+            message: "Ammount to deposit: ",
+          },
+        ])
+        .then((answer) => {
+          const iValue = answer["depositValue"];
+          if (!fAddAmount(accountName, iValue)) {
+            setTimeout(() => {
+              fClearScreen();
+              fDeposit();
+            }, 2000);
+            return;
+          }
+
+          console.log(
+            chalk.green.bold(`Deposit of US$ ${iValue} completed successfully.`)
+          );
+          setTimeout(() => {
+            fClearScreen();
+            fOperations();
+          }, 2000);
+          return;
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
+}
+
+// GENERAL FUNCTIONS
+function fAccountExists(accountName) {
+  return fs.existsSync(`accountsDB/${accountName}.json`);
+}
+
+function fAddAmount(accountName, amount) {
+  const accountData = getAccount(accountName);
+
+  if (!amount || isNaN(parseFloat(amount))) {
+    console.log(chalk.red.bold("Amount to deposit is invalid. try again."));
+    return false;
+  }
+
+  accountData.balance = parseFloat(amount) + parseFloat(accountData.balance);
+  fs.writeFileSync(
+    `accountsDB/${accountName}.json`,
+    JSON.stringify(accountData),
+    (err) => console.log(err)
+  );
+  return true;
+}
+
+function fWithdrawAmount(accountName, amount) {
+  const accountData = getAccount(accountName);
+
+  if (!amount || isNaN(parseFloat(amount))) {
+    console.log(chalk.red.bold("Amount to withdraw is invalid. try again."));
+    return false;
+  }
+
+  if (parseFloat(accountData.balance) < parseFloat(amount)) {
+    console.log(
+      chalk.red.bold("Amount requested to withdraw is not available.")
+    );
+    return false;
+  }
+
+  accountData.balance = parseFloat(accountData.balance) - parseFloat(amount);
+  fs.writeFileSync(
+    `accountsDB/${accountName}.json`,
+    JSON.stringify(accountData),
+    (err) => console.log(err)
+  );
+  return true;
+}
+
+function getAccount(accountName) {
+  const accountJSON = fs.readFileSync(`accountsDB/${accountName}.json`, {
+    encoding: "utf8",
+    flag: "r",
+  });
+  return JSON.parse(accountJSON);
+}
+
 function fClearScreen() {
   console.clear();
   console.log("Accounts Application.");
