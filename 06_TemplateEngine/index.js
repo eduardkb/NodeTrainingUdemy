@@ -13,8 +13,19 @@ app.engine(
 
 app.set("view engine", "hbs");
 
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard");
+});
+
 app.get("/", (req, res) => {
-  res.render("home");
+  const user = {
+    name: "Eduard",
+    surename: "Buhali",
+  };
+  const produto = "Maçã";
+  const auth = true;
+
+  res.render("home", { webData: user, produto, auth });
 });
 
 app.listen(3000, () => {

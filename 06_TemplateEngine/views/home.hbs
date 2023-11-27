@@ -1,9 +1,33 @@
-<div class="text-center">
-  <h1 class="text-primary">Hello, from Handlebars</h1>
-  <p class="text-warning" class="font-italic">By EKB</p>
-
-</div>
 <div>
+  {{! CONDITIONAL VARIABLE }}
+  <h5>Authentication:</h5>
+  {{#if auth}}
+    <p>You <a style="color:green">are</a> authenticated.</p>
+    <p><a href="/dashboard">Click here</a> to access restricted area.</p>
+  {{else}}
+    <p>You are
+      <a style="color:red">NOT</a>
+      authenticated</p>
+  {{/if}}
+</div>
+<hr />
+<div>
+  {{! DINAMIC TEXT FROM OBJECT }}
+  <h5>Dinamic Object:</h5>
+  <a>The user name is: {{webData.name}}</a><br />
+  <a>His last name is: {{webData.surename}}</a>
+</div>
+<hr />
+<div>
+  {{! DINAMIC TEXT FROM VARIABLE }}
+  <h5>Dinamic Text:</h5>
+  <a>Produto: {{produto}}</a>
+</div>
+<hr />
+<div>
+  {{! FIXED TEXT }}
+  <h5>Fixed text on home:</h5>
+
   <p class="text-justify">My Text. Lorem Ipsum é simplesmente uma simulação de
     texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o
     século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os
