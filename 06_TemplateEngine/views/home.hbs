@@ -1,12 +1,41 @@
 <div>
+  {{! WORKING WITH THE 'WITH' PROPERTY }}
+  <h5>'WITH': Simplifying refrencing large objects</h5>
+  {{#with objLecture}}
+    <h6>Lecture title:
+      <span
+        style="text-decoration: underline;
+        font-weight: 700;
+         color: darkolivegreen;"
+      >'{{title}}</span>'</h6>
+    <ul>
+      <li>Description__: {{description}}</li>
+      <li>Panelist_____: {{panelist}}</li>
+      <li>Cost_________: {{cost}}</li>
+      <li>Location_____: {{location}}</li>
+    </ul>
+  {{/with}}
+</div>
+<hr />
+<div>
+  {{! ITEMS IN AN ARRAY }}
+  <h5>List of items with 'EACH':</h5>
+  <ul>
+    {{#each arrItems}}
+      <li>{{this.name}} - US$ {{this.price}}</li>
+    {{/each}}
+  </ul>
+</div>
+<hr />
+<div>
   {{! CONDITIONAL VARIABLE }}
   <h5>Authentication:</h5>
   {{#if auth}}
-    <p>You <a style="color:green">are</a> authenticated.</p>
-    <p><a href="/dashboard">Click here</a> to access restricted area.</p>
+    <p>You <span style="color:green">are</span> authenticated.</p>
+    <p><span href="/dashboard">Click here</span> to access restricted area.</p>
   {{else}}
     <p>You are
-      <a style="color:red">NOT</a>
+      <span style="color:red">NOT</span>
       authenticated</p>
   {{/if}}
 </div>
@@ -14,14 +43,14 @@
 <div>
   {{! DINAMIC TEXT FROM OBJECT }}
   <h5>Dinamic Object:</h5>
-  <a>The user name is: {{webData.name}}</a><br />
-  <a>His last name is: {{webData.surename}}</a>
+  <span>The user name is: {{webData.name}}</span><br />
+  <span>His last name is: {{webData.surename}}</span>
 </div>
 <hr />
 <div>
   {{! DINAMIC TEXT FROM VARIABLE }}
   <h5>Dinamic Text:</h5>
-  <a>Produto: {{produto}}</a>
+  <span>Produto: {{produto}}</span>
 </div>
 <hr />
 <div>
