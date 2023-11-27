@@ -5,7 +5,7 @@
 ## Course
 
 Full GitHub code: https://github.com/matheusbattisti/curso_node \
-Next video: 88 \
+Next video: 96 \
 folders until 10. next 11
 
 ## Basics
