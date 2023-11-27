@@ -1,0 +1,18 @@
+h1 {
+  color: blue;
+}
+
+p {
+  color: darkgoldenrod;
+}
+
+.headerFooter {
+  background-color: rgb(85, 88, 90);
+  color: white;
+  padding: 5px;
+}
+
+.mainDiv {
+  margin-left: 200px;
+  margin-right: 200px;
+}

@@ -1,40 +1,41 @@
 <html lang="en">
   <head>
-    <!-- <meta> tags> -->
-    <link
+    <!-- COMMENTED BOOTSTRAP CSS TO USE LOCAL CSS -->
+    {{! <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    />
-    <title>Book Face</title>
+    /> }}
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Handlebar Page</title>
   </head>
 
   <body>
-    <header class="p-3 mb-2 bg-secondary text-white">
+    <header class="headerFooter">
       <small>E.K.B Page</small>
     </header>
     <nav>
       <p>Navigation Bar</p>
     </nav>
-    <div class="container">
+    <div class="mainDiv">
       <div class="text-center">
         <h1 class="text-primary">Hello, from Handlebars</h1>
-        <p class="text-warning" class="font-italic">By EKB</p>
       </div>
       <hr />
       {{{body}}}
       <hr />
     </div>
 
-    <footer class="p-3 mb-2 bg-secondary text-white">
+    <footer class="headerFooter">
       <small>Footer - EKB_Page</small>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <!-- COMMENTED BOOTSTRAP CSS TO USE LOCAL CSS -->
+    {{! <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     ></script>
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    ></script>
+    ></script> }}
   </body>
 </html>

@@ -8,10 +8,12 @@ app.engine(
   exphbs.engine({
     defaultLayout: "main",
     extname: ".hbs",
+    partialsDir: ["views/partials"], //needed for partials
   })
 );
 
 app.set("view engine", "hbs");
+app.use(express.static("public"));
 
 app.get("/dashboard", (req, res) => {
   res.render("dashboard");
@@ -38,6 +40,31 @@ app.get("/", (req, res) => {
   };
 
   res.render("home", { webData: user, produto, auth, arrItems, objLecture });
+});
+
+app.get("/blog", (req, res) => {
+  const posts = [
+    {
+      title: "Learn Node.js",
+      category: "IT Learn",
+      body: "Text of post learn nodejs. Text of post learn nodejs. Text of post learn nodejs.",
+      comments: 4,
+    },
+    {
+      title: "Learn PHP",
+      category: "IT Learn",
+      body: "Text of post learn php. Text of post learn php. Text of post learn php.",
+      comments: 2,
+    },
+    {
+      title: "Invest in FII's",
+      category: "Finances",
+      body: "Text about investing in imobliliary funds. Text about investing in imobliliary funds. ",
+      comments: 16,
+    },
+  ];
+
+  res.render("blog", { posts });
 });
 
 app.listen(3000, () => {

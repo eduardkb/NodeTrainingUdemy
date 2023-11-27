@@ -5,14 +5,8 @@
 ## Course
 
 Full GitHub code: https://github.com/matheusbattisti/curso_node \
-Next video: 96 \
+Next video: 105 \
 folders until 10. next 11
-
-## Basics
-
-Several basic JS topics are covered.
-
----
 
 ## md styling help
 
