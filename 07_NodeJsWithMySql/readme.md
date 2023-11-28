@@ -1,7 +1,7 @@
 # Implementing Node.js with MySQL
 
 ## Basics
-
+#### App Description
 - CRUD app that manages books with a MySQL database.
   - App automatically creates the table and adds some books (/myModueles/myModule.js)
   - main page (https://localhos:3000)
@@ -10,7 +10,7 @@
     - Update book: /books/edit/:id (inside book details. Click List All and select a book.)
     - Delete: /books/edit/:id (inside book details. Click List All and select a book.)
 
-### Using Connection Pool
+#### Implementing Connection Pool
 
 - Connection Pool is a cache to accelerate database connections
 - Implementation
