@@ -9,9 +9,7 @@ function fCreateTable(dbConn) {
                     `;
 
   dbConn.commit(sQuery, (err) => {
-    err
-      ? console.log("COMM_DB: ERROR:", err)
-      : console.log("COMM_DB: Table created successfully.");
+    err ? console.log("COMM_DB: ERROR:", err) : null; //console.log("COMM_DB: Table created successfully.");
   });
 }
 
@@ -29,7 +27,7 @@ function fAddSampleData(dbConn) {
     dbConn.commit(item, (err) => {
       err
         ? console.log(`COMM_DB: Error inserting line #${i + 1}. ERR: ${err}`)
-        : console.log(`COMM_DB: Success inserting line #${i + 1}`);
+        : null; //console.log(`COMM_DB: Success inserting line #${i + 1}`);
     });
   });
 }

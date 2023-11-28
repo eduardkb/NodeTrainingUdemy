@@ -98,6 +98,7 @@ function fBookRoutes() {
     });
   });
 
+  // GET - List all books
   app.get("/books", (req, res) => {
     const sSql = "SELECT * FROM books";
     conn.query(sSql, (err, data) => {
@@ -110,7 +111,7 @@ function fBookRoutes() {
       }
     });
   });
-
+  // GET - Print details about one book
   app.get("/books/:id", (req, res) => {
     const id = req.params.id;
     const sSql = `SELECT * FROM books WHERE id = ${id}`;
@@ -121,6 +122,39 @@ function fBookRoutes() {
       } else {
         const book = data[0];
         res.render("book", { book });
+      }
+    });
+  });
+
+  // GET - To get details prepared for update
+  app.get("/books/edit/:id", (req, res) => {
+    const id = req.params.id;
+    const sSql = `SELECT * fROM books WHERE id = ${id}`;
+    conn.query(sSql, (err, data) => {
+      if (err) {
+        console.log("SQL_ERR:", err);
+      } else {
+        const book = data[0];
+        res.render("editbook", { book });
+      }
+    });
+  });
+
+  // POST - to update the book
+  app.post("/books/updatebook", (req, res) => {
+    const id = req.body.id;
+    const name = req.body.name;
+    const pages = req.body.pages;
+    const price = req.body.price;
+
+    // console.log("DEB_VAL_UPDATE: %s|%s|%s|%s", id, name, pages, price);
+
+    const sSql = `UPDATE books SET name = '${name}', pages = ${pages}, price = ${price} WHERE id = ${id}`;
+    conn.query(sSql, (err) => {
+      if (err) {
+        console.log("SQL_ERR:", err);
+      } else {
+        res.redirect("/books");
       }
     });
   });

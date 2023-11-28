@@ -57,6 +57,11 @@ h3 {
   font-weight: bold;
 }
 
+.actions {
+  margin-top: 1em;
+  border-top: 1px solid #ccc;
+}
+
 /* Book */
 #book-page {
   padding: 2em;

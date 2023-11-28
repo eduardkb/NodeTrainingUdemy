@@ -1,0 +1,33 @@
+<h3>Edit your Book:</h3>
+<form action="/books/updatebook" method="POST" class="form">
+  <input type="hidden" name="id" value="{{book.id}}" />
+  <div class="form-control">
+    <label for="name">Title:</label>
+    <input
+      type="text"
+      name="name"
+      placeholder="Type the Title"
+      value="{{book.name}}"
+    />
+  </div>
+  <div class="form-control">
+    <label for="pages">Number of Pages:</label>
+    <input
+      type="number"
+      name="pages"
+      placeholder="Number of Pages"
+      value="{{book.pages}}"
+    />
+  </div>
+  <div class="form-control">
+    <label for="price">Price:</label>
+    <input
+      type="number"
+      step="0.01"
+      name="price"
+      placeholder="Price"
+      value="{{book.price}}"
+    />
+  </div>
+  <input type="submit" value="Submit Edit" />
+</form>
