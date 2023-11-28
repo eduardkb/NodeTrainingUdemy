@@ -87,10 +87,11 @@ function fBookRoutes() {
     const price = req.body.price;
 
     //building query to inster on database
-    const sSql = `INSERT INTO books (name, pages, price) VALUES ('${title}', ${pagesqtty}, ${price})`;
+    const sSql = `INSERT INTO books (name, pages, price) VALUES (?,?,?)`;
+    const data = [title, pagesqtty, price];
 
     // executing query
-    pool.query(sSql, (err) => {
+    pool.query(sSql, data, (err) => {
       if (err) {
         console.log(err);
       } else {
@@ -116,9 +117,10 @@ function fBookRoutes() {
   // GET - Print details about one book
   app.get("/books/:id", (req, res) => {
     const id = req.params.id;
-    const sSql = `SELECT * FROM books WHERE id = ${id}`;
 
-    pool.query(sSql, (err, data) => {
+    const sSql = `SELECT * FROM books WHERE id = ?`;
+    const data = [id];
+    pool.query(sSql, data, (err, data) => {
       if (err) {
         console.log("SQL_ERR:", err);
       } else {
@@ -131,8 +133,9 @@ function fBookRoutes() {
   // GET - To get details prepared for update
   app.get("/books/edit/:id", (req, res) => {
     const id = req.params.id;
-    const sSql = `SELECT * fROM books WHERE id = ${id}`;
-    pool.query(sSql, (err, data) => {
+    const sSql = `SELECT * fROM books WHERE id = ?`;
+    const data = [id];
+    pool.query(sSql, data, (err, data) => {
       if (err) {
         console.log("SQL_ERR:", err);
       } else {
@@ -151,8 +154,9 @@ function fBookRoutes() {
 
     // console.log("DEB_VAL_UPDATE: %s|%s|%s|%s", id, name, pages, price);
 
-    const sSql = `UPDATE books SET name = '${name}', pages = ${pages}, price = ${price} WHERE id = ${id}`;
-    pool.query(sSql, (err) => {
+    const sSql = "UPDATE books SET name = ?, pages = ?, price = ? WHERE id = ?";
+    const data = [name, pages, price, id];
+    pool.query(sSql, data, (err) => {
       if (err) {
         console.log("SQL_ERR:", err);
       } else {
@@ -164,8 +168,9 @@ function fBookRoutes() {
   // POST - to delete a book
   app.post("/books/remove/:id", (req, res) => {
     const id = req.params.id;
-    const sSql = `DELETE FROM books WHERE id = ${id}`;
-    pool.query(sSql, (err) => {
+    const sSql = `DELETE FROM books WHERE id = ?`;
+    const data = [id];
+    pool.query(sSql, data, (err) => {
       if (err) {
         console.log("SQL_ERR:", err);
       } else {

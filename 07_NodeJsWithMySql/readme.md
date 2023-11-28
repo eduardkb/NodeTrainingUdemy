@@ -18,6 +18,11 @@
   - imported conn with pool variable inside index.js
   - used pool variable instead of conn
 
+### Executing query securely (avoiding 'SQL Injection')
+
+- on queries use questoin marks to avoid SQL Injection
+- examples on fBookRoutes() function inside index.js
+
 ## How to Run App
 
 - Execute to install:
