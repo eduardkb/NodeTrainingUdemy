@@ -10,6 +10,21 @@
     - Update book: /books/edit/:id (inside book details. Click List All and select a book.)
     - Delete: /books/edit/:id (inside book details. Click List All and select a book.)
 
+### Using Connection Pool
+
+- Connection Pool is a cache to accelerate database connections
+- Implementation
+  - created new file /db/conn.js and migrated database connection to it.
+  - imported conn with pool variable inside index.js
+  - used pool variable instead of conn
+
+## How to Run App
+
+- Execute to install:
+  - $> npm install
+- Execute to run
+  - $> npm start
+
 ## Pre-requisites
 
 - Install MySQL Database
@@ -27,6 +42,7 @@
     SHOW DATABASES;
 
 - Install Workbench
+  - SQL local manager
   - Install MySql Workbench from: https://www.mysql.com/products/workbench/
 
 ## Node packages pre-requisites (initializing project)
@@ -37,10 +53,3 @@
   - $> npm init -y
   - $> npm install nodemon --save-dev
   - $> npm install express express-handlebars
-
-## Initialize App
-
-- Execute to install:
-  - $> npm install
-- Execute to run
-  - $> npm start

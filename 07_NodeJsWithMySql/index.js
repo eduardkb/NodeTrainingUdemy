@@ -1,15 +1,17 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-const mysql = require("mysql");
+const pool = require("./db/conn");
 const myModule = require("./myModules/myModule");
 const path = require("path");
 const port = 3000;
 const app = express();
-let conn;
 
 fInitializeApp();
 fBookRoutes();
 fInitializeDB();
+fStartServer();
+
+//!!!! FUNCTION DEFINITIONS !!!!//
 
 function fInitializeApp() {
   // getting body of submitted form
@@ -36,29 +38,29 @@ function fInitializeApp() {
 }
 
 function fInitializeDB() {
-  // Defining MySQL Connection
-  conn = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "nodebasicsdb",
-  });
+  // Create table and data if not exists
+  myModule.fCreateTable(pool);
+  myModule.fAddSampleData(pool);
 
-  // Connecting to MySQL
-  conn.connect((err) => {
-    if (err) {
-      console.log("DB_CONN:", err);
-    } else {
-      console.log("Success connecting to MySQL!");
+  // Not used anymore. New database connection on /db/conn.js
+  // conn = mysql.createConnection({ // define DB parameters
+  //   host: "localhost",
+  //   user: "root",
+  //   password: "",
+  //   database: "nodebasicsdb",
+  // });
 
-      // Create table and data if not exists
-      myModule.fCreateTable(conn);
-      myModule.fAddSampleData(conn);
+  // // Connecting to MySQL
+  // conn.connect((err) => {
+  //   if (err) {
+  //     console.log("DB_CONN:", err);
+  //   } else {
+  //     console.log("Success connecting to MySQL!");
 
-      // start app if successfully connected
-      fStartServer(app, port);
-    }
-  });
+  //     // start app if successfully connected
+  //     fStartServer(app, port);
+  //   }
+  // });
 }
 
 function fStartServer() {
@@ -88,7 +90,7 @@ function fBookRoutes() {
     const sSql = `INSERT INTO books (name, pages, price) VALUES ('${title}', ${pagesqtty}, ${price})`;
 
     // executing query
-    conn.query(sSql, (err) => {
+    pool.query(sSql, (err) => {
       if (err) {
         console.log(err);
       } else {
@@ -101,7 +103,7 @@ function fBookRoutes() {
   // GET - List all books
   app.get("/books", (req, res) => {
     const sSql = "SELECT * FROM books";
-    conn.query(sSql, (err, data) => {
+    pool.query(sSql, (err, data) => {
       if (err) {
         console.log(err);
         return;
@@ -116,7 +118,7 @@ function fBookRoutes() {
     const id = req.params.id;
     const sSql = `SELECT * FROM books WHERE id = ${id}`;
 
-    conn.query(sSql, (err, data) => {
+    pool.query(sSql, (err, data) => {
       if (err) {
         console.log("SQL_ERR:", err);
       } else {
@@ -130,7 +132,7 @@ function fBookRoutes() {
   app.get("/books/edit/:id", (req, res) => {
     const id = req.params.id;
     const sSql = `SELECT * fROM books WHERE id = ${id}`;
-    conn.query(sSql, (err, data) => {
+    pool.query(sSql, (err, data) => {
       if (err) {
         console.log("SQL_ERR:", err);
       } else {
@@ -150,7 +152,7 @@ function fBookRoutes() {
     // console.log("DEB_VAL_UPDATE: %s|%s|%s|%s", id, name, pages, price);
 
     const sSql = `UPDATE books SET name = '${name}', pages = ${pages}, price = ${price} WHERE id = ${id}`;
-    conn.query(sSql, (err) => {
+    pool.query(sSql, (err) => {
       if (err) {
         console.log("SQL_ERR:", err);
       } else {
@@ -163,7 +165,7 @@ function fBookRoutes() {
   app.post("/books/remove/:id", (req, res) => {
     const id = req.params.id;
     const sSql = `DELETE FROM books WHERE id = ${id}`;
-    conn.query(sSql, (err) => {
+    pool.query(sSql, (err) => {
       if (err) {
         console.log("SQL_ERR:", err);
       } else {
