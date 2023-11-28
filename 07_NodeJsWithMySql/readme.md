@@ -1,5 +1,15 @@
 # Implementing Node.js with MySQL
 
+## Basics
+
+- CRUD app that manages books with a MySQL database.
+  - App automatically creates the table and adds some books (/myModueles/myModule.js)
+  - main page (https://localhos:3000)
+    - Create book: /
+    - List books: /books
+    - Update book: /books/edit/:id (inside book details clicking a book name on the list)
+    - Delete: PLACEHOLDER
+
 ## Pre-requisites
 
 - Install MySQL Database
