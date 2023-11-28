@@ -53,6 +53,19 @@ app.post("/books/insertbook", (req, res) => {
   });
 });
 
+app.get("/books", (req, res) => {
+  const sSql = "SELECT * FROM books";
+  conn.query(sSql, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      const books = data;
+      res.render("books", { books });
+    }
+  });
+});
+
 // Defining MySQL Connection
 const conn = mysql.createConnection({
   host: "localhost",
