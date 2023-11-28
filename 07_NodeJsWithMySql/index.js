@@ -3,99 +3,110 @@ const exphbs = require("express-handlebars");
 const mysql = require("mysql");
 const myModule = require("./myModules/myModule");
 const port = 3000;
-
 const app = express();
-app.use(express.static("public"));
+let conn = "";
 
-// getting body of submitted form
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-app.use(express.json());
+fInitializeApp();
+fBookRoutes();
+fInitializeDB();
 
-// Initilize handlebars engine
-app.engine(
-  "hbs",
-  exphbs.engine({
-    defaultLayout: "main",
-    extname: ".hbs",
-    partialsDir: ["views/partials"], //needed for partials
-  })
-);
-app.set("view engine", "hbs");
-app.use(express.static("public"));
+function fInitializeApp() {
+  app.use(express.static("public"));
 
-// Base route
-app.get("/", (req, res) => {
-  res.render("home");
-});
+  // getting body of submitted form
+  app.use(
+    express.urlencoded({
+      extended: true,
+    })
+  );
+  app.use(express.json());
 
-// POST Route to submit books
-app.post("/books/insertbook", (req, res) => {
-  // getting data from submitted form
-  const title = req.body.title;
-  const pagesqtty = req.body.pagesqtty;
-  const price = req.body.price;
+  // Initilize handlebars engine
+  app.engine(
+    "hbs",
+    exphbs.engine({
+      defaultLayout: "main",
+      extname: ".hbs",
+      partialsDir: ["views/partials"], //needed for partials
+    })
+  );
+  app.set("view engine", "hbs");
+  app.use(express.static("public"));
+}
 
-  //building query to inster on database
-  const sSql = `INSERT INTO books (name, pages, price) VALUES ('${title}', ${pagesqtty}, ${price})`;
+function fInitializeDB() {
+  // Defining MySQL Connection
+  conn = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "nodebasicsdb",
+  });
 
-  // executing query
-  conn.query(sSql, (err) => {
+  // Connecting to MySQL
+  conn.connect((err) => {
     if (err) {
-      console.log(err);
+      console.log("DB_CONN:", err);
     } else {
-      console.log("COMM_DB: Successfully executed:", sSql);
-      res.redirect("/");
+      console.log("Success connecting to MySQL!");
+
+      // Create table and data if not exists
+      myModule.fCreateTable(conn);
+      myModule.fAddSampleData(conn);
+
+      // start app if successfully connected
+      fStartServer(app, port);
     }
   });
-});
+}
 
-app.get("/books", (req, res) => {
-  const sSql = "SELECT * FROM books";
-  conn.query(sSql, (err, data) => {
+function fStartServer() {
+  app.listen(port, (err) => {
     if (err) {
-      console.log(err);
-      return;
+      console.log("Server_INI_ERROR:", err);
     } else {
-      const books = data;
-      res.render("books", { books });
+      console.log(`SERVER INITIALIZED ON PORT ${port}.`);
     }
   });
-});
+}
 
-// Defining MySQL Connection
-const conn = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "nodebasicsdb",
-});
+function fBookRoutes() {
+  // Base route
+  app.get("/", (req, res) => {
+    res.render("home");
+  });
 
-// Connecting to MySQL
-conn.connect((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Success connecting to MySQL!");
+  // POST Route to submit books
+  app.post("/books/insertbook", (req, res) => {
+    // getting data from submitted form
+    const title = req.body.title;
+    const pagesqtty = req.body.pagesqtty;
+    const price = req.body.price;
 
-    // Create table and data if not exists
-    myModule.fCreateTable(conn);
-    myModule.fAddSampleData(conn);
+    //building query to inster on database
+    const sSql = `INSERT INTO books (name, pages, price) VALUES ('${title}', ${pagesqtty}, ${price})`;
 
-    // start app if successfully connected
-    fStartServer(app, port);
-  }
-});
+    // executing query
+    conn.query(sSql, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("COMM_DB: Successfully executed:", sSql);
+        res.redirect("/books");
+      }
+    });
+  });
 
-function fStartServer(app, srvPort) {
-  app.listen(srvPort, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(`SERVER INITIALIZED ON PORT ${srvPort}.`);
-    }
+  app.get("/books", (req, res) => {
+    const sSql = "SELECT * FROM books";
+    conn.query(sSql, (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        const books = data;
+        res.render("books", { books });
+      }
+    });
   });
 }

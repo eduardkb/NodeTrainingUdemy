@@ -21,8 +21,9 @@ function fAddSampleData(dbConn) {
     "INSERT IGNORE INTO books VALUES (2,'The Davinci Code', 485, 33.15);",
     "INSERT IGNORE INTO books (id, name, pages, price) VALUES (3,'Guide of the Galaxy', 685, 44.44);",
     "INSERT IGNORE INTO books (id, name, pages, price) VALUES (4,'Wildcards', 258, 25.88);",
-    "INSERT IGNORE INTO books (name, pages, price) VALUES ('Silmarillion', 282, 25.85);",
-    "INSERT IGNORE INTO books (name, pages, price) VALUES ('Kraken. The Legend', 333, 33.33);",
+    // Insert with PK automatic generation:
+    // "INSERT IGNORE INTO books (name, pages, price) VALUES ('Silmarillion', 282, 25.85);",
+    // "INSERT IGNORE INTO books (name, pages, price) VALUES ('Kraken. The Legend', 333, 33.33);",
   ];
   mySqlData.forEach((item, i) => {
     dbConn.commit(item, (err) => {
