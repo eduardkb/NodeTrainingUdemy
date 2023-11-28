@@ -6,6 +6,7 @@
 h3 {
   text-align: center;
   text-decoration: underline;
+  margin-bottom: 15px;
 }
 
 .form {
@@ -59,12 +60,19 @@ h3 {
 
 .actions {
   margin-top: 1em;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
   border-top: 1px solid #ccc;
+}
+
+.actions a {
+  margin-right: 1em;
 }
 
 /* Book */
 #book-page {
-  padding: 2em;
+  padding: 10px;
 }
 
 #book-page .container {

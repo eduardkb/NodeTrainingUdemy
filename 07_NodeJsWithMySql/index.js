@@ -158,4 +158,17 @@ function fBookRoutes() {
       }
     });
   });
+
+  // POST - to delete a book
+  app.post("/books/remove/:id", (req, res) => {
+    const id = req.params.id;
+    const sSql = `DELETE FROM books WHERE id = ${id}`;
+    conn.query(sSql, (err) => {
+      if (err) {
+        console.log("SQL_ERR:", err);
+      } else {
+        res.redirect("/books");
+      }
+    });
+  });
 }

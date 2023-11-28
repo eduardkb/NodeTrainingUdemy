@@ -7,8 +7,8 @@
   - main page (https://localhos:3000)
     - Create book: /
     - List books: /books
-    - Update book: /books/edit/:id (inside book details clicking a book name on the list)
-    - Delete: PLACEHOLDER
+    - Update book: /books/edit/:id (inside book details. Click List All and select a book.)
+    - Delete: /books/edit/:id (inside book details. Click List All and select a book.)
 
 ## Pre-requisites
 
