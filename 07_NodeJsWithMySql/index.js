@@ -4,7 +4,7 @@ const mysql = require("mysql");
 const myModule = require("./myModules/myModule");
 const port = 3000;
 const app = express();
-let conn = "";
+let conn;
 
 fInitializeApp();
 fBookRoutes();
@@ -106,6 +106,20 @@ function fBookRoutes() {
       } else {
         const books = data;
         res.render("books", { books });
+      }
+    });
+  });
+
+  app.get("/books/:id", (req, res) => {
+    const id = req.params.id;
+    const sSql = `SELECT * FROM books WHERE id = ${id}`;
+
+    conn.query(sSql, (err, data) => {
+      if (err) {
+        console.log("SQL_ERR:", err);
+      } else {
+        const book = data[0];
+        res.render("book", { book });
       }
     });
   });
