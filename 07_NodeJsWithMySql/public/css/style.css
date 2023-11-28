@@ -1,0 +1,41 @@
+* {
+  font-family: Helvetica;
+}
+
+h3 {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.form {
+  width: 450px;
+  margin: 0 auto;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5cm;
+}
+
+.form-control label {
+  font-weight: bold;
+  margin-bottom: 0.3em;
+}
+
+.form-control input {
+  padding: 5px;
+}
+
+.headerFooter {
+  text-decoration: underline;
+  background-color: darkgrey;
+  color: white;
+  padding: 10px;
+}
+
+.mainDiv {
+  margin: 5px 100px;
+  padding: 10px;
+  border: 3px solid darkgray;
+}

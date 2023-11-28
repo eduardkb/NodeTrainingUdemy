@@ -3,6 +3,7 @@
 ## Pre-requisites
 
 - Install MySQL Database
+
   - Install and run XAMPP: \
     Official Page: https://sourceforge.net/projects/xampp/ \
     Start MySQL from XAMPP Control Panel
@@ -14,3 +15,22 @@
     mysql -u root
   - Use cmd of MySQL \
     SHOW DATABASES;
+
+- Install Workbench
+  - Install MySql Workbench from: https://www.mysql.com/products/workbench/
+
+## Node packages pre-requisites (initializing project)
+
+- MySQL driver
+  - $> npm install mysql
+- Basic packages
+  - $> npm init -y
+  - $> npm install nodemon --save-dev
+  - $> npm install express express-handlebars
+
+## Initialize App
+
+- Execute to install:
+  - $> npm install
+- Execute to run
+  - $> npm start
