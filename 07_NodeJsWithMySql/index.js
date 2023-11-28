@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const mysql = require("mysql");
 const myModule = require("./myModules/myModule");
+const path = require("path");
 const port = 3000;
 const app = express();
 let conn;
@@ -11,8 +12,6 @@ fBookRoutes();
 fInitializeDB();
 
 function fInitializeApp() {
-  app.use(express.static("public"));
-
   // getting body of submitted form
   app.use(
     express.urlencoded({
@@ -31,6 +30,8 @@ function fInitializeApp() {
     })
   );
   app.set("view engine", "hbs");
+
+  // initialize public resources
   app.use(express.static("public"));
 }
 
