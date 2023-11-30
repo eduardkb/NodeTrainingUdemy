@@ -1,13 +1,14 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const conn = require("./db/conn");
+const User = require("./models/User");
 const port = 3000;
 const app = express();
 
 fInitializeApp();
 fAppRoutes();
-fInitializeDB();
-fStartServer();
+// Init DB and start server if DB Initialized
+fInitDB();
 
 //!!!! FUNCTION DEFINITIONS !!!!//
 
@@ -35,7 +36,14 @@ function fInitializeApp() {
   app.use(express.static("public"));
 }
 
-function fInitializeDB() {}
+function fInitDB() {
+  conn
+    .sync()
+    .then(() => {
+      fStartServer();
+    })
+    .catch((err) => console.log("DB_ERR: Error syncing DB. ERR:", err));
+}
 
 function fStartServer() {
   app.listen(port, (err) => {
@@ -51,5 +59,12 @@ function fAppRoutes() {
   // Base route
   app.get("/", (req, res) => {
     res.render("home");
+  });
+
+  // If user types an invalid URL
+  // is only executed if not in any path above
+  // 404 - page does not exist
+  app.use((req, res, next) => {
+    res.render("404");
   });
 }

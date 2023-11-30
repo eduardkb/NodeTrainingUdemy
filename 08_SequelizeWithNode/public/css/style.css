@@ -95,3 +95,9 @@ h3 {
 #navbar ul li {
   margin-left: 1em;
 }
+
+.h3404Err {
+  color: red;
+  text-decoration: underline;
+  font-weight: bold;
+}
