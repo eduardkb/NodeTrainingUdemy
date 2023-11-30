@@ -7,6 +7,9 @@
 
 ## How to Run
 
+- $> npm install
+- $> npm run
+
 ## Initializing project and installing dependencies
 
 - Initialize project

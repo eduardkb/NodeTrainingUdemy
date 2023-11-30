@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const conn = require("./db/conn");
 const User = require("./models/User");
+const userRoutes = require("./routes/users");
 const port = 3000;
 const app = express();
 
@@ -60,6 +61,9 @@ function fAppRoutes() {
   app.get("/", (req, res) => {
     res.render("home");
   });
+
+  // Import User routes
+  app.use("/users", userRoutes);
 
   // If user types an invalid URL
   // is only executed if not in any path above

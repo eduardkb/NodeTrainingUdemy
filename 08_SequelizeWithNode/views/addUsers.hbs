@@ -1,0 +1,35 @@
+<div>
+  <h3 class="h3Title">Add Users</h3>
+  <form action="/users/create" method="post" class="form">
+    <div class="form-control">
+      <label for="name">Name:</label>
+      <input type="text" name="name" placeholder="Type users name" />
+    </div>
+    <div class="form-control">
+      <label for="occupation">Occupation:</label>
+      <input
+        type="text"
+        name="occupation"
+        placeholder="Type users occupation"
+      />
+    </div>
+    <div class="form-control">
+      <label for="age">Age:</label>
+      <input type="number" name="age" placeholder="Type users age" />
+    </div>
+    <div class="form-control">
+      <label for="occupation">Heigth:</label>
+      <input
+        type="number"
+        step="0.01"
+        name="heigth"
+        placeholder="Type users heigth"
+      />
+    </div>
+    <div class="form-control form-checkbox">
+      <input type="checkbox" name="newsletter" checked />
+      <label for="newsletter">Get News?</label>
+    </div>
+    <input type="submit" value="Submit" />
+  </form>
+</div>

@@ -96,8 +96,22 @@ h3 {
   margin-left: 1em;
 }
 
+.form-checkbox {
+  flex-direction: row;
+}
+
+.form-checkbox input {
+  margin-right: 10px;
+}
+
 .h3404Err {
   color: red;
   text-decoration: underline;
   font-weight: bold;
+}
+
+.h3Title {
+  color: cornflowerblue;
+  font-weight: bold;
+  text-decoration: underline;
 }
