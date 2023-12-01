@@ -6,7 +6,7 @@
 
 Full GitHub code: https://github.com/matheusbattisti/curso_node \
 Next video: 141 \
-folders until 10. next 11
+folders until 13. next 14
 
 ## md styling help
 
