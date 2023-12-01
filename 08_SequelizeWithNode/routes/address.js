@@ -19,11 +19,10 @@ router.post("/create", async (req, res) => {
 });
 
 router.post("/delete", async (req, res) => {
-  console.log("==> DEB_Delete Function");
   const id = req.body.id;
   const UserId = req.body.UserId;
 
-  console.log("==> DEB_Delete Address: |%s|%s|", id, UserId);
+  //console.log("==> DEB_Delete Address: |%s|%s|", id, UserId);
 
   await Address.destroy({ where: { id: id } });
   res.redirect(`/users/edit/${UserId}`);

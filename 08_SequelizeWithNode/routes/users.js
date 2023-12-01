@@ -76,4 +76,9 @@ router.post("/update", async (req, res) => {
   res.redirect("/");
 });
 
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  res.render("detailsUser", { id });
+});
+
 module.exports = router;
