@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const Address = require("../models/Address");
 
 router.get("/add", (req, res) => {
   //res.sendFile(`/userform.html`);
@@ -42,9 +43,10 @@ router.post("/delete/:id", async (req, res) => {
 
 router.get("/edit/:id", async (req, res) => {
   const id = req.params.id;
-  const user = await User.findOne({ raw: true, where: { id: id } });
-  console.log("DEB_EditUserGet:", user);
-  res.render("editUser", { user });
+  const user = await User.findOne({ include: Address, where: { id: id } });
+  console.log("==> DEB_EditUserGet:", user);
+  console.log("==> DEB_UsrAddresses:", user.Addresses);
+  res.render("editUser", { user: user.get({ plain: true }) });
 });
 
 router.post("/update", async (req, res) => {
