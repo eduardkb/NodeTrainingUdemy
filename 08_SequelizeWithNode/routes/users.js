@@ -18,7 +18,7 @@ router.post("/create", async (req, res) => {
   // validating newsletter
   newsletter === "on" ? (newsletter = true) : (newsletter = false);
 
-  console.log("DEB_DataToInsert:", req.body);
+  // console.log("DEB_DataToInsert:", req.body);
 
   // writing to DB with sequelize.create()
   await User.create({ name, occupation, newsletter, age, heigth });
@@ -29,7 +29,7 @@ router.post("/create", async (req, res) => {
 router.get("/list", async (req, res) => {
   const users = await User.findAll({ raw: true }); // raw = true sends data in json format
 
-  console.log("DEB_GetUsers:", users);
+  // console.log("DEB_GetUsers:", users);
 
   res.render("listUsers", { users: users });
 });
@@ -44,8 +44,8 @@ router.post("/delete/:id", async (req, res) => {
 router.get("/edit/:id", async (req, res) => {
   const id = req.params.id;
   const user = await User.findOne({ include: Address, where: { id: id } });
-  console.log("==> DEB_EditUserGet:", user);
-  console.log("==> DEB_UsrAddresses:", user.Addresses);
+  // console.log("==> DEB_EditUserGet:", user);
+  // console.log("==> DEB_UsrAddresses:", user.Addresses);
   res.render("editUser", { user: user.get({ plain: true }) });
 });
 

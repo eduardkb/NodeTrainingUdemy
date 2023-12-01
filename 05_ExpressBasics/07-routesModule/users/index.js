@@ -5,7 +5,7 @@ const basePath = path.join(__dirname, "../templates");
 
 // get url to get user data
 router.get("/add", (req, res) => {
-  console.log(`DEB; ${basePath}`);
+  // console.log(`DEB; ${basePath}`);
   res.sendFile(`${basePath}/userform.html`);
 });
 
@@ -22,7 +22,7 @@ router.post("/save", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  console.log(`DEB2; ${basePath}`);
+  // console.log(`DEB2; ${basePath}`);
   const id = req.params.id;
   console.log(`Returning user ${id}`);
   res.sendFile(`${basePath}/users.html`);
