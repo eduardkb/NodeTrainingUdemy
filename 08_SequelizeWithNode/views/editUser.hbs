@@ -48,3 +48,23 @@
   </div>
   <input type="submit" value="Edit" />
 </form>
+
+<div class="address-container">
+  <h3>Addresses</h3>
+  <form action="/address/create" method="post">
+    <input type="hidden" name="UserId" value="{{user.id}}" />
+    <div class="form-control">
+      <label for="street">Street:</label>
+      <input type="text" name="street" placeholder="Type the Street Name" />
+    </div>
+    <div class="form-control">
+      <label for="number">Number:</label>
+      <input type="text" name="number" placeholder="Type the House Number" />
+    </div>
+    <div class="form-control">
+      <label for="city">City:</label>
+      <input type="text" name="city" placeholder="Type the City Name" />
+    </div>
+    <input type="submit" value="Add Address" />
+  </form>
+</div>

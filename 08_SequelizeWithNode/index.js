@@ -4,6 +4,7 @@ const conn = require("./db/conn");
 const User = require("./models/User");
 const Address = require("./models/Address");
 const userRoutes = require("./routes/users");
+const addressRoutes = require("./routes/address");
 const port = 3000;
 const app = express();
 
@@ -64,6 +65,7 @@ function fAppRoutes() {
 
   // Import User routes
   app.use("/users", userRoutes);
+  app.use("/address", addressRoutes);
 
   // If user types an invalid URL
   // is only executed if not in any path above
