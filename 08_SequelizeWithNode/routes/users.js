@@ -40,4 +40,38 @@ router.post("/delete/:id", async (req, res) => {
   res.redirect("/users/list");
 });
 
+router.get("/edit/:id", async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findOne({ raw: true, where: { id: id } });
+  console.log("DEB_EditUserGet:", user);
+  res.render("editUser", { user });
+});
+
+router.post("/update", async (req, res) => {
+  const id = req.body.id;
+  const name = req.body.name;
+  const occupation = req.body.occupation;
+  const age = req.body.age;
+  const heigth = req.body.heigth;
+  let newsletter = req.body.newsletter;
+
+  if (newsletter === "on") {
+    newsletter = true;
+  } else {
+    newsletter = false;
+  }
+
+  const userData = {
+    id,
+    name,
+    occupation,
+    age,
+    heigth,
+    newsletter,
+  };
+
+  await User.update(userData, { where: { id: id } });
+  res.redirect("/");
+});
+
 module.exports = router;

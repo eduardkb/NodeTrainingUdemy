@@ -1,0 +1,50 @@
+<h3 class="h3Title">Edit user: {{user.name}}</h3>
+<form action="/users/update" method="post" class="form">
+  <input type="hidden" name="id" value="{{user.id}}" />
+  <div class="form-control">
+    <label for="name">Name:</label>
+    <input
+      type="text"
+      name="name"
+      placeholder="Type users name"
+      value="{{user.name}}"
+    />
+  </div>
+  <div class="form-control">
+    <label for="occupation">Occupation:</label>
+    <input
+      type="text"
+      name="occupation"
+      placeholder="Type users occupation"
+      value="{{user.occupation}}"
+    />
+  </div>
+  <div class="form-control">
+    <label for="age">Age:</label>
+    <input
+      type="number"
+      name="age"
+      placeholder="Type users age"
+      value="{{user.age}}"
+    />
+  </div>
+  <div class="form-control">
+    <label for="occupation">Heigth:</label>
+    <input
+      type="number"
+      step="0.01"
+      name="heigth"
+      placeholder="Type users heigth"
+      value="{{user.heigth}}"
+    />
+  </div>
+  <div class="form-control form-checkbox">
+    {{#if user.newsletter}}
+      <input type="checkbox" name="newsletter" checked />
+    {{else}}
+      <input type="checkbox" name="newsletter" />
+    {{/if}}
+    <label for="newsletter">Get News?</label>
+  </div>
+  <input type="submit" value="Edit" />
+</form>
