@@ -32,4 +32,12 @@ router.get("/list", async (req, res) => {
 
   res.render("listUsers", { users: users });
 });
+
+router.post("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  await User.destroy({ where: { id: id } });
+
+  res.redirect("/users/list");
+});
+
 module.exports = router;
