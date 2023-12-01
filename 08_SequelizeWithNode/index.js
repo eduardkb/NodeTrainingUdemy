@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const conn = require("./db/conn");
 const User = require("./models/User");
+const Address = require("./models/Address");
 const userRoutes = require("./routes/users");
 const port = 3000;
 const app = express();
@@ -10,8 +11,6 @@ fInitializeApp();
 fAppRoutes();
 // Init DB and start server if DB Initialized
 fInitDB();
-
-//!!!! FUNCTION DEFINITIONS !!!!//
 
 function fInitializeApp() {
   // getting body of submitted form
@@ -40,6 +39,7 @@ function fInitializeApp() {
 function fInitDB() {
   conn
     .sync()
+    //.sync({ force: true }) // force re-sync DB structure. DELETES EVERYTHING
     .then(() => {
       fStartServer();
     })
