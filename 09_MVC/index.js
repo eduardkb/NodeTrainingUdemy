@@ -3,12 +3,13 @@ const exphbs = require("express-handlebars");
 
 const app = express();
 const conn = require("./db/conn");
+const Task = require("./models/Task");
 const port = 3000;
 
-fInitializeApp();
-fStartServer();
+fInitApp();
+fInitDb();
 
-function fInitializeApp() {
+function fInitApp() {
   // getting body of submitted form
   app.use(
     express.urlencoded({
@@ -31,6 +32,13 @@ function fInitializeApp() {
   // initialize public resources
   app.use(express.static("public"));
 }
+function fInitDb() {
+  conn
+    .sync()
+    .then(fStartServer())
+    .catch((err) => console.log("DB_ERR: %s", err));
+}
+
 function fStartServer() {
   app.listen(port, (err) => {
     if (err) {

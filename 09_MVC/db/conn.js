@@ -18,4 +18,4 @@ try {
   console.log(`DB_ERR: Not possible to connect to db. Error: ${error}`);
 }
 
-exports.default = sequelize;
+module.exports = sequelize;
