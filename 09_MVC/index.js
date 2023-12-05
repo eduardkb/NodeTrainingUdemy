@@ -1,10 +1,11 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-
-const app = express();
 const conn = require("./db/conn");
 const Task = require("./models/Task");
+const tasksRoutes = require("./routes/tasksRoutes");
+
 const port = 3000;
+const app = express();
 
 fInitApp();
 fInitDb();
@@ -31,6 +32,9 @@ function fInitApp() {
 
   // initialize public resources
   app.use(express.static("public"));
+
+  // importing routes
+  app.use("/tasks", tasksRoutes);
 }
 function fInitDb() {
   conn
