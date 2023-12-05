@@ -1,5 +1,15 @@
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize("sqlite::memory:");
+let sequelize;
+const bUseMomoryDbOnly = false;
+
+if (bUseMomoryDbOnly) {
+  sequelize = new Sequelize("sqlite::memory:"); //MEMORY ONLY: "sqlite::memory:"
+} else {
+  sequelize = new Sequelize({
+    dialect: "sqlite",
+    storage: "db/database.sqlite",
+  });
+}
 
 try {
   sequelize.authenticate();
