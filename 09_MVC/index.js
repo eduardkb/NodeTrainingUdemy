@@ -8,6 +8,7 @@ const port = 3000;
 const app = express();
 
 fInitApp();
+fInitRoutes();
 fInitDb();
 
 function fInitApp() {
@@ -32,10 +33,25 @@ function fInitApp() {
 
   // initialize public resources
   app.use(express.static("public"));
+}
+
+function fInitRoutes() {
+  // Base route
+  app.get("/", (req, res) => {
+    res.redirect("/tasks");
+  });
 
   // importing routes
   app.use("/tasks", tasksRoutes);
+
+  // If user types an invalid URL
+  // is only executed if not in any path above
+  // 404 - page does not exist
+  app.use((req, res, next) => {
+    res.render("404");
+  });
 }
+
 function fInitDb() {
   conn
     .sync()

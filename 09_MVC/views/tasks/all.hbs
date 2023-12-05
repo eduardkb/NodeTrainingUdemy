@@ -1,1 +1,19 @@
 <h1>List all Tasks</h1>
+<ul class="task-list">
+  {{#each tasks}}
+    <li>
+      <a href="/" class="title">{{this.title}}</a>
+      <div class="actions">
+        <a href="/"><i class="bi bi-check2"></i></a>
+        <a href="/"><i class="bi bi-pencil-square"></i></a>
+        <form action="/tasks/remove" method="post">
+          <button type="submit">
+            <input type="hidden" name="id" value="{{this.id}}" />
+            <a href="/"><i class="bi bi-x-lg"></i></a>
+          </button>
+        </form>
+
+      </div>
+    </li>
+  {{/each}}
+</ul>
