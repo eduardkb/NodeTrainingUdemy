@@ -17,12 +17,14 @@
 - Standard Packages:
     - $> npm install express express-handlebars sqlite3 sequelize nodemon
 - Create start script inisde package.json
-    - "start": "nodemon index.js",
+    - "start": "nodemon index.js localhost 3000",
 - Create MVC folders and files: -models; -views; -controllers; -routes
     - $> touch index.js
     - $> mkdir models
     - $> mkdir db
     - $> mkdir views
+    - $> mkdir views/layouts
+    - $> touch views/layouts/main.hbs
     - $> mkdir controllers
     - $> mkdir routes
     - $> mkdir public

@@ -1,8 +1,9 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-const conn = require("./db/conn");
-const Task = require("./models/Task");
-const tasksRoutes = require("./routes/tasksRoutes");
+const session = require("express-session");
+const FileStore = require('session-file-store')(session);
+const flas = require('express-flash');
+const conn = require('./db/conn')
 
 const port = 3000;
 const app = express();
@@ -38,11 +39,11 @@ function fInitApp() {
 function fInitRoutes() {
   // Base route
   app.get("/", (req, res) => {
-    res.redirect("/tasks");
+    res.render("iniTest");
   });
 
   // importing routes
-  app.use("/tasks", tasksRoutes);
+  // app.use("/tasks", tasksRoutes);
 
   // If user types an invalid URL
   // is only executed if not in any path above
