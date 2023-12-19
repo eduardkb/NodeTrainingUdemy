@@ -2,8 +2,19 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
 const FileStore = require('session-file-store')(session);
-const flas = require('express-flash');
+const flash = require('express-flash');
 const conn = require('./db/conn')
+
+// Import models
+const Thought = require('./models/Thought')
+const User = require('./models/User')
+
+// Import routes
+const thoughtRoutes = require('./routes/thoughtRoutes');
+
+// Import Controller
+const ThoughtController = require("./controllers/thoughtController");
+
 
 const port = 3000;
 const app = express();
@@ -69,12 +80,10 @@ function fInitApp() {
 
 function fInitRoutes() {
   // Base route
-  app.get("/", (req, res) => {
-    res.render("iniTest");
-  });
+  app.get("/", ThoughtController.showThoughts);
 
   // importing routes
-  // app.use("/tasks", tasksRoutes);
+  app.use("/thoughts", thoughtRoutes);
 
   // If user types an invalid URL
   // is only executed if not in any path above
@@ -86,7 +95,7 @@ function fInitRoutes() {
 
 function fInitDb() {
   conn
-    .sync()
+    .sync() //restart db: .sync({force:true})
     .then(fStartServer())
     .catch((err) => console.log("DB_ERR: %s", err));
 }

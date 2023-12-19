@@ -13,11 +13,11 @@ if (bUseMomoryDbOnly) {
 
 // CODE TO TEST CONNECTION
 // not needed in production
-try {
-  sequelize.authenticate();
-  console.log("DB_INF: Successfully Connected");
-} catch (error) {
-  console.log(`DB_ERR: Not possible to connect to db. Error: ${error}`);
-}
+// try {
+//   sequelize.authenticate();
+//   console.log("DB_INF: Successfully Connected");
+// } catch (error) {
+//   console.log(`DB_ERR: Not possible to connect to db. Error: ${error}`);
+// }
 
 module.exports = sequelize;
