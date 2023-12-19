@@ -34,6 +34,37 @@ function fInitApp() {
 
   // initialize public resources
   app.use(express.static("public"));
+
+  // initialize session middleware
+  app.use(
+    session({
+        name: "session",
+        secret: "A$tr0ng$&c43t",
+        resave: false,
+        saveUninitialized: false,
+        store: new FileStore({
+            logFn: function(){},
+            path: require('path').join(require('os').tmpdir(), ' sessions')
+        }),
+        cookie:{
+            secure: false,
+            maxAge: 360000,
+            expires: new Date(Date.now()+360000),
+            httpOnly:true
+        }
+    })
+  )
+
+  // initialize flash messages
+  app.use(flash());
+
+  // set session to res
+  app.use((req,res,next)=>{
+    if(req.session.userid){
+        res.locals.session = req.session
+    }
+    next
+  })
 }
 
 function fInitRoutes() {
