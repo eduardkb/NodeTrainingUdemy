@@ -1,20 +1,21 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-const session = require("express-session");
-const FileStore = require('session-file-store')(session);
-const flash = require('express-flash');
-const conn = require('./db/conn')
 
-// Import models
-const Thought = require('./models/Thought')
-const User = require('./models/User')
+// Import session controllers
+const session = require("express-session");
+const FileStore = require("session-file-store")(session);
+const flash = require("express-flash");
+
+// Import models and db
+const Thought = require("./models/Thought");
+const User = require("./models/User");
+const conn = require("./db/conn");
 
 // Import routes
-const thoughtRoutes = require('./routes/thoughtRoutes');
+const thoughtRoutes = require("./routes/thoughtRoutes");
 
 // Import Controller
 const ThoughtController = require("./controllers/thoughtController");
-
 
 const port = 3000;
 const app = express();
@@ -49,33 +50,33 @@ function fInitApp() {
   // initialize session middleware
   app.use(
     session({
-        name: "session",
-        secret: "A$tr0ng$&c43t",
-        resave: false,
-        saveUninitialized: false,
-        store: new FileStore({
-            logFn: function(){},
-            path: require('path').join(require('os').tmpdir(), ' sessions')
-        }),
-        cookie:{
-            secure: false,
-            maxAge: 360000,
-            expires: new Date(Date.now()+360000),
-            httpOnly:true
-        }
+      name: "session",
+      secret: "A$tr0ng$&c43t",
+      resave: false,
+      saveUninitialized: false,
+      store: new FileStore({
+        logFn: function () {},
+        path: require("path").join(require("os").tmpdir(), " sessions"),
+      }),
+      cookie: {
+        secure: false,
+        maxAge: 360000,
+        expires: new Date(Date.now() + 360000),
+        httpOnly: true,
+      },
     })
-  )
+  );
 
   // initialize flash messages
-  app.use(flash());
+  //app.use(flash());
 
   // set session to res
-  app.use((req,res,next)=>{
-    if(req.session.userid){
-        res.locals.session = req.session
+  app.use((req, res, next) => {
+    if (req.session.userid) {
+      res.locals.session = req.session;
     }
-    next
-  })
+    next();
+  });
 }
 
 function fInitRoutes() {
@@ -85,9 +86,7 @@ function fInitRoutes() {
   // importing routes
   app.use("/thoughts", thoughtRoutes);
 
-  // If user types an invalid URL
-  // is only executed if not in any path above
-  // 404 - page does not exist
+  // 404 - default route
   app.use((req, res, next) => {
     res.render("404");
   });

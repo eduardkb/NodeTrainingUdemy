@@ -1,8 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const ThoughtController = require('../controllers/thoughtController')
+const express = require("express");
+const router = express.Router();
+const ThoughtController = require("../controllers/thoughtController");
 
-
-router.get('/', ThoughtController.showThoughts);
+router.get("/", ThoughtController.showThoughts);
 
 module.exports = router;

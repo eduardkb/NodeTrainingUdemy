@@ -4,7 +4,7 @@
   "description": "- é um padrao de arquitetura de software para organizar aplicações. - Model - to interact with database. - View - to present data to user - Controller - to manipulate data",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js localhost 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

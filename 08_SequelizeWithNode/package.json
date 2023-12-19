@@ -4,7 +4,7 @@
   "description": "- app with Sequelize and Azure SQL Server\r   - sequelize is a ORM for relational databases",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon index.js localhost 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
