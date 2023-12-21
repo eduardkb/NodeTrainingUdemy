@@ -97,7 +97,8 @@ function fInitRoutes() {
 
 function fInitDb() {
   conn
-    .sync() //restart db: .sync({force:true})
+    .sync()
+    //.sync({ force: true }) // to restart db
     .then(fStartServer())
     .catch((err) => console.log("DB_ERR: %s", err));
 }
