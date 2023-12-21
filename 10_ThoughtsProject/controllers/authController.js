@@ -5,6 +5,35 @@ module.exports = class AuthController {
   static login(req, res) {
     res.render("auth/login");
   }
+  static async loginPost(req, res) {
+    const { email, password } = req.body;
+    console.log("DEB_WEB: data from from: |%s|%s|", email, password);
+    // check if user exists
+    const user = await User.findOne({ where: { email: email } });
+    console.log("DEB_DB: selected user:", user);
+    if (!user) {
+      req.flash("message", "User not found.");
+      res.render("auth/login");
+      return;
+    }
+
+    // check his password
+    const passMatch = bcrypt.compareSync(password, user.password);
+    console.log("DEB_Control: passMatch:", passMatch);
+    if (!passMatch) {
+      req.flash("message", "Password is Invalid.");
+      res.render("auth/login");
+      return;
+    }
+
+    // authenticate user and save session
+    req.session.userid = user.id;
+    console.log("DEB_SESSION:", req.session);
+    req.flash("message", `Successfully authenticated.`);
+    req.session.save(() => {
+      res.redirect("/");
+    });
+  }
   static register(req, res) {
     res.render("auth/register");
   }
