@@ -13,9 +13,11 @@ const conn = require("./db/conn");
 
 // Import routes
 const thoughtRoutes = require("./routes/thoughtRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 // Import Controller
-const ThoughtController = require("./controllers/thoughtController");
+const thoughtController = require("./controllers/thoughtController");
+const authController = require("./controllers/authController");
 
 const port = 3000;
 const app = express();
@@ -81,10 +83,11 @@ function fInitApp() {
 
 function fInitRoutes() {
   // Base route
-  app.get("/", ThoughtController.showThoughts);
+  app.get("/", thoughtController.showThoughts);
 
   // importing routes
   app.use("/thoughts", thoughtRoutes);
+  app.use("/", authRoutes);
 
   // 404 - default route
   app.use((req, res, next) => {
