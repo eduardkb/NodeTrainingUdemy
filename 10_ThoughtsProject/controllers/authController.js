@@ -57,4 +57,8 @@ module.exports = class AuthController {
       req.flash("message", "Error registering user. Try again later");
     }
   }
+  static logout(req, res) {
+    req.session.destroy();
+    res.redirect("login");
+  }
 };
