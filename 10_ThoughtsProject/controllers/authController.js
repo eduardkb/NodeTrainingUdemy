@@ -42,9 +42,16 @@ module.exports = class AuthController {
     };
 
     try {
-      await User.create(user);
+      const createdUser = await User.create(user);
+      console.log("DEB_DB: User created:", createdUser);
+
+      // authenticate user right after registered
+      req.session.userid = createdUser.id;
+      console.log("DEB_SESSION:", req.session);
       req.flash("message", `Successfully registered user: ${name}`);
-      res.render("thoughts/home");
+      req.session.save(() => {
+        res.redirect("/");
+      });
     } catch (error) {
       console.log("DEB_DB: Error while saving unser to database");
       req.flash("message", "Error registering user. Try again later");
