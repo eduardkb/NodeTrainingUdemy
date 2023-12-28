@@ -1,5 +1,6 @@
 const Thought = require("../models/Thought");
 const User = require("../models/User");
+const utils = require("../helpers/utils");
 
 module.exports = class ThoughtController {
   static async showThoughts(req, res) {
@@ -15,7 +16,7 @@ module.exports = class ThoughtController {
     const title = req.body.title;
     const UserId = req.session.userid;
 
-    console.log("-->DEB_Data for DB add: |%s|%s|", title, UserId);
+    utils.fPrintLog(`Data for DB add: |${title}|${UserId}|`, "DB");
 
     if (title.length <= 5) {
       req.flash("message", "Type more than 5 characters for the thougth.");
@@ -33,7 +34,7 @@ module.exports = class ThoughtController {
       req.flash("message", "Thougth successfully added.");
       res.render("thoughts/dashboard");
     } catch (error) {
-      console.log("DEB_DB: Error while saving thougth to database");
+      utils.fPrintLog(`Error while saving thougth to database`, "DB");
       req.flash(
         "message",
         "Error registering Thougth. Try again later. ERR:",

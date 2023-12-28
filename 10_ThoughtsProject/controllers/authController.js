@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const utils = require("../helpers/utils");
 
 module.exports = class AuthController {
   static login(req, res) {
@@ -7,10 +8,10 @@ module.exports = class AuthController {
   }
   static async loginPost(req, res) {
     const { email, password } = req.body;
-    console.log("DEB_WEB: data from from: |%s|%s|", email, password);
+    utils.fPrintLog(`data from from: |${email}|${password}|`, "WEB");
     // check if user exists
     const user = await User.findOne({ where: { email: email } });
-    console.log("DEB_DB: selected user:", user);
+    utils.fPrintLog(`selected user: ${user}`, "DB");
     if (!user) {
       req.flash("message", "User not found.");
       res.render("auth/login");
@@ -19,7 +20,7 @@ module.exports = class AuthController {
 
     // check his password
     const passMatch = bcrypt.compareSync(password, user.password);
-    console.log("DEB_Control: passMatch:", passMatch);
+    utils.fPrintLog(`PassMatch: ${passMatch}`, "CONTROL");
     if (!passMatch) {
       req.flash("message", "Password is Invalid.");
       res.render("auth/login");
@@ -28,7 +29,7 @@ module.exports = class AuthController {
 
     // authenticate user and save session
     req.session.userid = user.id;
-    console.log("DEB_SESSION:", req.session);
+    utils.fPrintLog(`User session: ${req.session}`, "AUTH");
     req.flash("message", `Successfully authenticated.`);
     req.session.save(() => {
       res.redirect("/");
@@ -72,17 +73,17 @@ module.exports = class AuthController {
 
     try {
       const createdUser = await User.create(user);
-      console.log("DEB_DB: User created:", createdUser);
+      utils.fPrintLog(`User created: ${createdUser}`, "DB");
 
       // authenticate user right after registered
       req.session.userid = createdUser.id;
-      console.log("DEB_SESSION:", req.session);
+      utils.fPrintLog(`User Session ID: ${req.session}`, "AUTH");
       req.flash("message", `Successfully registered user: ${name}`);
       req.session.save(() => {
         res.redirect("/");
       });
     } catch (error) {
-      console.log("DEB_DB: Error while saving unser to database");
+      utils.fPrintLog(` Error while saving unser to database`, "DB");
       req.flash("message", "Error registering user. Try again later");
     }
   }
