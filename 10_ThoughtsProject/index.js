@@ -62,8 +62,8 @@ function fInitApp() {
       }),
       cookie: {
         secure: false,
-        maxAge: 360000,
-        expires: new Date(Date.now() + 360000),
+        maxAge: 43200000, // 12 hours
+        // expires: new Date(Date.now() + 86400),
         httpOnly: true,
       },
     })

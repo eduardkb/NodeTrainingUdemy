@@ -49,7 +49,9 @@ module.exports = class ThoughtController {
     try {
       await Thought.create(thougth);
       req.flash("message", "Thougth successfully added.");
-      res.render("thoughts/dashboard");
+      req.session.save(() => {
+        res.redirect("/thoughts/dashboard");
+      });
     } catch (error) {
       utils.fPrintLog(`Error while saving thougth to database`, "DB");
       req.flash(
