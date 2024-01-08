@@ -29,6 +29,11 @@ module.exports = class AuthController {
 
     // authenticate user and save session
     req.session.userid = user.id;
+
+    // saving name to session (with first letter capitalized)
+    const capitalize = (s) => s && s[0].toUpperCase() + s.slice(1);
+    req.session.userName = capitalize(user.name);
+
     utils.fPrintLog(`User session: ${req.session}`, "AUTH");
     req.flash("message", `Successfully authenticated.`);
     req.session.save(() => {

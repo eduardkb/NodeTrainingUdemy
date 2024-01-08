@@ -21,7 +21,7 @@
         {{! CONDITIONALLY PRINT MENU ACCORDING TO LOGGED IN USER }}
         {{#if session.userid}}
           <li><a href="/thoughts/dashboard">Dashboard</a></li>
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="/logout">Logout ({{session.userid}}-{{session.userName}})</a></li>
         {{else}}
           <li><a href="/login">Login</a></li>
           <li><a href="/register">Register</a></li>
