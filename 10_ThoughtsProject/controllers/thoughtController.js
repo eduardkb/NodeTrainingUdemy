@@ -7,7 +7,24 @@ module.exports = class ThoughtController {
     res.render("thoughts/home");
   }
   static async dashboard(req, res) {
-    res.render("thoughts/dashboard");
+    const userId = req.session.userid;
+    const user = await User.findOne({
+      where: { id: userId },
+      include: Thought, // already get all user's thoughts
+      plain: true,
+    });
+
+    // if user does not exist redirect to login
+    if (!user) {
+      res.redirect("/login");
+    }
+
+    // use map function to extract only thoughts
+    // from returned DB values
+    const thoughts = user.Thoughts.map((result) => result.dataValues);
+    console.log("DEB:", thoughts);
+
+    res.render("thoughts/dashboard", { thoughts });
   }
   static createThought(req, res) {
     res.render("thoughts/create");
