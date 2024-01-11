@@ -1,6 +1,7 @@
 const Thought = require("../models/Thought");
 const User = require("../models/User");
 const utils = require("../helpers/utils");
+const session = require("express-session");
 
 module.exports = class ThoughtController {
   static async showThoughts(req, res) {
@@ -61,5 +62,23 @@ module.exports = class ThoughtController {
       );
       res.render("thoughts/create");
     }
+  }
+  static async removeThought(req, res) {
+    const id = req.body.id;
+    const userId = req.session.userid;
+    try {
+      await Thought.destroy({ where: { id: id, userId: userId } });
+
+      req.flash("message", "Thougth deleted successfully.");
+    } catch (error) {
+      req.flash(
+        "message",
+        "Error deleting Thougth. Try again later. ERR:",
+        error
+      );
+    }
+    req.session.save(() => {
+      res.redirect("/thoughts/dashboard");
+    });
   }
 };
