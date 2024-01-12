@@ -6,16 +6,25 @@ const { Op } = require("sequelize");
 
 module.exports = class ThoughtController {
   static async showThoughts(req, res) {
+    // filter by term
     let search = "";
     if (req.query.search) {
       search = req.query.search;
     }
     utils.fPrintLog(`Search value: ${search}`, "LOGIC");
+
+    // order by name
+    let order = "DESC";
+    if (req.query.order === "old") {
+      order = "ASC";
+    }
+
     const data = await Thought.findAll({
       include: User,
       where: {
         title: { [Op.like]: `%${search}%` },
       },
+      order: [["createdAt", order]],
     });
     const thoughts = data.map((result) => result.get({ plain: true }));
     let thQty = thoughts.length;
