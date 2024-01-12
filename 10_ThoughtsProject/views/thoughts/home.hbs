@@ -1,5 +1,14 @@
 <div class="home-header">
-  <h1>All Thoughts</h1>
+  {{#if search}}
+    <h1>Thoughts filtered by: <span>{{search}}</span> </h1>
+    {{#if thQty}}
+      <p>We found <span>{{thQty}}</span> thoughts for you.</p>
+    {{else}}
+      <p>No thoughts were found with the term <span>{{search}}</span></p>
+    {{/if}}
+  {{else}}
+    <h1>All our <span>Thoughts</span> </h1>
+  {{/if}}
   <form action="/" method="get">
     <input
       type="text"

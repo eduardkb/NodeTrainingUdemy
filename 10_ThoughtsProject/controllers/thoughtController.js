@@ -2,12 +2,27 @@ const Thought = require("../models/Thought");
 const User = require("../models/User");
 const utils = require("../helpers/utils");
 const session = require("express-session");
+const { Op } = require("sequelize");
 
 module.exports = class ThoughtController {
   static async showThoughts(req, res) {
-    const data = await Thought.findAll({ include: User });
+    let search = "";
+    if (req.query.search) {
+      search = req.query.search;
+    }
+    utils.fPrintLog(`Search value: ${search}`, "LOGIC");
+    const data = await Thought.findAll({
+      include: User,
+      where: {
+        title: { [Op.like]: `%${search}%` },
+      },
+    });
     const thoughts = data.map((result) => result.get({ plain: true }));
-    res.render("thoughts/home", { thoughts });
+    let thQty = thoughts.length;
+    if (thQty === 0) {
+      thQty = false;
+    }
+    res.render("thoughts/home", { thoughts, search, thQty });
   }
   static async dashboard(req, res) {
     const userId = req.session.userid;
