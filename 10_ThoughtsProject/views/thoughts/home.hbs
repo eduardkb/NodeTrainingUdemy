@@ -1,1 +1,16 @@
-<h1>All Thoughts</h1>
+<div class="home-header">
+  <h1>All Thoughts</h1>
+</div>
+<div class="toughts-container">
+  {{#each thoughts}}
+    <figure>
+      <blockquote>
+        "{{this.title}}"
+      </blockquote>
+      <figcaption>
+        by
+        <span>{{this.User.name}}</span>
+      </figcaption>
+    </figure>
+  {{/each}}
+</div>

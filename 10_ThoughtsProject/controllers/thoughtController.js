@@ -5,7 +5,9 @@ const session = require("express-session");
 
 module.exports = class ThoughtController {
   static async showThoughts(req, res) {
-    res.render("thoughts/home");
+    const data = await Thought.findAll({ include: User });
+    const thoughts = data.map((result) => result.get({ plain: true }));
+    res.render("thoughts/home", { thoughts });
   }
   static async dashboard(req, res) {
     const userId = req.session.userid;
