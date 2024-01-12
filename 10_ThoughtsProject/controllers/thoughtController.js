@@ -25,7 +25,11 @@ module.exports = class ThoughtController {
     const thoughts = user.Thoughts.map((result) => result.dataValues);
     console.log("DEB:", thoughts);
 
-    res.render("thoughts/dashboard", { thoughts });
+    let bEmptyThoughts = false;
+    if (thoughts.length === 0) {
+      bEmptyThoughts = true;
+    }
+    res.render("thoughts/dashboard", { thoughts, bEmptyThoughts });
   }
   static createThought(req, res) {
     res.render("thoughts/create");

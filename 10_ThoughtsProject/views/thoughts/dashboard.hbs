@@ -18,4 +18,9 @@
       </li>
     {{/each}}
   </ul>
+  {{#if bEmptyThoughts}}
+    <p>You don't have any thought registered yet.
+      <a href="/thoughts/add">Create one.</a>
+    </p>
+  {{/if}}
 </div>

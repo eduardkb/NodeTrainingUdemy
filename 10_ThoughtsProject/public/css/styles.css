@@ -129,7 +129,9 @@ form input[type="submit"]:hover,
   border-left: 4px solid #f6982d;
   padding: 10px;
 }
-
+.dashboard a {
+  color: #f6982d;
+}
 .dashboard h3 {
   margin-bottom: 1.5em;
 }
