@@ -90,4 +90,24 @@ module.exports = class ThoughtController {
     const thought = await Thought.findOne({ where: { id: id }, raw: true });
     res.render("thoughts/edit", { thought });
   }
+  static async updateThoughtSave(req, res) {
+    const id = req.body.id;
+    const thought = {
+      title: req.body.title,
+    };
+    try {
+      await Thought.update(thought, { where: { id: id } });
+      req.flash("message", "Thougth updated successfully.");
+    } catch (error) {
+      req.flash(
+        "message",
+        "Error while updateding thought. Try again later. ",
+        error
+      );
+    }
+
+    req.session.save(() => {
+      res.redirect("/thoughts/dashboard");
+    });
+  }
 };
