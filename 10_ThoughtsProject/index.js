@@ -50,8 +50,8 @@ function fInitApp() {
   app.use(express.static("public"));
 
   // initialize session middleware
-  // const iCookieMaxAge = 1000 * 60 * 60 * 12; // 12 hours
-  const iCookieMaxAge = 1000 * 60 * 5; // 5 minutos
+  const iCookieMaxAge = 1000 * 60 * 60 * 12; // 12 hours
+  //const iCookieMaxAge = 1000 * 60 * 5; // 5 minutos
   app.use(
     session({
       name: "session",
@@ -92,9 +92,9 @@ function fInitRoutes() {
   app.use("/", authRoutes);
 
   // 404 - default route
-  // app.use((req, res, next) => {
-  //   res.render("404");
-  // });
+  app.use((req, res, next) => {
+    res.render("404");
+  });
 }
 
 function fInitDb() {
