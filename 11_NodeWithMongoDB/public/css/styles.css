@@ -150,6 +150,14 @@ form {
 .product-page p {
   margin-bottom: 1em;
 }
+.editButtons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.btnRightSpace {
+  margin-right: 10px;
+}
 
 /* FOOTER */
 footer {
