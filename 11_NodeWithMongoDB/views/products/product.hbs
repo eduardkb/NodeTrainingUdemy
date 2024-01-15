@@ -1,0 +1,15 @@
+<div class="product-page">
+  <h1>{{product.name}}</h1>
+
+  {{#if product.image}}
+    <img src="{{product.image}}" alt="{{product.name}}" />
+  {{else}}
+    <img
+      src="https://th.bing.com/th/id/OIP.F00dCf4bXxX0J-qEEf4qIQHaD6?rs=1&pid=ImgDetMain"
+      alt="No Image - Placeholder"
+    />
+  {{/if}}
+  <p>Price: <strong> R$ {{product.price}}</strong></p>
+  <p>Description: {{product.description}}</p>
+</div>
+<a href="/">Back to Products</a>

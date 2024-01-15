@@ -21,4 +21,10 @@ module.exports = class ProductController {
 
     res.redirect("/");
   }
+  static async getProduct(req, res) {
+    const id = req.params.id;
+    const product = await Product.getProductById(id);
+    console.log("--> DEB_DB: Getting one product: ", product);
+    res.render("products/product", { product });
+  }
 };

@@ -10,10 +10,12 @@
           src="https://th.bing.com/th/id/OIP.F00dCf4bXxX0J-qEEf4qIQHaD6?rs=1&pid=ImgDetMain"
           alt="No Image - Placeholder"
         />
-        <h3>No Image</h3>
       {{/if}}
       <h3>{{this.name}}</h3>
       <p>R$ {{this.price}}</p>
+      <div class="actions">
+        <a href="/{{this._id}}">Details</a>
+      </div>
     </div>
   {{/each}}
 </div>
