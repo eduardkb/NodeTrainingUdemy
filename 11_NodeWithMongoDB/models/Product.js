@@ -35,6 +35,23 @@ class Product {
       .deleteOne({ _id: new ObjectId(id) });
     return;
   }
+  static async updateOne(prod) {
+    await conn
+      .db()
+      .collection("products")
+      .updateOne(
+        { _id: new ObjectId(prod.id) },
+        {
+          $set: {
+            name: prod.name,
+            image: prod.image,
+            price: prod.price,
+            description: prod.description,
+          },
+        }
+      );
+    return;
+  }
 }
 
 module.exports = Product;
