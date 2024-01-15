@@ -9,7 +9,10 @@
       alt="No Image - Placeholder"
     />
   {{/if}}
-  <p>Price: <strong> R$ {{product.price}}</strong></p>
+  <p>Price: <strong>R$ {{product.price}}</strong></p>
   <p>Description: {{product.description}}</p>
+  <form action="/remove/{{product._id}}" method="post">
+    <input type="submit" value="Delete" class="btn" />
+  </form>
 </div>
 <a href="/">Back to Products</a>
