@@ -131,6 +131,16 @@ form {
   font-weight: bold;
 }
 
+.product .actions {
+  background-color: var(--HeaderBg);
+  margin-top: 2px;
+}
+
+.aDetails {
+  background-color: var(--HeaderBg);
+  font-weight: bold;
+}
+
 .product-page img {
   max-width: 250px;
   margin-bottom: 1em;
