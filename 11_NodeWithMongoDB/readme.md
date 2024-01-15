@@ -2,7 +2,19 @@
 
 ---
 
-## MongoDB Basics
+## MongoDB Basics Commands
+
+### Show databases
+
+- show dbs
+
+### Create or use Database
+
+- use <db_name>
+
+### Show collections
+
+- show collections
 
 ### Insert
 
@@ -13,8 +25,8 @@
 
 ### Get
 
-- db.getCollection("products").find({})
-- db.getCollection("products").find({price:{$gt:100}})
+- db.products.find({})
+- db.products.findOne({price:{$gt:100}})
 
 ### Update
 
@@ -24,3 +36,8 @@
 ### Delete
 
 - db.products.deleteOne({ name: 'Headset Sennheiser' });
+
+## MongoDB Initialize Node Project
+
+- $> npm init -y
+- $> npm install express express-handlebars mongodb nodemon
