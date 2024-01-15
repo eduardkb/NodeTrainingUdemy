@@ -5,6 +5,7 @@ const port = 3000;
 const app = express();
 
 const conn = require("./db/conn");
+const productRoutes = require("./routes/productRoutes");
 
 // getting body of submitted form
 app.use(
@@ -28,8 +29,10 @@ app.set("view engine", "hbs");
 // initialize public resources
 app.use(express.static("public"));
 
-app.use(express.json());
+// initialize routes
+app.use("/", productRoutes);
 
+// start server on port 3000
 app.listen(port, (err) => {
   if (err) {
     console.log("--> MSG_ERR: Server initialization problem:", err);
