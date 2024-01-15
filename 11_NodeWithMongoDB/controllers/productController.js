@@ -40,17 +40,15 @@ module.exports = class ProductController {
     res.render("products/edit", { product });
   }
   static async postEditProduct(req, res) {
-    const prod = {
-      id: req.body.id,
-      name: req.body.name,
-      image: req.body.image,
-      price: req.body.price,
-      description: req.body.description,
-    };
-    console.log("--> DEB_REQ: received from post to be updated:", prod);
+    const product = new Product(
+      req.body.name,
+      req.body.image,
+      req.body.price,
+      req.body.description
+    );
+    console.log("--> DEB_REQ: received from post to be updated:", product);
 
-    await Product.updateOne(prod);
-
+    await product.updateProduct(req.body.id);
     res.redirect("/");
   }
 };
