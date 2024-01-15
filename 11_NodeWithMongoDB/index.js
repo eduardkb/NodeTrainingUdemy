@@ -4,6 +4,8 @@ const exphbs = require("express-handlebars");
 const port = 3000;
 const app = express();
 
+const conn = require("./db/conn");
+
 // getting body of submitted form
 app.use(
   express.urlencoded({
