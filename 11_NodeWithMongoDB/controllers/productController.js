@@ -32,4 +32,14 @@ module.exports = class ProductController {
     await Product.removeProductById(id);
     res.redirect("/");
   }
+  static async editProduct(req, res) {
+    const id = req.params.id;
+    console.log("--> DEB_REQ: Product ID to edit:", id);
+    const product = await Product.getProductById(id);
+    console.log("--> DEB_DB: Recovered mongoDB entry:", product);
+    res.render("products/edit", { product });
+  }
+  static async postEditProduct(req, res) {
+    res.redirect("/");
+  }
 };

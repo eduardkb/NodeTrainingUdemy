@@ -12,7 +12,7 @@
   <p>Price: <strong>R$ {{product.price}}</strong></p>
   <p>Description: {{product.description}}</p>
   <div class="editButtons">
-    <form action="/edit/{{product._id}}" method="post">
+    <form action="/edit/{{product._id}}" method="get">
       <input type="submit" value="Edit" class="btn btnRightSpace" />
     </form>
     <form action="/remove/{{product._id}}" method="post">
