@@ -1,13 +1,23 @@
+:root {
+  --HeaderBg: #105ca8;
+  --HeaderTxt: #fff;
+  --PageBg: #cad2db;
+  --PageTxt: #000;
+  --Border: #050e44;
+  --Hover: #050e44;
+}
+
 * {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-
-  color: #000;
+  background-color: var(--PageBg);
+  color: var(--PageTxt);
 }
 
 /* NAVBAR */
 #logo img {
+  background-color: var(--HeaderBg);
   height: 40px;
 }
 
@@ -15,45 +25,122 @@
   padding: 1.2em 2.4em;
   margin-bottom: 1em;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  background-color: #2189ff;
-  color: #2189ff;
-  border-bottom: 1px solid #15008a;
+  background-color: var(--HeaderBg);
+  color: var(--HeaderTxt);
+  border-bottom: 1px solid var(--Border);
 }
 
 #navbar ul {
+  background-color: var(--HeaderBg);
   display: flex;
   list-style: none;
 }
 
 #navbar ul li {
+  background-color: var(--HeaderBg);
   margin-left: 1em;
 }
 
 #navbar ul li a {
+  background-color: var(--HeaderBg);
   text-decoration: none;
-  color: #fff;
+  color: var(--HeaderTxt);
   transition: 0.5s;
   font-weight: bold;
 }
 
 #navbar ul li a:hover {
-  color: #15008a;
+  color: var(--Hover);
+}
+
+.container {
+  padding: 2em;
+}
+
+.container h1 {
+  margin-bottom: 1em;
+}
+
+form {
+  max-width: 300px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control label {
+  font-weight: bold;
+  margin-bottom: 0.4em;
+}
+
+.form-control input,
+.form-control textarea {
+  border: 1px solid var(--HeaderBg);
+  padding: 5px;
+  margin-bottom: 1em;
+}
+
+.btn {
+  background-color: var(--HeaderBg);
+  color: var(--HeaderTxt);
+  padding: 5px 10px;
+  border: none;
+  margin-top: 1em;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  font-weight: bold;
+  color: var(--Hover);
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product {
+  width: 23%;
+  margin: 1%;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.product img {
+  max-width: 100%;
+  margin-bottom: 0.5em;
+}
+
+.product h3 {
+  margin-bottom: 1em;
+}
+
+.product-page img {
+  max-width: 250px;
+  margin-bottom: 1em;
+}
+
+.product-page p {
+  margin-bottom: 1em;
 }
 
 /* FOOTER */
 footer {
   height: 50px;
-  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid #15008a;
-  background-color: #2189ff;
+  border-top: 1px solid var(--Border);
+  background-color: var(--HeaderBg);
 }
 
 footer span {
   font-weight: bold;
-  color: #fff;
+  color: var(--HeaderTxt);
+  background-color: var(--HeaderBg);
 }
