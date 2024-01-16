@@ -2,6 +2,11 @@
 
 ---
 
+## Runnint project
+
+- Mongo DB Parameters and Password has to be set.
+- Follow instructions on ./db/conn.js inside mDb object
+
 ## MongoDB Basics Commands
 
 ### Show databases
