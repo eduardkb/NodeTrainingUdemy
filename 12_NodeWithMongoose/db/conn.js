@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const mDb = {
   // PASSWORD HOW TO SET
   // set with command (PowerShell):
-  // $> [Environment]::SetEnvironmentVariable("mongoDbPass", "lGNARyucnH5NI3ARZXoVnArsu0ql5ucfQeIlsCjzmnDes0PoCsvk8BMgO9pvjbpUaW0Gm0hGpxiOACDbcbSNuQ==")
+  // $> [Environment]::SetEnvironmentVariable("mongoDbPass", "<MYPASS>")
   // set on Cmder or shell
-  // $> @set mongoDbPass=lGNARyucnH5NI3ARZXoVnArsu0ql5ucfQeIlsCjzmnDes0PoCsvk8BMgO9pvjbpUaW0Gm0hGpxiOACDbcbSNuQ==
+  // $> @set mongoDbPass=<MYPASS>
   // on the same shell where the "nmp start" will be run
   // or Direct like:
   //idPass: "MyPass",
 
   idName: "ekbmongodata",
   idPass: process.env.mongoDbPass,
-  pass: "lGNARyucnH5NI3ARZXoVnArsu0ql5ucfQeIlsCjzmnDes0PoCsvk8BMgO9pvjbpUaW0Gm0hGpxiOACDbcbSNuQ==",
+  pass: "<MYPASS>",
   server: "ekbmongodata.mongo.cosmos.azure.com",
   port: "10255",
   dbName: "nodeMongooseApp",

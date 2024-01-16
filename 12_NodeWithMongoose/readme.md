@@ -20,13 +20,13 @@
 
 - $> npm install mongoose
 
-## Settings from temp MongoDB on Azure
+## Settings from temp MongoDB on Azure (MISSING PASSWORD)
 
 ```Node.js
 const mDb = {
     idName: "ekbmongodata",
     idPass: process.env.mongoDbPass,
-    pass: "lGNARyucnH5NI3ARZXoVnArsu0ql5ucfQeIlsCjzmnDes0PoCsvk8BMgO9pvjbpUaW0Gm0hGpxiOACDbcbSNuQ==",
+    pass: "<MYPASS>",
     server: "ekbmongodata.mongo.cosmos.azure.com",
     port: "10255",
     dbName: "nodeProductsApp",
