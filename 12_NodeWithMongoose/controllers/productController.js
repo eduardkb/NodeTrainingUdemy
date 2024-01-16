@@ -27,11 +27,11 @@ module.exports = class ProductController {
     console.log("--> DEB_DB: Getting one product: ", product);
     res.render("products/product", { product });
   }
-  // static async removeProduct(req, res) {
-  //   const id = req.params.id;
-  //   await Product.removeProductById(id);
-  //   res.redirect("/");
-  // }
+  static async removeProduct(req, res) {
+    const id = req.params.id;
+    await Product.deleteOne({ _id: id });
+    res.redirect("/");
+  }
   static async editProduct(req, res) {
     const id = req.params.id;
     console.log("--> DEB_REQ: Product ID to edit:", id);
