@@ -64,16 +64,19 @@
 
 form {
   max-width: 300px;
+  background-color: var(--PageBg);
 }
 
 .form-control {
   display: flex;
   flex-direction: column;
+  background-color: var(--PageBg);
 }
 
 .form-control label {
   font-weight: bold;
   margin-bottom: 0.4em;
+  background-color: var(--PageBg);
 }
 
 .form-control input,
@@ -81,6 +84,11 @@ form {
   border: 1px solid var(--HeaderBg);
   padding: 5px;
   margin-bottom: 1em;
+  background-color: var(--PageBg);
+}
+
+.submitBtn {
+  background-color: var(--PageBg);
 }
 
 .btn {

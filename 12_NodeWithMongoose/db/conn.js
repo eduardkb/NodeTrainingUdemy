@@ -15,7 +15,7 @@ const mDb = {
   pass: "lGNARyucnH5NI3ARZXoVnArsu0ql5ucfQeIlsCjzmnDes0PoCsvk8BMgO9pvjbpUaW0Gm0hGpxiOACDbcbSNuQ==",
   server: "ekbmongodata.mongo.cosmos.azure.com",
   port: "10255",
-  dbName: "nodeProductsApp",
+  dbName: "nodeMongooseApp",
   params: "?ssl=true&retrywrites=false&maxIdleTimeMS=120000",
 };
 
