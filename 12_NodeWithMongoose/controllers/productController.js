@@ -21,12 +21,12 @@ module.exports = class ProductController {
 
     res.redirect("/");
   }
-  // static async getProduct(req, res) {
-  //   const id = req.params.id;
-  //   const product = await Product.getProductById(id);
-  //   console.log("--> DEB_DB: Getting one product: ", product);
-  //   res.render("products/product", { product });
-  // }
+  static async getProduct(req, res) {
+    const id = req.params.id;
+    const product = await Product.findById(id).lean();
+    console.log("--> DEB_DB: Getting one product: ", product);
+    res.render("products/product", { product });
+  }
   // static async removeProduct(req, res) {
   //   const id = req.params.id;
   //   await Product.removeProductById(id);

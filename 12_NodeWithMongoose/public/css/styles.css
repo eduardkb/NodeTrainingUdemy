@@ -149,18 +149,24 @@ form {
   font-weight: bold;
 }
 
+.product-page {
+  background-color: var(--PageBg);
+}
+
 .product-page img {
   max-width: 250px;
   margin-bottom: 1em;
-  background-color: var(--HeaderBg);
 }
 
+.product-page strong,
 .product-page p {
   margin-bottom: 1em;
+  background-color: var(--PageBg);
 }
 .editButtons {
   display: flex;
   justify-content: flex-start;
+  background-color: var(--PageBg);
 }
 
 .btnRightSpace {
