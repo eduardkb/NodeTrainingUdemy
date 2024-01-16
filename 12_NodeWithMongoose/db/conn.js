@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 
 const mDb = {
   // PASSWORD HOW TO SET
@@ -19,19 +19,16 @@ const mDb = {
   params: "?ssl=true&retrywrites=false&maxIdleTimeMS=120000",
 };
 
-const params = "?ssl=true&retrywrites=false&maxIdleTimeMS=120000";
-const dbName = "nodeFirstApp";
 const uri = `mongodb://${mDb.idName}:${mDb.idPass}@${mDb.server}:${mDb.port}/${mDb.dbName}${mDb.params}`;
 console.log("--> DEB_DB: Connection string:", uri);
-const client = new MongoClient(uri);
 
-async function run() {
+async function main() {
   try {
-    await client.connect();
-    console.log("--> MSG_INF: Connected to MongoDB.");
+    await mongoose.connect(uri);
+    console.log("--> MSG_INF: Connected to MongoDB with Mongoose.");
   } catch (error) {
-    console.log("--> DEB_DB: Error connecting to MongoDB:", error);
+    console.log("--> DEB_DB: Error. Mongoose couldn't connect:", error);
   }
 }
-run();
-module.exports = client;
+main();
+module.exports = mongoose.mongoose;

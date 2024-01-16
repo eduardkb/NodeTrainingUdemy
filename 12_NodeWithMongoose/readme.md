@@ -1,7 +1,7 @@
 # Node With Mongoose Project
 
-- this project is just a conversion from previous project from
-  manual written models to the mongoose automated module.
+- this project is a conversion from previous project (NodeWithMongoDB)
+  from manual written models to the mongoose automated module.
 
 ---
 
@@ -16,7 +16,11 @@
   - $> npm install
   - $> npm start
 
-## Settings from temp db
+## Install mongoose
+
+- $> npm install mongoose
+
+## Settings from temp MongoDB on Azure
 
 ```Node.js
 const mDb = {
