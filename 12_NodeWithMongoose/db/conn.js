@@ -12,7 +12,6 @@ const mDb = {
 
   idName: "ekbmongodata",
   idPass: process.env.mongoDbPass,
-  pass: "<MYPASS>",
   server: "ekbmongodata.mongo.cosmos.azure.com",
   port: "10255",
   dbName: "nodeMongooseApp",
