@@ -1,0 +1,25 @@
+<div class="product-page">
+  <h1>{{product.name}}</h1>
+
+  {{#if product.image}}
+    <img src="{{product.image}}" alt="{{product.name}}" />
+  {{else}}
+    <img
+      src="https://th.bing.com/th/id/OIP.F00dCf4bXxX0J-qEEf4qIQHaD6?rs=1&pid=ImgDetMain"
+      alt="No Image - Placeholder"
+    />
+  {{/if}}
+  <p>Price: <strong>R$ {{product.price}}</strong></p>
+  <p>Description: {{product.description}}</p>
+  <div class="editButtons">
+    <form action="/edit/{{product._id}}" method="get">
+      <input type="submit" value="Edit" class="btn btnRightSpace" />
+    </form>
+    <form action="/remove/{{product._id}}" method="post">
+      <input type="submit" value="Delete" class="btn btnRightSpace" />
+    </form>
+    <form action="/">
+      <input type="submit" value="Back to Products" class="btn" />
+    </form>
+  </div>
+</div>
