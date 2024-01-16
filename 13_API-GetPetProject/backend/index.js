@@ -20,7 +20,6 @@ app.use(express.static("public"));
 try {
   app.listen(port);
   fWriteLog("DEB", "BeServer", `Server started successfully on port ${port}.`);
-  fWriteLog("TST", "test", "sample msg");
 } catch (error) {
   fWriteLog("DEB", "BeServer", `Error while starting server: ${error}.`);
 }
