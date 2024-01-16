@@ -14,6 +14,10 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.static("public"));
 
 // Routes
+const UserRoutes = require("./routes/userRoutes");
+const PetRoutes = require("./routes/petRoutes");
+app.use("/users", UserRoutes);
+app.use("/pets", PetRoutes);
 
 // Initialize Server
 

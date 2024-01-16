@@ -14,7 +14,6 @@
   - get connection string
   - configure db on ./db/conn.js file
 - install backend
-  - !!! TEMP TEMP !!!
   - $> npm install
   - $> npm start
 

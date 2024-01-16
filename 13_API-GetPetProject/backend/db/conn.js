@@ -20,14 +20,14 @@ const mDb = {
 };
 
 const uri = `mongodb://${mDb.idName}:${mDb.idPass}@${mDb.server}:${mDb.port}/${mDb.dbName}${mDb.params}`;
-fWriteLog("DEB", "DB_INF", `Connection string: ${uri}`);
+fWriteLog("DEB", "DbINF", `Connection string: ${uri}`);
 
 async function main() {
   try {
     await mongoose.connect(uri);
-    fWriteLog("DEB", "DB_INF", `Successfully connected to DB with Mongoose.`);
+    fWriteLog("DEB", "DbINF", `Successfully connected to DB with Mongoose.`);
   } catch (error) {
-    fWriteLog("DEB", "DB_ERR", `Error. Mongoose couldn't connect: ${error}`);
+    fWriteLog("DEB", "DbERR", `Error. Mongoose couldn't connect: ${error}`);
   }
 }
 main();
