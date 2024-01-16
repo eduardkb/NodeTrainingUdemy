@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const mDb = {
   // PASSWORD HOW TO SET
   // set with command (PowerShell):
-  // $> [Environment]::SetEnvironmentVariable("mongoDbPass", "MyPass")
+  // $> [Environment]::SetEnvironmentVariable("mongoDbPass", "lGNARyucnH5NI3ARZXoVnArsu0ql5ucfQeIlsCjzmnDes0PoCsvk8BMgO9pvjbpUaW0Gm0hGpxiOACDbcbSNuQ==")
   // set on Cmder or shell
   // $> @set mongoDbPass=lGNARyucnH5NI3ARZXoVnArsu0ql5ucfQeIlsCjzmnDes0PoCsvk8BMgO9pvjbpUaW0Gm0hGpxiOACDbcbSNuQ==
   // on the same shell where the "nmp start" will be run

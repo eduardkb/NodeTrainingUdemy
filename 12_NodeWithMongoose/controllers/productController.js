@@ -32,23 +32,23 @@ module.exports = class ProductController {
   //   await Product.removeProductById(id);
   //   res.redirect("/");
   // }
-  // static async editProduct(req, res) {
-  //   const id = req.params.id;
-  //   console.log("--> DEB_REQ: Product ID to edit:", id);
-  //   const product = await Product.getProductById(id);
-  //   console.log("--> DEB_DB: Recovered mongoDB entry:", product);
-  //   res.render("products/edit", { product });
-  // }
-  // static async postEditProduct(req, res) {
-  //   const product = new Product(
-  //     req.body.name,
-  //     req.body.image,
-  //     req.body.price,
-  //     req.body.description
-  //   );
-  //   console.log("--> DEB_REQ: received from post to be updated:", product);
+  static async editProduct(req, res) {
+    const id = req.params.id;
+    console.log("--> DEB_REQ: Product ID to edit:", id);
+    const product = await Product.findById(id).lean();
+    console.log("--> DEB_DB: Recovered mongoDB entry:", product);
+    res.render("products/edit", { product });
+  }
+  static async postEditProduct(req, res) {
+    const product = {
+      name: req.body.name,
+      image: req.body.image,
+      price: req.body.price,
+      description: req.body.description,
+    };
+    console.log("--> DEB_REQ: received from post to be updated:", product);
 
-  //   await product.updateProduct(req.body.id);
-  //   res.redirect("/");
-  // }
+    await Product.updateOne({ _id: req.body.id }, product);
+    res.redirect("/");
+  }
 };
