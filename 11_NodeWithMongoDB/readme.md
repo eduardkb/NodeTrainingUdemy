@@ -2,10 +2,16 @@
 
 ---
 
-## Runnint project
+## Running project
 
-- Mongo DB Parameters and Password has to be set.
-- Follow instructions on ./db/conn.js inside mDb object
+- Configure database
+  - Install community MongoDB or Azure/AWS MongoDB
+  - Get connection string
+  - Mongo DB Parameters and Password from connection string have to be set.
+  - Follow instructions on ./db/conn.js inside mDb object
+- Run the application
+  - $> npm install
+  - $> npm start
 
 ## MongoDB Basics Commands
 
