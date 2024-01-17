@@ -143,4 +143,30 @@ module.exports = class UserController {
     }
     res.status(200).send(currentUser);
   }
+  static async getUserById(req, res) {
+    const id = req.params.id;
+
+    try {
+      const user = await User.findById(id).select("-password");
+
+      // if user doesn't exist send "catch" error
+      if (!user) {
+        throw "User not found";
+      }
+
+      // if exists return user
+      writeLog("DEB", "GetUserById", `User retreived from DB: ${user}`);
+      res.status(200).json({ user });
+    } catch {
+      writeLog(
+        "DEB",
+        "ErrGetUserById",
+        `Error retreivng user with id '${id}' from DB`
+      );
+      res.status(404).json({
+        message: `Usuário nao encontrado.`,
+      });
+      return;
+    }
+  }
 };
