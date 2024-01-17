@@ -20,7 +20,6 @@ app.use("/users", UserRoutes);
 app.use("/pets", PetRoutes);
 
 // Initialize Server
-
 try {
   app.listen(port);
   fWriteLog("DEB", "BeServer", `Server started successfully on port ${port}.`);
