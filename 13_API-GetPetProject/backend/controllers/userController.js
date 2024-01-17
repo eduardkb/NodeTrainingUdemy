@@ -109,4 +109,20 @@ module.exports = class UserController {
       `User logged in and token sent. User: ${user} | Token: ${jwt}`
     );
   }
+  static async checkUser(req, res) {
+    let currentUser;
+
+    writeLog(
+      "DEB",
+      "Login",
+      `Verify user. Authorization header: ${req.headers.authorization}`
+    );
+
+    if (req.headers.authorization) {
+      currentUser = "placeholder";
+    } else {
+      currentUser = null;
+    }
+    res.status(200).send(currentUser);
+  }
 };
