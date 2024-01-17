@@ -7,6 +7,7 @@ const writeLog = require("../helper/write-log");
 const createUserToken = require("../helper/create-user-token");
 const getToken = require("../helper/get-token");
 const jwtSignature = require("../helper/global-variables").jwtSignature;
+const getUserByToken = require("../helper/get-user-by-token");
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -170,7 +171,57 @@ module.exports = class UserController {
     }
   }
   static async editUser(req, res) {
-    res.status(201).json({
+    // get user id
+    const id = req.params.id;
+
+    // verify if user exists
+    const token = getToken(req);
+    const user = await getUserByToken(token);
+
+    // get user properties from request body
+    const { name, email, phone, password, confirmpassword } = req.body;
+    let image = "";
+
+    // user data validation
+    if (!name) {
+      res.status(422).json({ message: "O nome é obrigatório." });
+      return;
+    }
+    if (!email) {
+      res.status(422).json({ message: "O email é obrigatório." });
+      return;
+    }
+    if (!phone) {
+      res.status(422).json({ message: "O telefone é obrigatório." });
+      return;
+    }
+    if (!password) {
+      res.status(422).json({ message: "A senha é obrigatória." });
+      return;
+    }
+    if (!confirmpassword) {
+      res
+        .status(422)
+        .json({ message: "A Confirmação de senha é obrigatória." });
+      return;
+    }
+    if (password !== confirmpassword) {
+      res.status(422).json({
+        message: "A senha e a confirmação de senha precisam ser iguais.",
+      });
+      return;
+    }
+
+    // Validation: check if e-mail is already taken if different from user
+    const emailExists = await User.findOne({ email: email });
+    if (user.email !== email && emailExists) {
+      return res.status(422).json({
+        message: "Este email já está em uso.",
+      });
+    }
+
+    // Change User data
+    return res.status(201).json({
       message: `Usuário atualizado com sucesso.`,
     });
   }

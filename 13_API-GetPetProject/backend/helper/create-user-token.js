@@ -7,6 +7,7 @@ const createUserToken = async (user, req, res) => {
     {
       name: user.name,
       id: user._id,
+      dt_gen: new Date().toISOString(),
     },
     jwtSignature
   );
