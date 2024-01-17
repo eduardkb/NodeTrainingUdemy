@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const fWriteLog = require("./helper/genFunc").fWriteLog;
+const writeLog = require("./helper/write-log").writeLog;
 const port = 5000;
 const app = express();
 
@@ -22,7 +22,7 @@ app.use("/pets", PetRoutes);
 // Initialize Server
 try {
   app.listen(port);
-  fWriteLog("DEB", "BeServer", `Server started successfully on port ${port}.`);
+  writeLog("DEB", "BeServer", `Server started successfully on port ${port}.`);
 } catch (error) {
-  fWriteLog("DEB", "BeServer", `Error while starting server: ${error}.`);
+  writeLog("DEB", "BeServer", `Error while starting server: ${error}.`);
 }

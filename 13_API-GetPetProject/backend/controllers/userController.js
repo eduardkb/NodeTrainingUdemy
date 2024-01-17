@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const fWriteLog = require("../helper/genFunc").fWriteLog;
+const writeLog = require("../helper/write-log").writeLog;
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -60,9 +60,9 @@ module.exports = class UserController {
         message: `Usuário '${email}' registrado com successo.`,
         newUser,
       });
-      fWriteLog("INF", "DbOk", `User saved successfully: ${newUser}`);
+      writeLog("INF", "DbOk", `User saved successfully: ${newUser}`);
     } catch (error) {
-      fWriteLog("DEB", "DbErr", `Error saving user to db: ${error}`);
+      writeLog("DEB", "DbErr", `Error saving user to db: ${error}`);
       res.status(500).json({
         message: "Erro ao salvar usuário. Tente novamente mais tarde",
       });

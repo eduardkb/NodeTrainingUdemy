@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const fWriteLog = require("../helper/genFunc").fWriteLog;
+const writeLog = require("../helper/write-log").writeLog;
 
 const mDb = {
   // PASSWORD HOW TO SET
@@ -20,14 +20,14 @@ const mDb = {
 };
 
 const uri = `mongodb://${mDb.idName}:${mDb.idPass}@${mDb.server}:${mDb.port}/${mDb.dbName}${mDb.params}`;
-fWriteLog("DEB", "DbINF", `Connection string: ${uri}`);
+writeLog("DEB", "DbINF", `Connection string: ${uri}`);
 
 async function main() {
   try {
     await mongoose.connect(uri);
-    fWriteLog("DEB", "DbINF", `Successfully connected to DB with Mongoose.`);
+    writeLog("DEB", "DbINF", `Successfully connected to DB with Mongoose.`);
   } catch (error) {
-    fWriteLog("DEB", "DbERR", `Error. Mongoose couldn't connect: ${error}`);
+    writeLog("DEB", "DbERR", `Error. Mongoose couldn't connect: ${error}`);
   }
 }
 main();

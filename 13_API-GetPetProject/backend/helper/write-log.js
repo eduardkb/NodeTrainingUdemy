@@ -1,5 +1,5 @@
-module.exports = class genFunctions {
-  static fWriteLog(classification, type, message) {
+module.exports = class writeLog {
+  static writeLog(classification, type, message) {
     const bPrintDebug = true;
     const bPrintMessages = true;
     const msg = `==> ${new Date().toISOString()} - ${classification}_${type}: ${message}`;
