@@ -177,6 +177,7 @@ module.exports = class UserController {
     // verify if user exists
     const token = getToken(req);
     const user = await getUserByToken(token);
+    user.password = undefined;
 
     // get user properties from request body
     const { name, email, phone, password, confirmpassword } = req.body;
@@ -195,22 +196,6 @@ module.exports = class UserController {
       res.status(422).json({ message: "O telefone é obrigatório." });
       return;
     }
-    if (!password) {
-      res.status(422).json({ message: "A senha é obrigatória." });
-      return;
-    }
-    if (!confirmpassword) {
-      res
-        .status(422)
-        .json({ message: "A Confirmação de senha é obrigatória." });
-      return;
-    }
-    if (password !== confirmpassword) {
-      res.status(422).json({
-        message: "A senha e a confirmação de senha precisam ser iguais.",
-      });
-      return;
-    }
 
     // Validation: check if e-mail is already taken if different from user
     const emailExists = await User.findOne({ email: email });
@@ -220,9 +205,40 @@ module.exports = class UserController {
       });
     }
 
+    // validate passwords if changed
+    if (password !== confirmpassword) {
+      res.status(422).json({
+        message: "A senha e a confirmação de senha precisam ser iguais.",
+      });
+      return;
+    } else if (password != null && password === confirmpassword) {
+      // crypt user's password
+      const salt = await bcrypt.genSalt(12);
+      const passHash = await bcrypt.hash(password, salt);
+      user.password = passHash;
+    }
+
+    // set new values on user
+    user.name = name;
+    user.email = email;
+    user.phone = phone;
+
     // Change User data
-    return res.status(201).json({
-      message: `Usuário atualizado com sucesso.`,
-    });
+    try {
+      const changedUser = await User.findOneAndUpdate({ _id: user._id }, user, {
+        new: true,
+      });
+
+      writeLog("DEB", "UpdatingUser", `Data to be written: ${user}`);
+      return res.status(200).json({
+        message: `Usuário atualizado com sucesso.`,
+        changedUser,
+      });
+    } catch (error) {
+      writeLog("DEB", "ErrUpdating", `Err while updating user: ${error}`);
+      return res.status(500).json({
+        message: `Problema ao cadastrar usuario. Tente novamente mais tarde.`,
+      });
+    }
   }
 };
