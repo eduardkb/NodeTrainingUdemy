@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const writeLog = require("../helper/write-log").writeLog;
+const writeLog = require("../helper/write-log");
 
 const mDb = {
   // PASSWORD HOW TO SET

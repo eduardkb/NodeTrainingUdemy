@@ -1,7 +1,12 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const writeLog = require("../helper/write-log").writeLog;
+const jwt = require("jsonwebtoken");
+
+// import helpers
+const writeLog = require("../helper/write-log");
 const createUserToken = require("../helper/create-user-token");
+const getToken = require("../helper/get-token");
+const jwtSignature = require("../helper/global-variables").jwtSignature;
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -119,7 +124,16 @@ module.exports = class UserController {
     );
 
     if (req.headers.authorization) {
-      currentUser = "placeholder";
+      try {
+        const token = getToken(req);
+        const decoded = jwt.verify(token, jwtSignature);
+        writeLog("DEB", "TokenOk", `Decoded user token: ${decoded.id}`);
+        currentUser = await User.findById(decoded.id);
+        currentUser.password = undefined;
+      } catch (error) {
+        writeLog("DEB", "TokenErr", `Error while decoding token": ${error}`);
+        currentUser = null;
+      }
     } else {
       currentUser = null;
     }

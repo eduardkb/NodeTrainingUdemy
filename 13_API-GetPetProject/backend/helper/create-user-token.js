@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const jwtSignature = require("./global-variables").jwtSignature;
 
 const createUserToken = async (user, req, res) => {
   // creating the token
@@ -7,7 +8,7 @@ const createUserToken = async (user, req, res) => {
       name: user.name,
       id: user._id,
     },
-    "MyC.mp1&xS&cr3t.1701"
+    jwtSignature
   );
 
   // returning token

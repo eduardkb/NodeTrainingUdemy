@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const writeLog = require("./helper/write-log").writeLog;
+const writeLog = require("./helper/write-log");
 const port = 5000;
 const app = express();
 
