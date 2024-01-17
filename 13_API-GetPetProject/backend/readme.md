@@ -12,7 +12,7 @@
 - install database
   - Install local MongoDB or configure Azure/AWS MongoDB instance
   - get connection string
-  - configure db on ./db/conn.js file
+  - configure db variables on ./helper/global-variables.js file
 - install backend
   - $> npm install
   - $> npm start

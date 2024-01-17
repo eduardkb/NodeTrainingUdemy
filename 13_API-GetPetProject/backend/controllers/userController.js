@@ -127,7 +127,11 @@ module.exports = class UserController {
       try {
         const token = getToken(req);
         const decoded = jwt.verify(token, jwtSignature);
-        writeLog("DEB", "TokenOk", `Decoded user token: ${decoded.id}`);
+        writeLog(
+          "DEB",
+          "TokenOk",
+          `Decoded user token: ${JSON.stringify(decoded)}`
+        );
         currentUser = await User.findById(decoded.id);
         currentUser.password = undefined;
       } catch (error) {
