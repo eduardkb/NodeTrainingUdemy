@@ -169,4 +169,9 @@ module.exports = class UserController {
       return;
     }
   }
+  static async editUser(req, res) {
+    res.status(201).json({
+      message: `Usuário atualizado com sucesso.`,
+    });
+  }
 };
