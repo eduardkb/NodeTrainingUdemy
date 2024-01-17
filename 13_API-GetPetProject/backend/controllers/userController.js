@@ -70,4 +70,43 @@ module.exports = class UserController {
       });
     }
   }
+  static async login(req, res) {
+    const { email, password } = req.body;
+
+    // validations
+    if (!email) {
+      res.status(422).json({ message: "O e-mail é obrigatório." });
+      return;
+    }
+    if (!password) {
+      res.status(422).json({ message: "A senha é obrigatória." });
+      return;
+    }
+
+    // check if user exists
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      res.status(404).json({
+        message: `Usuário com e-mail '${email}' nao encontrado. Cadastre-se por favor.`,
+      });
+      return;
+    }
+
+    // check if password matches with DB password
+    const checkPassword = await bcrypt.compare(password, user.password);
+    if (!checkPassword) {
+      res.status(401).json({
+        message: `Usuário ou senha incorreta. Tente novamente`,
+      });
+      return;
+    }
+
+    // Successfull login. Generate and send token
+    const jwt = await createUserToken(user, req, res);
+    writeLog(
+      "INF",
+      "Login",
+      `User logged in and token sent. User: ${user} | Token: ${jwt}`
+    );
+  }
 };
