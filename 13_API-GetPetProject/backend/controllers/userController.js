@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const writeLog = require("../helper/write-log").writeLog;
+const createUserToken = require("../helper/create-user-token");
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -56,10 +57,11 @@ module.exports = class UserController {
     });
     try {
       const newUser = await user.save();
-      res.status(201).json({
-        message: `Usuário '${email}' registrado com successo.`,
-        newUser,
-      });
+      createUserToken(newUser, req, res);
+      // res.status(201).json({
+      //   message: `Usuário '${email}' registrado com successo.`,
+      //   newUser,
+      // });
       writeLog("INF", "DbOk", `User saved successfully: ${newUser}`);
     } catch (error) {
       writeLog("DEB", "DbErr", `Error saving user to db: ${error}`);
