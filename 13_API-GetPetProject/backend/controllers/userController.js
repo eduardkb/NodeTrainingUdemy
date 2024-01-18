@@ -181,7 +181,11 @@ module.exports = class UserController {
 
     // get user properties from request body
     const { name, email, phone, password, confirmpassword } = req.body;
-    let image = "";
+
+    // getting image if present
+    if (req.file) {
+      user.image = req.file.filename;
+    }
 
     // user data validation
     if (!name) {

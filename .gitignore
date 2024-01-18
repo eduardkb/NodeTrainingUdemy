@@ -133,3 +133,4 @@ dist
 *.md.swp
 package-lock.json
 *.tmp
+images/
