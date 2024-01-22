@@ -5,7 +5,7 @@
 ## Course
 
 Full GitHub code: https://github.com/matheusbattisti/curso_node \
-Next video: 248
+Next video: 249
 
 ## md styling help
 
