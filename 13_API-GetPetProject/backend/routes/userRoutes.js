@@ -6,6 +6,7 @@ const verifyToken = require("../helper/verify-token");
 const { imageUpload } = require("../helper/image-upload");
 
 // rotas
+router.get("/testres", UserController.getUsTest);
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 router.get("/checkUser", UserController.checkUser);
@@ -16,6 +17,5 @@ router.patch(
   imageUpload.single("image"),
   UserController.editUser
 );
-router.get("/usTest", UserController.getUsTest);
 
 module.exports = router;

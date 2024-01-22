@@ -245,7 +245,7 @@ module.exports = class UserController {
       });
     }
   }
-  static(req, res) {
+  static getUsTest(req, res) {
     return res.status(200).json({
       message: `Successfully Retreived Users`,
       status: 200,

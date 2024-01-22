@@ -8,6 +8,8 @@ module.exports = class globalVar {
     // set on Cmder or shell
     // $> @set mongoDbPass=<MYPASS>
     // on the same shell where the "nmp start" will be run
+    // In Linux:
+    // $> export mongoDbPass=[variable_value]
     // or Directle password here like:
     //idPass: "MyPass",
 
