@@ -245,4 +245,15 @@ module.exports = class UserController {
       });
     }
   }
+  static(req, res) {
+    return res.status(200).json({
+      message: `Successfully Retreived Users`,
+      status: 200,
+      users: [
+        { name: "Yasmin", age: 22, gender: "Female" },
+        { name: "Olaf", age: 33, gender: "Male" },
+        { name: "Sonya", age: 44, gender: "Female" },
+      ],
+    });
+  }
 };

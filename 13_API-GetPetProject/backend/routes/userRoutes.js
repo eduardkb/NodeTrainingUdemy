@@ -16,5 +16,6 @@ router.patch(
   imageUpload.single("image"),
   UserController.editUser
 );
+router.get("/usTest", UserController.getUsTest);
 
 module.exports = router;
