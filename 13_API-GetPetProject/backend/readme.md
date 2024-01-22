@@ -21,3 +21,8 @@
 
 - $> npm init -y
 - $> npm install express nodemon cors mongoose bcrypt cookie-parser jsonwebtoken multer
+
+## Database Initial Sample Data
+
+- !!! TO-DO To-DO !!!
+- create admin datadump route to save all users and pets

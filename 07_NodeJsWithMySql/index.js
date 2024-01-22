@@ -11,7 +11,7 @@ fBookRoutes();
 fInitializeDB();
 fStartServer();
 
-//!!!! FUNCTION DEFINITIONS !!!!//
+// FUNCTION DEFINITIONS //
 
 function fInitializeApp() {
   // getting body of submitted form

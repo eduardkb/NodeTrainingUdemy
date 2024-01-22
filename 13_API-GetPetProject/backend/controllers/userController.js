@@ -248,6 +248,7 @@ module.exports = class UserController {
   static getUsTest(req, res) {
     return res.status(200).json({
       message: `Successfully Retreived Users`,
+      obs: "Demo hardocded data returned.",
       status: 200,
       users: [
         { name: "Yasmin", age: 22, gender: "Female" },
