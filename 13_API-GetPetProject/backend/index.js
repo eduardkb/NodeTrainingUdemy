@@ -16,8 +16,10 @@ app.use(express.static("public"));
 // Routes
 const UserRoutes = require("./routes/userRoutes");
 const PetRoutes = require("./routes/petRoutes");
+const AdminRoutes = require("./routes/adminRoutes");
 app.use("/users", UserRoutes);
 app.use("/pets", PetRoutes);
+app.use("/admin", AdminRoutes);
 
 // Initialize Server
 try {

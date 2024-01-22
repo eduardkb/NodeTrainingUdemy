@@ -24,5 +24,93 @@
 
 ## Database Initial Sample Data
 
-- !!! TO-DO To-DO !!!
-- create admin datadump route to save all users and pets
+- API to backup: /admin/getdbbackup
+- Data Dump:
+
+```Node.js
+{
+    "message": "Success Retreiving Data.",
+    "AllUsers": [
+        {
+            "_id": "65a7c2a0e4cdfbeee4ce53f6",
+            "name": "Maria",
+            "email": "maria@edu.com",
+            "password": "$2b$12$VH.LKt4cx9RZ41yadGcJkOtcpbN.WHqC5FvkIRSIm5z8KAO9oO/N.",
+            "phone": "+1-587-487-4488",
+            "createdAt": "2024-01-17T12:05:52.441Z",
+            "updatedAt": "2024-01-17T12:05:52.441Z",
+            "__v": 0
+        },
+        {
+            "_id": "65a7c335a29687af108e32d8",
+            "name": "João",
+            "email": "joao@edu.com",
+            "password": "$2b$12$rl2oF0L23uh521Np4sqSDOPbVpzNjhOiaruTpz/O7V8ogI8GdqaOy",
+            "phone": "+1-489-997-9977",
+            "createdAt": "2024-01-17T12:08:21.672Z",
+            "updatedAt": "2024-01-17T12:08:21.672Z",
+            "__v": 0
+        },
+        {
+            "_id": "65a7cc4f1ea75aeafa93be78",
+            "name": "Pedro",
+            "email": "pedro@edu.com",
+            "password": "$2b$12$0a2Ii894BdNSLSlkmAie2Oz/lsfn02V.d8iKcOuVlVnxp2x5dV0sS",
+            "phone": "+1-158-158-1588",
+            "createdAt": "2024-01-17T12:47:11.526Z",
+            "updatedAt": "2024-01-17T12:47:11.526Z",
+            "__v": 0
+        },
+        {
+            "_id": "65a813303cf478b4d2358fc0",
+            "name": "JoséMaria",
+            "email": "josemaria@edu.com",
+            "password": "$2b$12$mvx/DVw3UEiBOODVF6Si8u/Y.t/qVLSxZ/xbWCPSy2bMaUO/YTASe",
+            "phone": "+1-888-999-1004",
+            "createdAt": "2024-01-17T17:49:36.271Z",
+            "updatedAt": "2024-01-18T18:51:31.139Z",
+            "__v": 0,
+            "image": "1705603890199_jose.jpg"
+        }
+    ],
+    "AllPets": [
+        {
+            "_id": "65aeb0905b09e0fa1d23bf22",
+            "name": "Pipoca",
+            "age": 9,
+            "weight": 5.5,
+            "color": "black",
+            "breed": "Pincher",
+            "images": [],
+            "available": true,
+            "user": {
+                "_id": "65a813303cf478b4d2358fc0",
+                "name": "JoséMaria",
+                "image": "1705603890199_jose.jpg",
+                "phone": "+1-888-999-1004"
+            },
+            "createdAt": "2024-01-22T18:14:40.473Z",
+            "updatedAt": "2024-01-22T18:14:40.473Z",
+            "__v": 0
+        },
+        {
+            "_id": "65aeb15b5b09e0fa1d23bf28",
+            "name": "Mimi",
+            "age": 4,
+            "weight": 4.8,
+            "color": "Amarelo",
+            "breed": "Maltês",
+            "images": [],
+            "available": true,
+            "user": {
+                "_id": "65a7c2a0e4cdfbeee4ce53f6",
+                "name": "Maria",
+                "phone": "+1-587-487-4488"
+            },
+            "createdAt": "2024-01-22T18:18:03.914Z",
+            "updatedAt": "2024-01-22T18:18:03.914Z",
+            "__v": 0
+        }
+    ]
+}
+```
