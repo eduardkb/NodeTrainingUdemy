@@ -1,6 +1,7 @@
 module.exports = class globalVar {
   static appName = "GetAPet";
-  static jwtSignature = "MyC.mp1&xS&cr3t.1701";
+  // static jwtSignature = "MyC.mp1&xS&cr3t.1701";
+  static jwtSignature = "2D92F4a!5E93DBFF0765e9187&5395EC";
   static dbConnectionVariables = {
     // PASSWORD HOW TO SET
     // set with command (PowerShell):

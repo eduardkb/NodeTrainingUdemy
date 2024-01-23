@@ -44,10 +44,18 @@ module.exports = class UserController {
     }
 
     // check if user with same email already exists
-    const userExists = await User.findOne({ email: email });
-    if (userExists) {
-      res.status(422).json({ message: "Este usuário já está cadastrado." });
-      return;
+    try {
+      const userExists = await User.findOne({ email: email });
+      if (userExists) {
+        res.status(422).json({ message: "Este usuário já está cadastrado." });
+        return;
+      }
+    } catch (error) {
+      writeLog("DEB", "Db_err", `Error while registering user. Err: ${error}`);
+      return res.status(500).json({
+        message:
+          "Erro ao cadastrar usuario. Favor tentar novamente mais tarde.",
+      });
     }
 
     // crypt user's password
@@ -90,12 +98,19 @@ module.exports = class UserController {
     }
 
     // check if user exists
-    const user = await User.findOne({ email: email });
-    if (!user) {
-      res.status(404).json({
-        message: `Usuário com e-mail '${email}' nao encontrado. Cadastre-se por favor.`,
+    try {
+      const user = await User.findOne({ email: email });
+      if (!user) {
+        res.status(404).json({
+          message: `Usuário com e-mail '${email}' nao encontrado. Cadastre-se por favor.`,
+        });
+        return;
+      }
+    } catch (error) {
+      writeLog("DEB", "Db_err", `Error while retreiving user. Err: ${error}`);
+      return res.status(500).json({
+        message: "Erro ao logar usuario. Favor tentar novamente mais tarde.",
       });
-      return;
     }
 
     // check if password matches with DB password
@@ -138,6 +153,9 @@ module.exports = class UserController {
       } catch (error) {
         writeLog("DEB", "TokenErr", `Error while decoding token": ${error}`);
         currentUser = null;
+        return res
+          .status(400)
+          .send({ message: "Error decoding token. Access Denied." });
       }
     } else {
       currentUser = null;
@@ -176,7 +194,7 @@ module.exports = class UserController {
 
     // verify if user exists
     const token = getToken(req);
-    const user = await getUserByToken(token);
+    const user = await getUserByToken(token, res);
     user.password = undefined;
 
     // get user properties from request body
@@ -246,15 +264,19 @@ module.exports = class UserController {
     }
   }
   static getUsTest(req, res) {
-    return res.status(200).json({
-      message: `Successfully Retreived Users`,
-      obs: "Demo hardocded data returned.",
-      status: 200,
-      users: [
-        { name: "Yasmin", age: 22, gender: "Female" },
-        { name: "Olaf", age: 33, gender: "Male" },
-        { name: "Sonya", age: 44, gender: "Female" },
-      ],
-    });
+    try {
+      return res.status(200).json({
+        message: `Successfully Retreived Users`,
+        obs: "Demo hardocded data returned.",
+        status: 200,
+        users: [
+          { name: "Yasmin", age: 22, gender: "Female" },
+          { name: "Olaf", age: 33, gender: "Male" },
+          { name: "Sonya", age: 44, gender: "Female" },
+        ],
+      });
+    } catch (error) {
+      res.status(500).json({ message: `Error retreivng data. Err:${error}` });
+    }
   }
 };

@@ -43,7 +43,7 @@ module.exports = class PetController {
 
     // Get Pet Owner
     const token = getToken(req);
-    const owner = await getUserByToken(token);
+    const owner = await getUserByToken(token, res);
 
     // Create a Pet object
     const pet = new Pet({

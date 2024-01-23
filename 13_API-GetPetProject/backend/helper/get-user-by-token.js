@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const writeLog = require("./write-log");
 const pass = require("./global-variables").jwtSignature;
 
 // get user by jwt token
-const getUserByToken = async (token) => {
+const getUserByToken = async (token, res) => {
   if (!token) {
     return res.status(401).json({ message: "Acesso negado." });
   }
@@ -15,7 +16,8 @@ const getUserByToken = async (token) => {
       return res.status(401).json({ message: "Acesso negado." });
     }
     return user;
-  } catch {
+  } catch (error) {
+    writeLog("DEB", "TokenDecode", `Error decoding token:${error}`);
     return res.status(401).json({ message: "Acesso negado." });
   }
 };
