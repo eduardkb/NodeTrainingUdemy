@@ -71,6 +71,16 @@
             "updatedAt": "2024-01-18T18:51:31.139Z",
             "__v": 0,
             "image": "1705603890199_jose.jpg"
+        },
+        {
+            "_id": "65afb683866f0d9aa9a7deb1",
+            "name": "Arthur",
+            "email": "arthur@edu.com",
+            "password": "$2b$12$PSiJTBZ47LdnnDEi04fjLe5Tc71lOObdIHa75R29FwnKK3CuUcsim",
+            "phone": "+2-222-222-2222",
+            "createdAt": "2024-01-23T12:52:19.881Z",
+            "updatedAt": "2024-01-23T13:01:31.057Z",
+            "__v": 0
         }
     ],
     "AllPets": [
@@ -109,6 +119,24 @@
             },
             "createdAt": "2024-01-22T18:18:03.914Z",
             "updatedAt": "2024-01-22T18:18:03.914Z",
+            "__v": 0
+        },
+        {
+            "_id": "65afb8fc405b9bc054499f87",
+            "name": "Pluto",
+            "age": 13,
+            "weight": 16,
+            "color": "Preto",
+            "breed": "Pastor Alemao",
+            "images": [],
+            "available": true,
+            "user": {
+                "_id": "65afb683866f0d9aa9a7deb1",
+                "name": "Arthur",
+                "phone": "+2-222-222-2222"
+            },
+            "createdAt": "2024-01-23T13:02:52.184Z",
+            "updatedAt": "2024-01-23T13:02:52.184Z",
             "__v": 0
         }
     ]

@@ -98,8 +98,9 @@ module.exports = class UserController {
     }
 
     // check if user exists
+    let user;
     try {
-      const user = await User.findOne({ email: email });
+      user = await User.findOne({ email: email });
       if (!user) {
         res.status(404).json({
           message: `Usuário com e-mail '${email}' nao encontrado. Cadastre-se por favor.`,
