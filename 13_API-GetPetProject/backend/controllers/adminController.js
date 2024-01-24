@@ -14,6 +14,7 @@ module.exports = class AdminController {
         AllPets: pets,
       });
     } catch (error) {
+      writeLog("DEB", "DbError", `Error reading DB: ${error}`);
       return res
         .status(500)
         .json({ message: `Erro ao ler os dados. Err: ${error}` });

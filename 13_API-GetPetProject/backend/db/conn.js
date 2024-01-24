@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const writeLog = require("../helper/write-log");
-const mDb = require("../helper/global-variables").dbConnectionVariables;
-
-const uri = `mongodb://${mDb.idName}:${mDb.idPass}@${mDb.server}:${mDb.port}/${mDb.dbName}${mDb.params}`;
-writeLog("DEB", "DbINF", `Connection string: ${uri}`);
+const mdbUri = require("../helper/global-variables").dbConnectionString;
+const getSecret = require("../helper/get-azure-secrets");
 
 async function main() {
   try {
-    await mongoose.connect(uri);
+    const sec = await getSecret("dbConnectionString");
+    writeLog("DEB", "DbINF", `Connection string: ${sec}`);
+    await mongoose.connect(sec);
+
     writeLog("DEB", "DbINF", `Successfully connected to DB with Mongoose.`);
   } catch (error) {
     writeLog("DEB", "DbERR", `Error. Mongoose couldn't connect: ${error}`);

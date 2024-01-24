@@ -6,13 +6,41 @@
 
 - uses Node.js for the backend
 - uses mongoose to consult a MongoDB database
+- uses Azure Keyvault to get keys (MongoDb and jwtSignature)
 
 ## How to start Application
+
+### If using local secrets
 
 - install database
   - Install local MongoDB or configure Azure/AWS MongoDB instance
   - get connection string
-  - configure db variables on ./helper/global-variables.js file
+  - configure db variables on ./helper/global-variables.js file uncommenting lines at the end and commenting azure lines
+- install backend
+  - $> npm install
+  - $> npm start
+
+### If using Azure KeyVault
+
+- install database
+  - Install local MongoDB or configure Azure/AWS MongoDB instance
+  - get connection string
+- configure a keyvault with secrets:
+  - jwtSignature=<random 128Bit password for encryption>
+  - mongoDbPass=<MongoDb Connection String>
+- configure a App Registration with web authenticatin type
+  - on Certificates & Secrets create a new "Client Secret" and take notes of values
+- on KeyVault give secrets read access to the app registration (as principal)
+- create a ENV file inside helper folder with:
+
+```Node.js
+KEYVAULT_URI=<"key vault URL from keyVault essentials">
+AZURE_TENANT_ID=<"From App registration essentials, the Directory (tenant) ID">
+AZURE_CLIENT_ID=<"From App registration essentials, the Application (client) ID">
+AZURE_CLIENT_SECRET=<"Value from AppRegistration --> Cert & Secrets --> Client Secret --> Secret Value">
+
+```
+
 - install backend
   - $> npm install
   - $> npm start
@@ -21,6 +49,11 @@
 
 - $> npm init -y
 - $> npm install express nodemon cors mongoose bcrypt cookie-parser jsonwebtoken multer
+- Packages for keyvault
+- $> npm install @azure/keyvault-secrets @azure/identity KEYVAULT_URI=<"key vault URL">
+  AZURE_TENANT_ID=<"registered app in azure active directory">
+  AZURE_CLIENT_ID=<"registered app in azure active directory">
+  AZURE_CLIENT_SECRET=<"previously copied value">dotenv
 
 ## Database Initial Sample Data
 

@@ -4,6 +4,9 @@ const writeLog = require("./helper/write-log");
 const port = 5000;
 const app = express();
 
+// reset log
+writeLog("NEW", "StartRun", `#####################################`);
+
 // Config JSON response
 app.use(express.json());
 
