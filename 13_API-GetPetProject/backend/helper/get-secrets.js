@@ -1,12 +1,23 @@
-const GET_FROM_AZURE = true;
-
 require("dotenv").config();
 const { SecretClient } = require("@azure/keyvault-secrets");
 const { DefaultAzureCredential } = require("@azure/identity");
 const writeLog = require("./write-log");
 
 const getSecrets = async (name) => {
-  if (!GET_FROM_AZURE) {
+  // verify .env file
+  let bSecretsFromAzure = process.env.GET_SECRETS_FROM_AZURE;
+
+  if (!bSecretsFromAzure) {
+    throw 'No ".env" file to read variables from';
+  } else {
+    bSecretsFromAzure === "true"
+      ? (bSecretsFromAzure = true)
+      : (bSecretsFromAzure = false);
+  }
+
+  // if not getting secrets from azure
+  if (!bSecretsFromAzure) {
+    writeLog("DEB", "EnvVars", `Using secrets from local .env file`);
     // secret names getting retreived
     // jwtSignature
     // dbConnectionString
@@ -25,6 +36,8 @@ const getSecrets = async (name) => {
     writeLog("DEB", "Secrets", `Returned key ${name} with value ${sRet}`);
     return sRet;
   } else {
+    // if getting secrets from Azure KeyVault
+    writeLog("DEB", "EnvVars", `Using secrets from Azure KeyVault`);
     writeLog(
       "Deb",
       "EnvVars",

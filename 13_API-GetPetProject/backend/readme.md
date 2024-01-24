@@ -13,29 +13,33 @@
 - install database
   - Install local MongoDB or configure Azure/AWS MongoDB instance
   - get MongoDB connection string
-- if keys will be stored locally on env file
-  - Modify file ./helper/get-Secrets.js. Change variable GET_FROM_AZURE to false.
-  - Create file .env on root dir with content:
-  - ```Node.js
-    LOCAL_JWT_SIGNATURE="<A Strong Password for Encryptoin>"
-    LOCAL_DB_CONNECTION_STRING="<The MongoDB connectin string>"
-    ```
 - if Keys will be stored on KeyVault
+
   - configure a keyvault with secrets:
   - ```Node.js
     jwtSignature=<random 128Bit password for encryption>
     dbConnectionString=<MongoDb Connection String>
     ```
-- configure a App Registration with web authenticatin type
+  - configure a App Registration with web authenticatin type
   - on Certificates & Secrets create a new "Client Secret" and take notes of the secret
-- on KeyVault give secrets read access to the app registration (as principal)
-- create a .env file on root folder with:
-  - ```Node.js
-    KEYVAULT_URI="key vault URL from keyVault essentials"
-    AZURE_TENANT_ID="value From App registration essentials, the Directory (tenant) ID"
-    AZURE_CLIENT_ID="value From App registration essentials, the Application (client) ID"
-    AZURE_CLIENT_SECRET<"Value from AppRegistration --> Cert & Secrets --> Client Secret --> Secret Value"
-    ```
+  - on KeyVault give secrets read access to the app registration (as principal)
+
+- Create .env file inside the root directory.
+- Save it with content below changing the variable GET_SECRETS_FROM_AZURE to "true" or "false"
+- ```Node.js
+  # "true" or "false" accepted.
+  GET_SECRETS_FROM_AZURE="true"
+  # Variables in use if Keys will be retreived from Azure KeyVault
+  KEYVAULT_URI="https://ekb-mysecrets-kv.vault.azure.net/"
+  AZURE_TENANT_ID="d1ee1acd-bc7a-4bc4-a787-938c49a83906"
+  AZURE_CLIENT_ID="8115de36-b665-4905-95ae-a58f4c40a9d7"
+  AZURE_CLIENT_SECRET="3nq8Q~4ljCYGYbgKlpSsSGwok6sVlVHaHosm7dxE"
+  # Variables in use if keys will be stored locally on .env file
+  LOCAL_JWT_SIGNATURE="6hyBj7zZ36B%Cg2DY2NM$mVn"
+  LOCAL_DB_CONNECTION_STRING="mongodb://ekbmongodata:nbl6KiEtbQBZwURtxN4SRFuYtetu6l0vc2Dackv9PCExZ5mKH0wz8hOGVp21IsK7WfF2qXFB086SACDb0bDmNg==@ekbmongodata.mongo.cosmos.azure.com:10255/nodeGetaPetApp?ssl=true&retrywrites=false&maxIdleTimeMS=120000"
+  ```
+
+````
 - install backend
   - $> npm install
   - $> npm start
@@ -170,3 +174,4 @@
     ]
 }
 ```
+````
