@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 const writeLog = require("../helper/write-log");
 const createUserToken = require("../helper/create-user-token");
 const getToken = require("../helper/get-token");
-const jwtSignature = require("../helper/global-variables").jwtSignature;
 const getUserByToken = require("../helper/get-user-by-token");
+const getSecrets = require("../helper/get-secrets");
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -143,7 +143,8 @@ module.exports = class UserController {
     if (req.headers.authorization) {
       try {
         const token = getToken(req);
-        const decoded = jwt.verify(token, jwtSignature);
+        const jwtSecret = await getSecrets("jwtSignature");
+        const decoded = jwt.verify(token, jwtSecret);
         writeLog(
           "DEB",
           "TokenOk",

@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const writeLog = require("../helper/write-log");
-const mdbUri = require("../helper/global-variables").dbConnectionString;
-const getSecret = require("../helper/get-azure-secrets");
+const getSecret = require("../helper/get-secrets");
 
 async function main() {
   try {

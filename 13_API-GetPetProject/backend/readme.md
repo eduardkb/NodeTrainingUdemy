@@ -14,33 +14,28 @@
 
 - install database
   - Install local MongoDB or configure Azure/AWS MongoDB instance
-  - get connection string
-  - configure db variables on ./helper/global-variables.js file uncommenting lines at the end and commenting azure lines
-- install backend
-  - $> npm install
-  - $> npm start
-
-### If using Azure KeyVault
-
-- install database
-  - Install local MongoDB or configure Azure/AWS MongoDB instance
-  - get connection string
-- configure a keyvault with secrets:
-  - jwtSignature=<random 128Bit password for encryption>
-  - mongoDbPass=<MongoDb Connection String>
+  - get MongoDB connection string
+- if keys will be stored locally on env file
+  - Modify file ./helper/get-Secrets.js. Change variable GET_FROM_AZURE to false.
+  - Create file .env on root dir with content:
+  - ```Node.js
+    LOCAL_JWT_SIGNATURE="<A Strong Password for Encryptoin>"
+    LOCAL_DB_CONNECTION_STRING="<The MongoDB connectin string>"
+    ```
+- if Keys will be stored on KeyVault
+  - configure a keyvault with secrets:
+    1. jwtSignature=<random 128Bit password for encryption>
+    1. mongoDbPass=<MongoDb Connection String>
 - configure a App Registration with web authenticatin type
-  - on Certificates & Secrets create a new "Client Secret" and take notes of values
+  - on Certificates & Secrets create a new "Client Secret" and take notes of the secret
 - on KeyVault give secrets read access to the app registration (as principal)
-- create a ENV file inside helper folder with:
-
-```Node.js
-KEYVAULT_URI=<"key vault URL from keyVault essentials">
-AZURE_TENANT_ID=<"From App registration essentials, the Directory (tenant) ID">
-AZURE_CLIENT_ID=<"From App registration essentials, the Application (client) ID">
-AZURE_CLIENT_SECRET=<"Value from AppRegistration --> Cert & Secrets --> Client Secret --> Secret Value">
-
-```
-
+- create a .env file on root folder with:
+  - ```Node.js
+    KEYVAULT_URI="key vault URL from keyVault essentials"
+    AZURE_TENANT_ID="value From App registration essentials, the Directory (tenant) ID"
+    AZURE_CLIENT_ID="value From App registration essentials, the Application (client) ID"
+    AZURE_CLIENT_SECRET<"Value from AppRegistration --> Cert & Secrets --> Client Secret --> Secret Value"
+    ```
 - install backend
   - $> npm install
   - $> npm start

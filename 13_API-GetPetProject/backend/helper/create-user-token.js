@@ -1,15 +1,17 @@
 const jwt = require("jsonwebtoken");
-const jwtSignature = require("./global-variables").jwtSignature;
+const getSecrets = require("./get-secrets");
+const writeLog = require("./write-log");
 
 const createUserToken = async (user, req, res) => {
   // creating the token
+  const jwtSecret = await getSecrets("jwtSignature");
   const token = jwt.sign(
     {
       name: user.name,
       id: user._id,
       dt_gen: new Date().toISOString(),
     },
-    jwtSignature
+    jwtSecret
   );
 
   // returning token

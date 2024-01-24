@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const writeLog = require("./write-log");
-const pass = require("./global-variables").jwtSignature;
 
 // get user by jwt token
 const getUserByToken = async (token, res) => {

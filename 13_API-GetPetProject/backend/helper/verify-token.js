@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const getToken = require("./get-token");
 const writeLog = require("./write-log");
-const pass = require("./global-variables").jwtSignature;
 
 const checkToken = (req, res, next) => {
   try {
