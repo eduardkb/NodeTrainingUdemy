@@ -10,8 +10,6 @@
 
 ## How to start Application
 
-### If using local secrets
-
 - install database
   - Install local MongoDB or configure Azure/AWS MongoDB instance
   - get MongoDB connection string
@@ -24,8 +22,10 @@
     ```
 - if Keys will be stored on KeyVault
   - configure a keyvault with secrets:
-    1. jwtSignature=<random 128Bit password for encryption>
-    1. mongoDbPass=<MongoDb Connection String>
+  - ```Node.js
+    jwtSignature=<random 128Bit password for encryption>
+    mongoDbPass=<MongoDb Connection String>
+    ```
 - configure a App Registration with web authenticatin type
   - on Certificates & Secrets create a new "Client Secret" and take notes of the secret
 - on KeyVault give secrets read access to the app registration (as principal)
