@@ -24,7 +24,7 @@
   - configure a keyvault with secrets:
   - ```Node.js
     jwtSignature=<random 128Bit password for encryption>
-    mongoDbPass=<MongoDb Connection String>
+    dbConnectionString=<MongoDb Connection String>
     ```
 - configure a App Registration with web authenticatin type
   - on Certificates & Secrets create a new "Client Secret" and take notes of the secret
