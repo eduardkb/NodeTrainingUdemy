@@ -30,13 +30,13 @@
   # "true" or "false" accepted.
   GET_SECRETS_FROM_AZURE="true"
   # Variables in use if Keys will be retreived from Azure KeyVault
-  KEYVAULT_URI="https://ekb-mysecrets-kv.vault.azure.net/"
-  AZURE_TENANT_ID="d1ee1acd-bc7a-4bc4-a787-938c49a83906"
-  AZURE_CLIENT_ID="8115de36-b665-4905-95ae-a58f4c40a9d7"
-  AZURE_CLIENT_SECRET="3nq8Q~4ljCYGYbgKlpSsSGwok6sVlVHaHosm7dxE"
+  KEYVAULT_URI="key vault URL from keyVault essentials"
+  AZURE_TENANT_ID="value From App registration essentials, the Directory (tenant) ID"
+  AZURE_CLIENT_ID="value From App registration essentials, the Application (client) ID"
+  AZURE_CLIENT_SECRET<"Value from AppRegistration --> Cert & Secrets --> Client Secret --> Secret Value"
   # Variables in use if keys will be stored locally on .env file
-  LOCAL_JWT_SIGNATURE="6hyBj7zZ36B%Cg2DY2NM$mVn"
-  LOCAL_DB_CONNECTION_STRING="mongodb://ekbmongodata:nbl6KiEtbQBZwURtxN4SRFuYtetu6l0vc2Dackv9PCExZ5mKH0wz8hOGVp21IsK7WfF2qXFB086SACDb0bDmNg==@ekbmongodata.mongo.cosmos.azure.com:10255/nodeGetaPetApp?ssl=true&retrywrites=false&maxIdleTimeMS=120000"
+  LOCAL_JWT_SIGNATURE="<aStrongEncryptionPassword>"
+  LOCAL_DB_CONNECTION_STRING="mongodb://<userName>:<userPass>@<server>:<port>/<dbName>?<parameters>
   ```
 
 ````
@@ -47,12 +47,9 @@
 ## Initializing Project
 
 - $> npm init -y
-- $> npm install express nodemon cors mongoose bcrypt cookie-parser jsonwebtoken multer
+- $> npm install express nodemon cors mongoose bcrypt cookie-parser jsonwebtoken multer dotenv
 - Packages for keyvault
-- $> npm install @azure/keyvault-secrets @azure/identity KEYVAULT_URI=<"key vault URL">
-  AZURE_TENANT_ID=<"registered app in azure active directory">
-  AZURE_CLIENT_ID=<"registered app in azure active directory">
-  AZURE_CLIENT_SECRET=<"previously copied value">dotenv
+- $> npm install @azure/keyvault-secrets @azure/identity
 
 ## Database Initial Sample Data
 
