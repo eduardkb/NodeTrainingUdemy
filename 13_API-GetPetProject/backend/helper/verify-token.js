@@ -1,14 +1,18 @@
 const jwt = require("jsonwebtoken");
 const getToken = require("./get-token");
 const writeLog = require("./write-log");
+const getSecret = require("./get-secrets");
 
-const checkToken = (req, res, next) => {
+const checkToken = async (req, res, next) => {
   try {
     // convert token if req has it
     const token = getToken(req);
 
+    // get JWT Signature
+    const signature = await getSecret("jwtSignature");
+
     // verify token validity
-    const verified = jwt.verify(token, pass);
+    const verified = jwt.verify(token, signature);
     writeLog(
       "DEB",
       "TokenOk",

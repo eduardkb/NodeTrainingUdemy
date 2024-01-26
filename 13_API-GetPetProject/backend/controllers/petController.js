@@ -20,9 +20,7 @@ module.exports = class PetController {
   static async create(req, res) {
     const { name, age, weight, breed, color } = req.body;
     const available = true;
-
-    // image upload
-    // !!! PLACEHOLDER !!!
+    const images = req.files;
 
     // validations
     if (!name) {
@@ -39,6 +37,13 @@ module.exports = class PetController {
     }
     if (!color) {
       return res.status(422).json({ message: "A cor é obrigatória." });
+    }
+
+    // image upload
+    if (images.length === 0) {
+      return res
+        .status(422)
+        .json({ message: "Upload de imagem do pet é obrigatório." });
     }
 
     // Get Pet Owner
@@ -60,6 +65,11 @@ module.exports = class PetController {
         image: owner.image,
         phone: owner.phone,
       },
+    });
+
+    // get image fileName from POST and insert into new pet.images array
+    images.map((image) => {
+      pet.images.push(image.filename);
     });
 
     try {

@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const writeLog = require("./write-log");
+const getSecret = require("./get-secrets");
 
 // get user by jwt token
 const getUserByToken = async (token, res) => {
@@ -8,7 +9,11 @@ const getUserByToken = async (token, res) => {
     return res.status(401).json({ message: "Acesso negado." });
   }
   try {
-    const decoded = jwt.verify(token, pass);
+    // get JWT Signature
+    const signature = await getSecret("jwtSignature");
+
+    // decode token
+    const decoded = jwt.verify(token, signature);
     const userId = decoded.id;
     const user = await User.findOne({ _id: userId });
     if (!user) {
