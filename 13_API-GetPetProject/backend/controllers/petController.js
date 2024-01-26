@@ -19,7 +19,7 @@ module.exports = class PetController {
   }
   static async getAll(req, res) {
     try {
-      const pets = await Pet.find(); //.sort("createdAt");
+      const pets = await Pet.find().sort("-createdAt");
       return res.status(200).json({ pets: pets });
     } catch (error) {
       writeLog(
@@ -29,6 +29,25 @@ module.exports = class PetController {
       );
       return res.status(500).json({
         message: "Erro ao consultar os Pets. Tente novamente mais tarde.",
+      });
+    }
+  }
+  static async getUserPets(req, res) {
+    try {
+      // get user from token
+      const token = getToken(req);
+      const user = await getUserByToken(token);
+
+      const pets = await Pet.find({ "user._id": user._id }).sort("-createdAt");
+      return res.status(200).json({ pets: pets });
+    } catch (error) {
+      writeLog(
+        "DEB",
+        "DbErr",
+        `Error while retreiving user pets. ERR: ${error}`
+      );
+      return res.status(500).json({
+        message: "Erro ao consultar os seus Pets. Tente novamente mais tarde.",
       });
     }
   }

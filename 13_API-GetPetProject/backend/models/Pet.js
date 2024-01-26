@@ -16,7 +16,7 @@ const Pet = mongoose.model(
       adopter: Object,
     },
     { timestamps: true }
-  )
+  ).index({ createdAt: 1 }) // needed to sort by createdAt in Azure CosmosDB
 );
 
 module.exports = Pet;
