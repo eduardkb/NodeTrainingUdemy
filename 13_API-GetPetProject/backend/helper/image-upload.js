@@ -15,9 +15,10 @@ const imageStorage = multer.diskStorage({
     callback(null, `public/images/${folder}`);
   },
   filename: function (req, file, callback) {
-    const sFileName = `${Date.now()}_${String(
-      Math.floor(Math.random() * 1000)
-    )}_${file.originalname}`;
+    let sRand = String(Math.floor(Math.random() * 1000));
+    sRand = sRand.padStart(4, 0);
+    // standardize random to output always 4 digits
+    const sFileName = `${Date.now()}_${sRand}_${file.originalname}`;
     writeLog("DEB", "ImgUpName", `Generated Image Name:${sFileName}`);
     callback(null, sFileName);
     //callback(null, Date.now() + path.extname(file.originalname));
