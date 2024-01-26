@@ -7,6 +7,7 @@ const { imageUpload } = require("../helper/image-upload");
 
 //routes
 router.get("/testres", PetController.getTestReq);
+router.get("/", PetController.getAll);
 router.post(
   "/create",
   verifyToken,

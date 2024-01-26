@@ -17,6 +17,21 @@ module.exports = class PetController {
       ],
     });
   }
+  static async getAll(req, res) {
+    try {
+      const pets = await Pet.find(); //.sort("createdAt");
+      return res.status(200).json({ pets: pets });
+    } catch (error) {
+      writeLog(
+        "DEB",
+        "DbErr",
+        `Error while retreiving all pets. ERR: ${error}`
+      );
+      return res.status(500).json({
+        message: "Erro ao consultar os Pets. Tente novamente mais tarde.",
+      });
+    }
+  }
   static async create(req, res) {
     const { name, age, weight, breed, color } = req.body;
     const available = true;
