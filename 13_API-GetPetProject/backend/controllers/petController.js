@@ -169,4 +169,39 @@ module.exports = class PetController {
       });
     }
   }
+  static async removePetById(req, res) {
+    try {
+      const id = req.params.id;
+      if (!ObjectID.isValid(id)) {
+        return res.status(422).json({ message: "ID Inválida." });
+      }
+
+      // get pet by ID
+      const pet = await Pet.findOne({ _id: id });
+
+      // check if pet exists
+      if (!pet) {
+        return res.status(404).json({ message: "O pet nao foi encontrado." });
+      }
+
+      // check if logged in user registered the pet to delete
+      const token = getToken(req);
+      const user = await getUserByToken(token);
+
+      if (pet.user._id.toString() !== user._id.toString()) {
+        return res
+          .status(404)
+          .json({ message: "Voce nao pode deletar este pet." });
+      }
+
+      // delete user
+      await Pet.findByIdAndDelete(id);
+      return res.status(200).json({ message: "Pet removido com sucesso." });
+    } catch (error) {
+      writeLog("DEB", "DbErr", `Error while removing pet. ERR: ${error}`);
+      return res.status(500).json({
+        message: "Erro ao remover o pet. Tente novamente mais tarde.",
+      });
+    }
+  }
 };

@@ -18,5 +18,6 @@ router.post(
   imageUpload.array("images"),
   PetController.create
 );
+router.delete("/:id", verifyToken, PetController.removePetById);
 
 module.exports = router;
