@@ -11,6 +11,7 @@ router.get("/testres", PetController.getTestReq);
 router.get("/", PetController.getAll);
 router.get("/mypets", verifyToken, PetController.getUserPets);
 router.get("/myadoptions", verifyToken, PetController.getAllUserAdoptions);
+router.get("/:id", PetController.getPedById);
 router.post(
   "/create",
   verifyToken,

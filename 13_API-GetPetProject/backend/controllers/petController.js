@@ -4,6 +4,7 @@ const Pet = require("../models/Pet");
 const getToken = require("../helper/get-token");
 const getUserByToken = require("../helper/get-user-by-token");
 const writeLog = require("../helper/write-log");
+const ObjectID = require("mongoose").Types.ObjectId;
 
 module.exports = class PetController {
   static getTestReq(req, res) {
@@ -133,10 +134,38 @@ module.exports = class PetController {
       writeLog(
         "DEB",
         "DbErr",
-        `Error while retreiving user pets. ERR: ${error}`
+        `Error while retreiving adopted pets. ERR: ${error}`
       );
       return res.status(500).json({
-        message: "Erro ao consultar os seus Pets. Tente novamente mais tarde.",
+        message: "Erro ao consultar pets adotados. Tente novamente mais tarde.",
+      });
+    }
+  }
+  static async getPedById(req, res) {
+    try {
+      const id = req.params.id;
+      if (!ObjectID.isValid(id)) {
+        return res.status(422).json({ message: "ID Inválida." });
+      }
+
+      // get pet by ID
+      const pet = await Pet.findOne({ _id: id });
+
+      // check if pet exists
+      if (!pet) {
+        return res.status(404).json({ message: "O pet nao foi encontrado." });
+      }
+
+      // retornar pet
+      return res.status(200).json({ pet: pet });
+    } catch (error) {
+      writeLog(
+        "DEB",
+        "DbErr",
+        `Error while retreiving pet details. ERR: ${error}`
+      );
+      return res.status(500).json({
+        message: "Erro ao consultar o pet. Tente novamente mais tarde.",
       });
     }
   }
