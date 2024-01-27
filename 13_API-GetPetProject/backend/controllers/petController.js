@@ -17,40 +17,6 @@ module.exports = class PetController {
       ],
     });
   }
-  static async getAll(req, res) {
-    try {
-      const pets = await Pet.find().sort("-createdAt");
-      return res.status(200).json({ pets: pets });
-    } catch (error) {
-      writeLog(
-        "DEB",
-        "DbErr",
-        `Error while retreiving all pets. ERR: ${error}`
-      );
-      return res.status(500).json({
-        message: "Erro ao consultar os Pets. Tente novamente mais tarde.",
-      });
-    }
-  }
-  static async getUserPets(req, res) {
-    try {
-      // get user from token
-      const token = getToken(req);
-      const user = await getUserByToken(token);
-
-      const pets = await Pet.find({ "user._id": user._id }).sort("-createdAt");
-      return res.status(200).json({ pets: pets });
-    } catch (error) {
-      writeLog(
-        "DEB",
-        "DbErr",
-        `Error while retreiving user pets. ERR: ${error}`
-      );
-      return res.status(500).json({
-        message: "Erro ao consultar os seus Pets. Tente novamente mais tarde.",
-      });
-    }
-  }
   static async create(req, res) {
     const { name, age, weight, breed, color } = req.body;
     const available = true;
@@ -117,6 +83,61 @@ module.exports = class PetController {
       return res
         .status(500)
         .json({ message: "Erro ao salvar o pet. Tente novamente mais tarde." });
+    }
+  }
+  static async getAll(req, res) {
+    try {
+      const pets = await Pet.find().sort("-createdAt");
+      return res.status(200).json({ pets: pets });
+    } catch (error) {
+      writeLog(
+        "DEB",
+        "DbErr",
+        `Error while retreiving all pets. ERR: ${error}`
+      );
+      return res.status(500).json({
+        message: "Erro ao consultar os Pets. Tente novamente mais tarde.",
+      });
+    }
+  }
+  static async getUserPets(req, res) {
+    try {
+      // get user from token
+      const token = getToken(req);
+      const user = await getUserByToken(token);
+
+      const pets = await Pet.find({ "user._id": user._id }).sort("-createdAt");
+      return res.status(200).json({ pets: pets });
+    } catch (error) {
+      writeLog(
+        "DEB",
+        "DbErr",
+        `Error while retreiving user pets. ERR: ${error}`
+      );
+      return res.status(500).json({
+        message: "Erro ao consultar os seus Pets. Tente novamente mais tarde.",
+      });
+    }
+  }
+  static async getAllUserAdoptions(req, res) {
+    try {
+      // get user from token
+      const token = getToken(req);
+      const user = await getUserByToken(token);
+
+      const pets = await Pet.find({ "adopter._id": user._id }).sort(
+        "-createdAt"
+      );
+      return res.status(200).json({ pets: pets });
+    } catch (error) {
+      writeLog(
+        "DEB",
+        "DbErr",
+        `Error while retreiving user pets. ERR: ${error}`
+      );
+      return res.status(500).json({
+        message: "Erro ao consultar os seus Pets. Tente novamente mais tarde.",
+      });
     }
   }
 };
