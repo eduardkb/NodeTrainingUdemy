@@ -278,4 +278,61 @@ module.exports = class PetController {
       });
     }
   }
+  static async schedule(req, res) {
+    try {
+      const id = req.params.id;
+
+      // verify if ObjectID is valid
+      if (!ObjectID.isValid(id)) {
+        return res.status(422).json({ message: "ID Inválida." });
+      }
+
+      // get pet by ID
+      const pet = await Pet.findOne({ _id: id });
+
+      // check if pet exists
+      if (!pet) {
+        return res.status(404).json({ message: "O pet nao foi encontrado." });
+      }
+
+      // check if user is trying to schedule visit for his own pet
+      const token = getToken(req);
+      const user = await getUserByToken(token);
+
+      if (pet.user._id.equals(user._id)) {
+        return res
+          .status(404)
+          .json({ message: "Voce nao pode agendar visita com o seu pet." });
+      }
+
+      // check if user has already scheduled a visit
+      if (pet.adopter) {
+        if (pet.adopter._id.equals(user._id)) {
+          return res
+            .status(422)
+            .json({ message: "Voce já agendou uma visita para este pet." });
+        }
+      }
+
+      // save the schedule
+      pet.adopter = {
+        _id: user._id,
+        name: user.name,
+        image: user.image,
+      };
+
+      await Pet.findByIdAndUpdate(id, pet);
+
+      return res
+        .status(200)
+        .json({
+          message: `Visita agendada com sucesso. Entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}`,
+        });
+    } catch (error) {
+      writeLog("DEB", "DbErr", `Error while scheduling a visit. ERR: ${error}`);
+      return res.status(500).json({
+        message: "Erro ao agendar uma visita. Tente novamente mais tarde.",
+      });
+    }
+  }
 };

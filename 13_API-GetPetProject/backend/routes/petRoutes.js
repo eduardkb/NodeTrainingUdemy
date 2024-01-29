@@ -4,7 +4,6 @@ const PetController = require("../controllers/petController");
 //middlewares
 const verifyToken = require("../helper/verify-token");
 const { imageUpload } = require("../helper/image-upload");
-const { verify } = require("jsonwebtoken");
 
 //routes
 router.get("/testres", PetController.getTestReq);
@@ -25,5 +24,6 @@ router.patch(
   PetController.updatePet
 );
 router.delete("/:id", verifyToken, PetController.removePetById);
+router.patch("/schedule/:id", verifyToken, PetController.schedule);
 
 module.exports = router;
