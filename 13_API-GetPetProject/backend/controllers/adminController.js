@@ -8,6 +8,7 @@ module.exports = class AdminController {
       const users = await User.find();
       const pets = await Pet.find();
       writeLog("INF", "GetDb", `All Users: |${users}| \nAll Pets: |${pets}|`);
+      //return all pets and users
       return res.status(200).json({
         message: "Success Retreiving Data.",
         AllUsers: users,

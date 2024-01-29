@@ -323,15 +323,55 @@ module.exports = class PetController {
 
       await Pet.findByIdAndUpdate(id, pet);
 
-      return res
-        .status(200)
-        .json({
-          message: `Visita agendada com sucesso. Entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}`,
-        });
+      return res.status(200).json({
+        message: `Visita agendada com sucesso. Entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}`,
+      });
     } catch (error) {
       writeLog("DEB", "DbErr", `Error while scheduling a visit. ERR: ${error}`);
       return res.status(500).json({
         message: "Erro ao agendar uma visita. Tente novamente mais tarde.",
+      });
+    }
+  }
+  static async concludeAdoption(req, res) {
+    try {
+      const id = req.params.id;
+
+      // verify if ObjectID is valid
+      if (!ObjectID.isValid(id)) {
+        return res.status(422).json({ message: "ID Inválida." });
+      }
+
+      // get pet by ID
+      const pet = await Pet.findOne({ _id: id });
+
+      // check if pet exists
+      if (!pet) {
+        return res.status(404).json({ message: "O pet nao foi encontrado." });
+      }
+
+      // verify if user logged in is owner of the pet
+      const token = getToken(req);
+      const user = await getUserByToken(token);
+
+      if (!pet.user._id.equals(user._id)) {
+        return res.status(404).json({
+          message: "Voce nao pode confirmar adoção de um pet que nao é seu.",
+        });
+      }
+
+      // set available to false
+      pet.available = false;
+
+      // conclude adoption
+      await Pet.findByIdAndUpdate(id, pet);
+      return res.status(200).json({
+        message: `Parabéns! Adoção concluida com sucesso.`,
+      });
+    } catch (error) {
+      writeLog("DEB", "DbErr", `Error while adopting a pet. ERR: ${error}`);
+      return res.status(500).json({
+        message: "Erro ao adotart um pet. Tente novamente mais tarde.",
       });
     }
   }
