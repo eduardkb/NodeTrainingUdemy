@@ -172,6 +172,8 @@ module.exports = class PetController {
   static async removePetById(req, res) {
     try {
       const id = req.params.id;
+
+      // verify if ObjectID is valid
       if (!ObjectID.isValid(id)) {
         return res.status(422).json({ message: "ID Inválida." });
       }
@@ -201,6 +203,78 @@ module.exports = class PetController {
       writeLog("DEB", "DbErr", `Error while removing pet. ERR: ${error}`);
       return res.status(500).json({
         message: "Erro ao remover o pet. Tente novamente mais tarde.",
+      });
+    }
+  }
+  static async updatePet(req, res) {
+    try {
+      const id = req.params.id;
+      const { name, age, weight, breed, color, available } = req.body;
+      const images = req.files;
+      const updatedData = {};
+      // verify if ObjectID is valid
+      if (!ObjectID.isValid(id)) {
+        return res.status(422).json({ message: "ID Inválida." });
+      }
+
+      // get pet by ID
+      const pet = await Pet.findOne({ _id: id });
+
+      // check if pet exists
+      if (!pet) {
+        return res.status(404).json({ message: "O pet nao foi encontrado." });
+      }
+
+      // check if logged in user registered the pet to delete
+      const token = getToken(req);
+      const user = await getUserByToken(token);
+
+      if (pet.user._id.toString() !== user._id.toString()) {
+        return res
+          .status(404)
+          .json({ message: "Voce nao pode deletar este pet." });
+      }
+
+      // validations
+      if (!name) {
+        return res.status(422).json({ message: "O nome é obrigatório." });
+      }
+      updatedData.name = name;
+      if (!age) {
+        return res.status(422).json({ message: "A idade é obrigatória." });
+      }
+      updatedData.age = age;
+      if (!weight) {
+        return res.status(422).json({ message: "O peso é obrigatório." });
+      }
+      updatedData.weight = weight;
+      if (!breed) {
+        return res.status(422).json({ message: "A raça é obrigatória." });
+      }
+      updatedData.breed = breed;
+      if (!color) {
+        return res.status(422).json({ message: "A cor é obrigatória." });
+      }
+      updatedData.color = color;
+
+      // image upload
+      if (images.length === 0) {
+        return res
+          .status(422)
+          .json({ message: "Upload de imagem do pet é obrigatório." });
+      }
+      updatedData.images = [];
+      images.map((image) => {
+        updatedData.images.push(image.filename);
+      });
+
+      // update pet
+      await Pet.findByIdAndUpdate(id, updatedData);
+      return res.status(200).json({ message: "Pet atualizado com sucesso." });
+    } catch (error) {
+      writeLog("DEB", "DbErr", `Error while updating pet. ERR: ${error}`);
+      return res.status(500).json({
+        message: "Erro ao atualizar o pet. Tente novamente mais tarde.",
       });
     }
   }
