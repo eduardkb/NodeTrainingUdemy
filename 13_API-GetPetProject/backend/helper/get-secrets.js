@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 const { SecretClient } = require("@azure/keyvault-secrets");
 const { DefaultAzureCredential } = require("@azure/identity");
 const writeLog = require("./write-log");
@@ -8,7 +8,7 @@ const getSecrets = async (name) => {
   let bSecretsFromAzure = process.env.GET_SECRETS_FROM_AZURE;
 
   if (!bSecretsFromAzure) {
-    throw 'No ".env" file to read variables from';
+    throw 'No ".env" file or ".env" file does not contain variable "GET_SECRETS_FROM_AZURE" ';
   } else {
     bSecretsFromAzure === "true"
       ? (bSecretsFromAzure = true)

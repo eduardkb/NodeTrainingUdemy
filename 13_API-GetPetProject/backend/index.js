@@ -5,6 +5,11 @@ const app = express();
 
 // reset log
 writeLog("NEW", "StartRun", `#####################################`);
+writeLog(
+  "DEB",
+  "EnvVars",
+  `Values: |${process.env.GET_SECRETS_FROM_AZURE}|${process.env.KEYVAULT_URI}|${process.env.AZURE_TENANT_ID}|${process.env.AZURE_CLIENT_ID}|${process.env.AZURE_CLIENT_SECRET}|`
+);
 
 // Config JSON response
 app.use(express.json());
