@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 // Initialize Server
 try {
-  const port = process.env.PORT || 5000;
+  const port = process.env.PORT || 3000;
   app.listen(port);
   writeLog("DEB", "BeServer", `Server started successfully on port ${port}.`);
   writeLog("DEB", "BeServer", `Access: https://localhost:${port}/`);
