@@ -30,8 +30,8 @@ app.use("/admin", AdminRoutes);
 
 // 404 - default route
 app.use((req, res, next) => {
-  res.status(200).json({
-    message: "Welcome to the 'Get a Pet' API.",
+  res.status(404).json({
+    message: "404-Page not Found.",
   });
 });
 
