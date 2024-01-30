@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 const { SecretClient } = require("@azure/keyvault-secrets");
 const { DefaultAzureCredential } = require("@azure/identity");
 const writeLog = require("./write-log");
