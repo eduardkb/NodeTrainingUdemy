@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const writeLog = require("./helper/write-log");
 const app = express();
 
@@ -10,7 +10,7 @@ writeLog("NEW", "StartRun", `#####################################`);
 app.use(express.json());
 
 // Configure CORS
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+// app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 // Public folder
 app.use(express.static("public"));
