@@ -5,7 +5,7 @@ const app = express();
 //Initialize Middlewares
 require("./helper/middlewares").iniMiddlewares(app, express);
 
-// Imported Routes
+// Import Routes
 const UserRoutes = require("./routes/userRoutes");
 const PetRoutes = require("./routes/petRoutes");
 const AdminRoutes = require("./routes/adminRoutes");

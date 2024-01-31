@@ -52,7 +52,7 @@ router.get(
   PetController.getPedById
   /*
     #swagger.ignore = true
-    #swagger.path = '/pets/:id'
+    #swagger.path = '/pets/{id}'
     #swagger.tags = ['Pets']
     #swagger.summary = 'Get pet by ID'
     #swagger.description = 'Returns a pet by it's ID.'
@@ -90,7 +90,7 @@ router.patch(
   PetController.updatePet
   /*
     #swagger.ignore = true
-    #swagger.path = '/pets/:id'
+    #swagger.path = '/pets/{id}'
     #swagger.tags = ['Pets']
     #swagger.summary = 'Modify a pet'
     #swagger.description = 'Changes a pet's registered values'
@@ -100,12 +100,24 @@ router.delete(
   "/:id",
   verifyToken,
   PetController.removePetById
-  /*
-    #swagger.ignore = true
-    #swagger.path = '/pets/id'
+  /*    
+    #swagger.path = '/pets/{id}'
     #swagger.tags = ['Pets']
     #swagger.summary = 'Delete a pet'
     #swagger.description = 'Removes a pet from the system'
+    #swagger.parameters['id'] = {
+            in: 'path'
+            description: 'ID of the Pet to be deleted'            
+            type: 'string'
+            required: true
+            schema: {
+              id: "124351234"
+            }
+          }
+
+    #swagger.security = [{
+            "bearerAuth": []
+    }]
 */
 );
 router.patch(

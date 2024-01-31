@@ -72,7 +72,7 @@ router.get(
   UserController.getUserById
   /*
     #swagger.ignore = true
-    #swagger.path = '/users/:id'
+    #swagger.path = '/users/{id}'
     #swagger.tags = ['Users']
     #swagger.summary = 'Get a user by ID'
     #swagger.description = 'Returns a user detail by its ID'
@@ -85,7 +85,7 @@ router.patch(
   UserController.editUser
   /*
     #swagger.ignore = true
-    #swagger.path = '/users/edit/:id'
+    #swagger.path = '/users/edit/{id}'
     #swagger.tags = ['Users']
     #swagger.summary = 'Edit a user'
     #swagger.description = 'Modifies the properties of a user'
