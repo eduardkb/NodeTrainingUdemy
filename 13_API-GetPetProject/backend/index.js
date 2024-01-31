@@ -20,10 +20,6 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 // Public folder
 app.use(express.static("public"));
 
-// import swagger
-const { swaggerUi, specs } = require("./helper/swagger");
-app.use("/api", swaggerUi.serve, swaggerUi.setup(specs));
-
 // Imported Routes
 const UserRoutes = require("./routes/userRoutes");
 const PetRoutes = require("./routes/petRoutes");

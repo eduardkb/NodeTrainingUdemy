@@ -25,8 +25,6 @@
 - $> npm install express nodemon cors mongoose bcrypt cookie-parser jsonwebtoken multer dotenv
 - Packages for keyvault
 - $> npm install @azure/keyvault-secrets @azure/identity
-- Packages for Swagger
-- $> npm install swagger-ui-express swagger-jsdoc
 
 ## Database Initial Sample Data
 
