@@ -155,3 +155,4 @@ package-lock.json
 *.tmp
 images/
 .ENV
+swagger-output.json

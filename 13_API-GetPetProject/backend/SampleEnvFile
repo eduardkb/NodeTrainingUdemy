@@ -4,7 +4,9 @@
 #     - Variable below defines if reading from Azure or Local ENV
 GET_SECRETS_FROM_AZURE="true" # Accepted values: "true" or "false"
 # port where backend will be started
-PORT=3000
+PORT=5000
+# Swagger server
+SWAGGER_SERVER="localhost:5000"
 
 # This app uses MongoDB as its dabatase
 #     - Install a local mongoDB instance or use the ones available in

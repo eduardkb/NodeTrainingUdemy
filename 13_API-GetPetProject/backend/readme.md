@@ -2,6 +2,12 @@
 
 ---
 
+## To-Do
+
+- Swagger
+  - verify parameter documentation and configure parameters for requests
+  - https://swagger-autogen.github.io/docs/endpoints/manual-capture
+
 ## Intro
 
 - uses Node.js for the backend
@@ -25,6 +31,8 @@
 - $> npm install express nodemon cors mongoose bcrypt cookie-parser jsonwebtoken multer dotenv
 - Packages for keyvault
 - $> npm install @azure/keyvault-secrets @azure/identity
+- Packages for swagger
+- $> npm install swagger-autogen swagger-ui-express body-parser
 
 ## Database Initial Sample Data
 
