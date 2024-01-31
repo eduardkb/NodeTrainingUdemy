@@ -11,6 +11,7 @@ router.get(
   PetController.getTestReq
   /*
     #swagger.ignore = true
+    #swagger.tags = ['Pets']    
 */
 );
 router.get(
@@ -32,6 +33,9 @@ router.get(
     #swagger.tags = ['Pets']
     #swagger.summary = 'Get my pets'
     #swagger.description = 'Returns all pets that I registered'
+    #swagger.security = [{
+            "bearerAuth": []
+    }]
 */
 );
 router.get(
@@ -40,12 +44,14 @@ router.get(
   PetController.getAllUserAdoptions
   /*
     #swagger.ignore = true
+    #swagger.tags = ['Pets']
 */
 );
 router.get(
   "/:id",
   PetController.getPedById
   /*
+    #swagger.ignore = true
     #swagger.path = '/pets/:id'
     #swagger.tags = ['Pets']
     #swagger.summary = 'Get pet by ID'
@@ -57,11 +63,24 @@ router.post(
   verifyToken,
   imageUpload.array("images"),
   PetController.create
-  /*
+  /*    
     #swagger.path = '/pets/create'
     #swagger.tags = ['Pets']
     #swagger.summary = 'Create a pet'
     #swagger.description = 'Add a new pet to the system'
+    #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/petBody"
+                    }  
+                }
+            }
+        } 
+    #swagger.security = [{
+            "bearerAuth": []
+    }]
 */
 );
 router.patch(
@@ -70,6 +89,7 @@ router.patch(
   imageUpload.array("images"),
   PetController.updatePet
   /*
+    #swagger.ignore = true
     #swagger.path = '/pets/:id'
     #swagger.tags = ['Pets']
     #swagger.summary = 'Modify a pet'
@@ -81,6 +101,7 @@ router.delete(
   verifyToken,
   PetController.removePetById
   /*
+    #swagger.ignore = true
     #swagger.path = '/pets/id'
     #swagger.tags = ['Pets']
     #swagger.summary = 'Delete a pet'
@@ -93,6 +114,7 @@ router.patch(
   PetController.schedule
   /*
     #swagger.ignore = true
+    #swagger.tags = ['Pets']
 */
 );
 router.patch(
@@ -101,6 +123,7 @@ router.patch(
   PetController.concludeAdoption
   /*
     #swagger.ignore = true
+    #swagger.tags = ['Pets']
 */
 );
 

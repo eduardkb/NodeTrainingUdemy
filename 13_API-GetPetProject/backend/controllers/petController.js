@@ -41,10 +41,18 @@ module.exports = class PetController {
     }
 
     // image upload
-    if (images.length === 0) {
+    try {
+      writeLog("DEB", "ImagesUp", `Upload images variable: ${images}`);
+      if (images === undefined || images.length === 0) {
+        return res
+          .status(422)
+          .json({ message: "Upload de imagem do pet é obrigatório." });
+      }
+    } catch (error) {
+      writeLog("DEB", "ImgErr", `Upload images Error: ${error}`);
       return res
         .status(422)
-        .json({ message: "Upload de imagem do pet é obrigatório." });
+        .json({ message: "Erro ao fazer o upload das imagens." });
     }
 
     // Get Pet Owner

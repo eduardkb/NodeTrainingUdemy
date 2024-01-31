@@ -24,12 +24,24 @@ const swaggerIni = async (expApp) => {
           $email: "johndoe@edu.com",
           $phone: "+111-222-3333",
           $password: "johndoe1234",
-          $confirmationpassword: "johndoe1234",
+          $confirmpassword: "johndoe1234",
         },
         userResponse: {
           name: "Jhon Doe",
           email: "johndoe@edu.com",
           phone: "+111-222-3333",
+        },
+        userLogin: {
+          $email: "johndoe@edu.com",
+          $password: "johndoe1234",
+        },
+        petBody: {
+          $name: "Buddy",
+          $age: "7",
+          $weight: "6",
+          $breed: "Beagle",
+          $color: "Black/Caramel",
+          $images: "johndoe1234",
         },
       },
       securitySchemes: {
@@ -48,7 +60,7 @@ const swaggerIni = async (expApp) => {
 
     expApp.use(bodyParser.json());
     const swaggerFile = require("./swagger-output.json");
-    expApp.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+    expApp.use("/", swaggerUi.serve, swaggerUi.setup(swaggerFile));
     writeLog(
       "DEB",
       "Swagger",

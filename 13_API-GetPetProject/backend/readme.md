@@ -5,7 +5,7 @@
 ## To-Do
 
 - Swagger
-  - verify parameter documentation and configure parameters for requests
+  - upload images on pet register
   - https://swagger-autogen.github.io/docs/endpoints/manual-capture
 
 ## Intro

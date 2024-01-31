@@ -161,6 +161,7 @@ module.exports = class UserController {
       }
     } else {
       currentUser = null;
+      return res.status(500).send({ message: "No token received." });
     }
     res.status(200).send(currentUser);
   }

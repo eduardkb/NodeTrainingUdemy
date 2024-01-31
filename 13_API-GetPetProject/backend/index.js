@@ -1,37 +1,18 @@
 const express = require("express");
-const cors = require("cors");
 const writeLog = require("./helper/write-log");
 const app = express();
 
-// reset log
-writeLog("NEW", "StartRun", `#####################################`);
-
-// Config JSON response
-app.use(express.json());
-
-// Configure CORS
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-
-// Public folder
-app.use(express.static("public"));
-
-// Swagger Initialization
-require("./helper/swagger").swaggerIni(app);
+//Initialize Middlewares
+require("./helper/middlewares").iniMiddlewares(app, express);
 
 // Imported Routes
 const UserRoutes = require("./routes/userRoutes");
 const PetRoutes = require("./routes/petRoutes");
 const AdminRoutes = require("./routes/adminRoutes");
+const exp = require("constants");
 app.use("/users", UserRoutes);
 app.use("/pets", PetRoutes);
 app.use("/admin", AdminRoutes);
-
-// 404 - default route
-// app.use((req, res, next) => {
-//   res.status(404).json({
-//     message: "404-Page not Found.",
-//   });
-// });
 
 // Initialize Server
 try {
