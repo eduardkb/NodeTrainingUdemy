@@ -316,3 +316,8 @@
       ]
   }
   ```
+
+## Temp
+
+- Swagger HowTo
+  - https://davibaltar.medium.com/documenta%C3%A7%C3%A3o-autom%C3%A1tica-de-apis-em-node-js-com-swagger-parte-2-usando-openapi-v3-cbc371d8c5ee
