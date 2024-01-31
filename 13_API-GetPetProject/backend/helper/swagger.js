@@ -18,30 +18,89 @@ const swaggerIni = async (expApp) => {
       },
     ],
     components: {
-      schemas: {
+      "@schemas": {
         userBody: {
-          $name: "Jhon Doe",
-          $email: "johndoe@edu.com",
-          $phone: "+111-222-3333",
-          $password: "johndoe1234",
-          $confirmpassword: "johndoe1234",
-        },
-        userResponse: {
-          name: "Jhon Doe",
-          email: "johndoe@edu.com",
-          phone: "+111-222-3333",
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              description: "User Name",
+              example: "John Doe",
+            },
+            email: {
+              type: "string",
+              description: "User email",
+              example: "johndoe@edu.com",
+            },
+            phone: {
+              type: "string",
+              description: "User Name",
+              example: "+555-444-3333",
+            },
+            password: {
+              type: "string",
+              description: "User Name",
+              example: "johndoe1234",
+            },
+            confirmpassword: {
+              type: "string",
+              confirmpassword: "User Name",
+              example: "johndoe1234",
+            },
+          },
         },
         userLogin: {
-          $email: "johndoe@edu.com",
-          $password: "johndoe1234",
+          type: "object",
+          properties: {
+            email: {
+              type: "string",
+              description: "User Name",
+              example: "johndoe@edu.com",
+            },
+            password: {
+              type: "string",
+              description: "User email",
+              example: "johndoe1234",
+            },
+          },
         },
         petBody: {
-          $name: "Buddy",
-          $age: "7",
-          $weight: "6",
-          $breed: "Beagle",
-          $color: "Black/Caramel",
-          $images: "johndoe1234",
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              description: "Pet Name",
+              example: "Max",
+            },
+            age: {
+              type: "integer",
+              description: "Pet Age",
+              example: 4,
+            },
+            weight: {
+              type: "integer",
+              description: "Pet Weight",
+              example: 12,
+            },
+            color: {
+              type: "string",
+              description: "Pet Color",
+              example: "Black",
+            },
+            breed: {
+              type: "string",
+              description: "Pet Breed",
+              example: "German Sheppard",
+            },
+            images: {
+              type: "array",
+              description: "Images Upload",
+              items: {
+                type: "string",
+                format: "binary",
+              },
+            },
+          },
         },
       },
       securitySchemes: {

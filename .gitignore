@@ -149,10 +149,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#manual
+#manual add
 *.md.swp
 package-lock.json
 *.tmp
-images/
-.ENV
+**/pets/*
+!**/pets/*.placeholder
+**/users/*
+!**/users/*.placeholder
+.env
 swagger-output.json

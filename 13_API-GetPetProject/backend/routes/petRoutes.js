@@ -66,21 +66,21 @@ router.post(
   /*    
     #swagger.path = '/pets/create'
     #swagger.tags = ['Pets']
-    #swagger.summary = 'Create a pet'
+    #swagger.summary = 'Register a pet'
     #swagger.description = 'Add a new pet to the system'
-    #swagger.requestBody = {
-            required: true,
-            content: {
-                "application/json": {
-                    schema: {
-                        $ref: "#/components/schemas/petBody"
-                    }  
-                }
-            }
-        } 
     #swagger.security = [{
             "bearerAuth": []
     }]
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "multipart/form-data": {
+          schema: {            
+            $ref: "#/components/schemas/petBody"
+          }  
+        }
+      }
+    }
 */
 );
 router.patch(
