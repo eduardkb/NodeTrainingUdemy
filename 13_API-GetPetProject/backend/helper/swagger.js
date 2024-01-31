@@ -55,7 +55,11 @@ const swaggerIni = async (expApp) => {
 
   try {
     const outputFile = "./helper/swagger-output.json";
-    const endpointsFiles = ["./routes/*.js"];
+    const endpointsFiles = [
+      "./routes/petRoutes.js",
+      "./routes/userRoutes.js",
+      "./routes/adminRoutes.js",
+    ];
     await swaggerAutogen(outputFile, endpointsFiles, doc);
 
     expApp.use(bodyParser.json());
