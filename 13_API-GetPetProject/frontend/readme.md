@@ -2,6 +2,10 @@
 
 ---
 
+## ToDo
+
+- axios getting correct path from .env.local file?
+
 ## Intro
 
 - uses React framework for frontend
@@ -10,6 +14,8 @@
 
 - install database (instructions in backend)
 - install backend (instructions in backend)
+- configure .env file on root folder with variables:
+  - REACT_APP_API='https://<PATH_TO_API>/'
 - intall frontend
   - modify ./.env.local file with correct values
   - $> npm install
