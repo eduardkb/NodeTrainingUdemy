@@ -4,9 +4,8 @@
 
 ## To-Do
 
-- Swagger
-  - upload images on pet register
-  - https://swagger-autogen.github.io/docs/endpoints/manual-capture
+- images
+  - make option to upload images to azure
 
 ## Intro
 
@@ -46,8 +45,8 @@
         "email": "maria@edu.com",
         "password": "$2b$12$VH.LKt4cx9RZ41yadGcJkOtcpbN.WHqC5FvkIRSIm5z8KAO9oO/N.",
         "phone": "+1-587-487-4488",
-        "createdAt": ISODate("2024-01-17T12:05:52.441Z"),
-        "updatedAt": ISODate("2024-01-17T12:05:52.441Z")
+        "createdAt": ISODate("2024-01-12T12:05:52.441Z"),
+        "updatedAt": ISODate("2024-01-12T12:05:52.441Z")
         },
         {
         "_id": ObjectId("65a7c335a29687af108e32d8"),
@@ -64,8 +63,8 @@
         "email": "pedro@edu.com",
         "password": "$2b$12$0a2Ii894BdNSLSlkmAie2Oz/lsfn02V.d8iKcOuVlVnxp2x5dV0sS",
         "phone": "+1-158-158-1588",
-        "createdAt": ISODate("2024-01-17T12:47:11.526Z"),
-        "updatedAt": ISODate("2024-01-17T12:47:11.526Z")
+        "createdAt": ISODate("2024-01-12T12:47:11.526Z"),
+        "updatedAt": ISODate("2024-01-12T12:47:11.526Z")
         }
     ])
     db.getCollection("users").find({})
@@ -87,8 +86,8 @@
   		  "image": "1705603890199_jose.jpg",
   		  "phone": "+1-888-999-1004"
   	  },
-  	  "createdAt": ISODate("2024-01-22T18:14:40.473Z"),
-  	  "updatedAt": ISODate("2024-01-22T18:14:40.473Z")
+  	  "createdAt": ISODate("2024-01-17T18:14:40.473Z"),
+  	  "updatedAt": ISODate("2024-01-17T18:14:40.473Z")
     },
     {
   	  "_id": ObjectId("65aeb15b5b09e0fa1d23bf28"),
