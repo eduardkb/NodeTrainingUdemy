@@ -46,8 +46,8 @@
         "email": "maria@edu.com",
         "password": "$2b$12$VH.LKt4cx9RZ41yadGcJkOtcpbN.WHqC5FvkIRSIm5z8KAO9oO/N.",
         "phone": "+1-587-487-4488",
-        "createdAt": "2024-01-17T12:05:52.441Z",
-        "updatedAt": "2024-01-17T12:05:52.441Z"
+        "createdAt": ISODate("2024-01-17T12:05:52.441Z"),
+        "updatedAt": ISODate("2024-01-17T12:05:52.441Z")
         },
         {
         "_id": ObjectId("65a7c335a29687af108e32d8"),
@@ -55,8 +55,8 @@
         "email": "joao@edu.com",
         "password": "$2b$12$rl2oF0L23uh521Np4sqSDOPbVpzNjhOiaruTpz/O7V8ogI8GdqaOy",
         "phone": "+1-489-997-9977",
-        "createdAt": "2024-01-17T12:08:21.672Z",
-        "updatedAt": "2024-01-17T12:08:21.672Z"
+        "createdAt": ISODate("2024-01-17T12:08:21.672Z"),
+        "updatedAt": ISODate("2024-01-17T12:08:21.672Z")
         },
         {
         "_id": ObjectId("65a7cc4f1ea75aeafa93be78"),
@@ -64,8 +64,8 @@
         "email": "pedro@edu.com",
         "password": "$2b$12$0a2Ii894BdNSLSlkmAie2Oz/lsfn02V.d8iKcOuVlVnxp2x5dV0sS",
         "phone": "+1-158-158-1588",
-        "createdAt": "2024-01-17T12:47:11.526Z",
-        "updatedAt": "2024-01-17T12:47:11.526Z"
+        "createdAt": ISODate("2024-01-17T12:47:11.526Z"),
+        "updatedAt": ISODate("2024-01-17T12:47:11.526Z")
         }
     ])
     db.getCollection("users").find({})
@@ -87,8 +87,8 @@
   		  "image": "1705603890199_jose.jpg",
   		  "phone": "+1-888-999-1004"
   	  },
-  	  "createdAt": "2024-01-22T18:14:40.473Z",
-  	  "updatedAt": "2024-01-22T18:14:40.473Z"
+  	  "createdAt": ISODate("2024-01-22T18:14:40.473Z"),
+  	  "updatedAt": ISODate("2024-01-22T18:14:40.473Z")
     },
     {
   	  "_id": ObjectId("65aeb15b5b09e0fa1d23bf28"),
@@ -104,8 +104,8 @@
   		  "name": "Maria",
   		  "phone": "+1-587-487-4488"
   	  },
-  	  "createdAt": "2024-01-22T18:18:03.914Z",
-  	  "updatedAt": "2024-01-22T18:18:03.914Z",
+  	  "createdAt": ISODate("2024-01-22T18:18:03.914Z"),
+  	  "updatedAt": ISODate("2024-01-22T18:18:03.914Z"),
   	  "adopter": {
   		  "_id": "65b568bc8a7d4df56a580730"
   	  }
@@ -124,8 +124,8 @@
   		  "name": "João",
   		  "phone": "+2-222-222-2222"
   	  },
-  	  "createdAt": "2024-01-23T13:02:52.184Z",
-  	  "updatedAt": "2024-01-23T13:02:52.184Z"
+  	  "createdAt": ISODate("2024-01-23T13:02:52.184Z"),
+  	  "updatedAt": ISODate("2024-01-23T13:02:52.184Z")
     },
     {
   	  "_id": ObjectId("65b3ba09a30639ead1d33d62"),
@@ -146,8 +146,8 @@
   		  "name": "João",
   		  "phone": "+2-222-222-2222"
   	  },
-  	  "createdAt": "2024-01-26T13:56:25.403Z",
-  	  "updatedAt": "2024-01-26T13:56:25.403Z"
+  	  "createdAt": ISODate("2024-01-26T13:56:25.403Z"),
+  	  "updatedAt": ISODate("2024-01-26T13:56:25.403Z")
     },
     {
   	  "_id": ObjectId("65b3ba3ba30639ead1d33d68"),
@@ -168,8 +168,8 @@
   		  "name": "Maria",
   		  "phone": "+2-222-222-2222"
   	  },
-  	  "createdAt": "2024-01-26T13:57:15.920Z",
-  	  "updatedAt": "2024-01-26T13:57:15.920Z"
+  	  "createdAt": ISODate("2024-01-26T13:57:15.920Z"),
+  	  "updatedAt": ISODate("2024-01-26T13:57:15.920Z")
     }
     ])
     db.getCollection("pets").find({})
