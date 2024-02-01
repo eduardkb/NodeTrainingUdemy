@@ -1,8 +1,10 @@
 const router = require("express").Router();
 const AdminController = require("../controllers/adminController");
+const verifyAdmin = require("../helper/verify-if-admin");
 
 router.get(
   "/getDbBackup",
+  verifyAdmin,
   AdminController.getDbBackup
   /*
     #swagger.path = '/admin/getDbBackup'
