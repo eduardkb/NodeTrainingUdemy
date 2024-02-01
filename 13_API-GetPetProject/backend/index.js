@@ -19,7 +19,6 @@ try {
   const port = process.env.PORT || 5000;
   app.listen(port);
   writeLog("DEB", "BeServer", `Server started successfully on port ${port}.`);
-  writeLog("DEB", "BeServer", `Access: https://localhost:${port}/`);
 } catch (error) {
   writeLog("DEB", "BeServer", `Error while starting server: ${error}.`);
 }

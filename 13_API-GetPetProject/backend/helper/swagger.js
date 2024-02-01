@@ -123,7 +123,7 @@ const swaggerIni = async (expApp) => {
 
     expApp.use(bodyParser.json());
     const swaggerFile = require("./swagger-output.json");
-    expApp.use("/", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+    expApp.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile));
     writeLog(
       "DEB",
       "Swagger",

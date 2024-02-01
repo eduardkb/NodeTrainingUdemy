@@ -11,6 +11,9 @@ router.get(
     #swagger.tags = ['Admin']
     #swagger.summary = 'Get a backup'
     #swagger.description = 'Generates a backup with all users and all pets'
+    #swagger.security = [{
+            "bearerAuth": []
+    }]
 */
 );
 
