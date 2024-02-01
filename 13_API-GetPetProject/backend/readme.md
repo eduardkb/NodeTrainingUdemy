@@ -19,7 +19,7 @@
   - Install local MongoDB or configure Azure/AWS MongoDB instance
   - get MongoDB connection string
 - This application requires some configuration
-  - read the file SampleEnvFile for instructions
+  - read the file .env_SAMPLE for instructions
 - install backend
   - $> npm install
   - $> npm start

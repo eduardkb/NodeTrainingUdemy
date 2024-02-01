@@ -1,11 +1,13 @@
 import Input from "../../form/input";
 import styles from "../../form/form.module.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import writeLog from "../../../utils/write-log";
+import { UserContext } from "../../../context/UserContext";
 
 function Register() {
   const [user, setUser] = useState({});
+  const { register } = useContext(UserContext);
   function handleChange(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
@@ -18,6 +20,9 @@ function Register() {
       `RegisterUser: User data captured from 
       form to register: ${JSON.stringify(user)}`
     );
+
+    // sending data to context to call API
+    register(user);
   }
 
   return (

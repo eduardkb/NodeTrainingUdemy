@@ -16,6 +16,7 @@ const getUserByToken = async (token, res) => {
     const decoded = jwt.verify(token, signature);
     const userId = decoded.id;
     const user = await User.findOne({ _id: userId });
+    writeLog("DEB", "GetUserByToken", `Data: ${JSON.stringify(user)}`);
     if (!user) {
       return res.status(401).json({ message: "Acesso negado." });
     }
