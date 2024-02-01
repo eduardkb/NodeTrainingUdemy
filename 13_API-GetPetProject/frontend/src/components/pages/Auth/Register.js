@@ -1,14 +1,29 @@
 import Input from "../../form/input";
 import styles from "../../form/form.module.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import writeLog from "../../../utils/write-log";
 
 function Register() {
-  function handleChange(e) {}
+  const [user, setUser] = useState({});
+  function handleChange(e) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault(); // prevent react from reloading page
+    // log user to be regitered
+    writeLog(
+      "DEB",
+      `RegisterUser: User data captured from 
+      form to register: ${JSON.stringify(user)}`
+    );
+  }
 
   return (
     <section className={styles.form_container}>
       <h1>Registrar</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           text="Nome"
           type="text"

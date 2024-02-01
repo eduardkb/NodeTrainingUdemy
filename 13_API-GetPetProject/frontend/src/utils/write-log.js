@@ -1,7 +1,7 @@
-module.exports = function writeLog(classification, type, message) {
+module.exports = function writeLog(classification, message) {
   const bPrintDebug = true;
   const bPrintMessages = true;
-  const msg = `==> ${new Date().toISOString()} - ${classification}_${type}: ${message}`;
+  const msg = `==> ${new Date().toISOString()} - ${classification}: ${message}`;
   if (classification === "DEB" && bPrintDebug) {
     writeMsg(msg);
   }
