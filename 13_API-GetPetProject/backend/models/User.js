@@ -10,6 +10,7 @@ const User = mongoose.model(
       password: { type: String, required: true },
       image: { type: String },
       phone: { type: String, required: true },
+      isAdmin: { type: Boolean },
     },
     { timestamps: true }
   )

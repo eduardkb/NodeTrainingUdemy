@@ -1,6 +1,7 @@
 const cors = require("cors");
 require("dotenv").config();
 const writeLog = require("./write-log");
+const admSetup = require("../controllers/userController");
 
 const iniMiddlewares = (app, express) => {
   // reset log
@@ -19,5 +20,8 @@ const iniMiddlewares = (app, express) => {
 
   // Swagger Initialization
   require("./swagger").swaggerIni(app);
+
+  // setup admin user
+  admSetup.createAdmin();
 };
 module.exports = { iniMiddlewares };

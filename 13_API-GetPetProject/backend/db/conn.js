@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const writeLog = require("../helper/write-log");
 const getSecret = require("../helper/get-secrets");
+const userControl = require("../controllers/userController");
 
 async function main() {
   try {
@@ -14,4 +15,5 @@ async function main() {
   }
 }
 main();
+
 module.exports = mongoose.mongoose;

@@ -106,10 +106,10 @@ router.delete(
     #swagger.summary = 'Delete a pet'
     #swagger.description = 'Removes a pet from the system'
     #swagger.parameters['id'] = {
-            in: 'path'
-            description: 'ID of the Pet to be deleted'            
-            type: 'string'
-            required: true
+            in: 'path',
+            description: 'ID of the Pet to be deleted',          
+            type: 'string',
+            required: true,
             schema: {
               id: "124351234"
             }

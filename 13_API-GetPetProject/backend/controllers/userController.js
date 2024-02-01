@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 // import helpers
 const writeLog = require("../helper/write-log");
@@ -72,10 +73,6 @@ module.exports = class UserController {
     try {
       const newUser = await user.save();
       createUserToken(newUser, req, res);
-      // res.status(201).json({
-      //   message: `Usuário '${email}' registrado com successo.`,
-      //   newUser,
-      // });
       writeLog("INF", "DbOk", `User saved successfully: ${newUser}`);
     } catch (error) {
       writeLog("DEB", "DbErr", `Error saving user to db: ${error}`);
@@ -280,6 +277,33 @@ module.exports = class UserController {
       });
     } catch (error) {
       res.status(500).json({ message: `Error retreivng data. Err:${error}` });
+    }
+  }
+  static async createAdmin() {
+    try {
+      const admUserEmail = process.env.ADMIN_USER || "admin@edu.com";
+      // verify if Admin user exists
+      const userExists = await User.findOne({ email: admUserEmail });
+      if (!userExists) {
+        // crypt user's password
+        const salt = await bcrypt.genSalt(12);
+        const passHash = await bcrypt.hash("admin1234", salt);
+
+        // create user object with admin user properties
+        const user = new User({
+          name: "Admin",
+          email: admUserEmail,
+          phone: "+1-000-000-0000",
+          password: passHash,
+          isAdmin: true,
+        });
+
+        // write user to DB
+        await user.save();
+        writeLog("DEB", "AdminUser", `Admin user created successfully`);
+      }
+    } catch (error) {
+      writeLog("DEB", "AdminUser", `Error while creating Admin ID: ${error}`);
     }
   }
 };

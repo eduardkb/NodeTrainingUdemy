@@ -7,6 +7,7 @@ UPLOAD_PICTURES_TO_AZURE="false" # "true"=Upload pictures to Azure; "false"=uplo
 PORT=5000 # server initialization port
 SWAGGER_SERVER="localhost:5000" # Swagger server
 CORS_URL="http://localhost:3000" # CORS URL
+ADMIN_USER="admin@edu.com" # initial password = "admin1234"
 
 
 # This app uses MongoDB as its dabatase
