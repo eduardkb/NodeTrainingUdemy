@@ -2,7 +2,7 @@ require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const rootDir = require("path").resolve("./");
-const logDir = rootDir + "\\log";
+const logDir = rootDir + "/log";
 let delDay = "";
 
 module.exports = function writeLog(classification, type, message) {
@@ -37,7 +37,7 @@ function writeLogToFile(msg) {
   // create file if not existant
   const fileName =
     "AppLog_" + new Date().toISOString().split("T")[0].split("-").join("");
-  const file = `${logDir}\\${fileName}.log`;
+  const file = `${logDir}/${fileName}.log`;
 
   try {
     if (fs.existsSync(file)) {
