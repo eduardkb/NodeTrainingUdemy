@@ -6,6 +6,7 @@
 
 - images
   - make option to upload images to azure
+  - how to make token expire?
 
 ## Intro
 

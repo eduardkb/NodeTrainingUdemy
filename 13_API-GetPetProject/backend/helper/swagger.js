@@ -19,7 +19,7 @@ const swaggerIni = async (expApp) => {
     ],
     components: {
       "@schemas": {
-        userBody: {
+        userRegister: {
           type: "object",
           properties: {
             name: {
@@ -46,6 +46,40 @@ const swaggerIni = async (expApp) => {
               type: "string",
               confirmpassword: "User Name",
               example: "johndoe1234",
+            },
+          },
+        },
+        userModify: {
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              description: "User Name",
+              example: "John Doe",
+            },
+            email: {
+              type: "string",
+              description: "User email",
+              example: "johndoe@edu.com",
+            },
+            phone: {
+              type: "string",
+              description: "User Phone",
+              example: "+555-444-3333",
+            },
+            password: {
+              type: "string",
+              description: "User Password",
+              example: "johndoe1234",
+            },
+            confirmpassword: {
+              type: "string",
+              confirmpassword: "User Confirm Password",
+              example: "johndoe1234",
+            },
+            image: {
+              type: "string",
+              format: "binary",
             },
           },
         },

@@ -89,11 +89,23 @@ router.patch(
   imageUpload.array("images"),
   PetController.updatePet
   /*
-    #swagger.ignore = true
     #swagger.path = '/pets/{id}'
     #swagger.tags = ['Pets']
     #swagger.summary = 'Modify a pet'
     #swagger.description = 'Changes a pet's registered values'
+    #swagger.security = [{
+            "bearerAuth": []
+    }]
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "multipart/form-data": {
+          schema: {            
+            $ref: "#/components/schemas/petBody"
+          }  
+        }
+      }
+    }
 */
 );
 router.delete(

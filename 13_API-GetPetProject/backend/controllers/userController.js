@@ -189,9 +189,6 @@ module.exports = class UserController {
     }
   }
   static async editUser(req, res) {
-    // get user id
-    const id = req.params.id;
-
     // verify if user exists
     const token = getToken(req);
     const user = await getUserByToken(token, res);

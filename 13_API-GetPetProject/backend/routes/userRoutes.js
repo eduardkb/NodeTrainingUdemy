@@ -27,7 +27,7 @@ router.post(
             content: {
                 "application/json": {
                     schema: {
-                        $ref: "#/components/schemas/userBody"
+                        $ref: "#/components/schemas/userRegister"
                     }  
                 }
             }
@@ -79,16 +79,28 @@ router.get(
   */
 );
 router.patch(
-  "/edit/:id",
+  "/edit",
   verifyToken,
   imageUpload.single("image"),
   UserController.editUser
-  /*
-    #swagger.ignore = true
-    #swagger.path = '/users/edit/{id}'
+  /*    
+    #swagger.path = '/users/edit'
     #swagger.tags = ['Users']
     #swagger.summary = 'Edit a user'
     #swagger.description = 'Modifies the properties of a user'
+    #swagger.security = [{
+            "bearerAuth": []
+    }]
+    #swagger.requestBody = {
+            required: true,
+            content: {
+                "multipart/form-data": {
+                    schema: {
+                        $ref: "#/components/schemas/userModify"
+                    }  
+                }
+            }
+        }
   */
 );
 
