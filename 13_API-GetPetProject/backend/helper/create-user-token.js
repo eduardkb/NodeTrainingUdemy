@@ -11,7 +11,10 @@ const createUserToken = async (user, req, res) => {
       id: user._id,
       dt_gen: new Date().toISOString(),
     },
-    jwtSecret
+    jwtSecret,
+    {
+      expiresIn: 24 * 60 * 60, // in seconds
+    }
   );
 
   // returning token
