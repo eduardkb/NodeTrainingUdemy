@@ -9,7 +9,8 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "helper/*.json"
+      "helper/*.json",
+      "log/*.log"
     ]
   },
   "keywords": [],

@@ -159,3 +159,4 @@ package-lock.json
 !**/users/*.placeholder
 .env
 swagger-output.json
+**/log

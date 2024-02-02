@@ -7,6 +7,7 @@
 - images
   - make option to upload images to azure
   - write log to a file
+  - send logs to azure blob storage
 
 ## Intro
 
