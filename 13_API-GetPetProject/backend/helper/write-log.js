@@ -25,7 +25,7 @@ module.exports = function writeLog(classification, type, message) {
 
 function writeMsg(msg) {
   console.log(`${new Date().toISOString()} ==> ${msg}`);
-  //console.log("".padEnd(50, "="), `\n${msg}\n`, "".padEnd(50, "-"));
+  //console.log("".padEnd(50, "="), `\r\n${msg}\r\n`, "".padEnd(50, "-"));
 }
 
 function writeLogToFile(msg) {
@@ -41,11 +41,11 @@ function writeLogToFile(msg) {
 
   try {
     if (fs.existsSync(file)) {
-      fs.appendFile(file, `${new Date().toISOString()} ==> ${msg}\n`, (err) =>
+      fs.appendFile(file, `${new Date().toISOString()} ==> ${msg}\r\n`, (err) =>
         err ? console.log("Error writing log. ERROR:", err) : null
       );
     } else {
-      fs.writeFile(file, `${new Date().toISOString()} ==> ${msg}\n`, (err) =>
+      fs.writeFile(file, `${new Date().toISOString()} ==> ${msg}\r\n`, (err) =>
         err ? console.log("Error writing log. ERROR:", err) : null
       );
     }
