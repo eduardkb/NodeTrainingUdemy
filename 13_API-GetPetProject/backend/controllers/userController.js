@@ -154,11 +154,13 @@ module.exports = class UserController {
         currentUser = null;
         return res
           .status(400)
-          .send({ message: "Error decoding token. Access Denied." });
+          .send({ message: "Token Inválido. Acesso Negado." });
       }
     } else {
       currentUser = null;
-      return res.status(500).send({ message: "No token received." });
+      return res
+        .status(500)
+        .send({ message: "Token Inválido. Acesso Negado." });
     }
     res.status(200).send(currentUser);
   }
@@ -273,7 +275,11 @@ module.exports = class UserController {
         ],
       });
     } catch (error) {
-      res.status(500).json({ message: `Error retreivng data. Err:${error}` });
+      res
+        .status(500)
+        .json({
+          message: `Erro ao consultar dados. Tente novamente mais tarde.`,
+        });
     }
   }
   static async createAdmin() {
