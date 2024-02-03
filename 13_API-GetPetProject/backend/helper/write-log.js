@@ -61,9 +61,9 @@ function deleteOldFiles() {
   // only run deletion once a day
   let today = new Date().toISOString().split("T")[0].split("-").join("");
 
-  //for test:
-  let day = new Date().getHours();
-  today = today + "_" + day;
+  //for test: (run every hour)
+  // let hour = new Date().getHours();
+  // today = today + "_" + hour;
 
   if (!(today === delDay)) {
     writeLogToFile(

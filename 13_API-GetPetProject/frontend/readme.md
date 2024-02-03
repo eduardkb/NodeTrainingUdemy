@@ -4,7 +4,7 @@
 
 ## ToDo
 
-- axios getting correct path from .env.local file?
+- while registering user, if backend is not available, app crashes
 
 ## Intro
 

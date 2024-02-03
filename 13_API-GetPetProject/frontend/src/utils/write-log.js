@@ -11,5 +11,6 @@ module.exports = function writeLog(classification, message) {
 };
 
 function writeMsg(msg) {
-  console.log("".padEnd(50, "="), `\n${msg}\n`, "".padEnd(50, "-"));
+  console.log(msg);
+  // console.log("".padEnd(50, "="), `\n${msg}\n`, "".padEnd(50, "-"));
 }
