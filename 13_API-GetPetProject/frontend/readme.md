@@ -4,7 +4,7 @@
 
 ## ToDo
 
-- while registering user, if backend is not available, app crashes
+-
 
 ## Intro
 

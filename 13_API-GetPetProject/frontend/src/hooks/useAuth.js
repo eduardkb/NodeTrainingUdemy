@@ -24,15 +24,14 @@ export default function useAuth() {
       writeLog(
         "DEB",
         `AxiosERROR: Called API to register user
-            and received ERROR: ${error}`
+            and received ERROR: ${JSON.stringify(error)}`
       );
-      msgText = error.response.data.message;
+      if (!error.response) {
+        msgText = error.message;
+      } else {
+        msgText = error.response.data.message;
+      }
       msgType = "error";
-      // if (error.response.data) {
-      //   writeLog("DEB", `Register return ERROR data: ${error.response}`);
-      //   msgText = error.response.data.message;
-      //   msgType = "error";
-      // }
     }
     setFlashMessage(msgText, msgType);
   }
