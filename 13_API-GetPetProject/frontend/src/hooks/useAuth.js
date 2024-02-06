@@ -1,7 +1,7 @@
 import api from "../utils/api";
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import writeLog from "../utils/write-log";
 import useFlashMessage from "./useFlashMessage";
 
@@ -55,6 +55,16 @@ export default function useAuth() {
 
     navigate("/");
   }
+  function logout() {
+    const msgText = "Logout realizado com sucesso";
+    const msgType = "success";
 
-  return { authenticated, register };
+    setAuthenticated(false);
+    localStorage.removeItem("token");
+    api.defaults.headers.Authorization = undefined;
+    redirect("/");
+
+    setFlashMessage(msgText, msgType);
+  }
+  return { authenticated, register, logout };
 }
