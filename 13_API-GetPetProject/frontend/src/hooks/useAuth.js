@@ -45,16 +45,7 @@ export default function useAuth() {
     }
     setFlashMessage(msgText, msgType);
   }
-  async function authUser(data) {
-    setAuthenticated(true);
-    writeLog(
-      "DEB",
-      `User Logged in. Data.token= ${JSON.stringify(data.token)}`
-    );
-    localStorage.setItem("token", JSON.stringify(data.token));
 
-    navigate("/");
-  }
   function logout() {
     const msgText = "Logout realizado com sucesso";
     const msgType = "success";
@@ -66,5 +57,35 @@ export default function useAuth() {
 
     setFlashMessage(msgText, msgType);
   }
-  return { authenticated, register, logout };
+  async function login(user) {
+    let msgText = "Login realizado com sucesso.";
+    let msgType = "success";
+
+    try {
+      const data = await api.post("/users/login", user).then((response) => {
+        return response.data;
+      });
+      await authUser(data);
+      writeLog("DEB", `Usuário logado com successo.`);
+    } catch (error) {
+      writeLog(
+        "DEB",
+        `Error ao logar usuario. ERR: ${error.response.data.message}`
+      );
+      msgText = error.response.data.message;
+      msgType = "error";
+    }
+    setFlashMessage(msgText, msgType);
+  }
+  async function authUser(data) {
+    setAuthenticated(true);
+    writeLog(
+      "DEB",
+      `User Logged in. Data.token= ${JSON.stringify(data.token)}`
+    );
+    localStorage.setItem("token", JSON.stringify(data.token));
+
+    navigate("/");
+  }
+  return { authenticated, register, logout, login };
 }
