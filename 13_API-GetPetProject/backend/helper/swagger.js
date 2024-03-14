@@ -5,7 +5,7 @@ require("dotenv").config();
 const writeLog = require("./write-log");
 
 const swaggerIni = async (expApp) => {
-  const srvURL = process.env.SWAGGER_SERVER || `http://localhost:5000`;
+  const srvURL = process.env.SWAGGER_URL || `http://localhost:5000`;
   const doc = {
     info: {
       version: "1.0.0",
