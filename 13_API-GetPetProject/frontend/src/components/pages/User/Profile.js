@@ -3,10 +3,13 @@ import api from "../../../utils/api";
 import styles from "./Profile.module.css";
 import formStyles from "../../form/form.module.css";
 import Input from "../../form/input";
+import useFlashMessage from "../../../hooks/useFlashMessage";
+import writeLog from "../../../utils/write-log";
 
 function Profile() {
   const [user, setUser] = useState({});
   const [token] = useState(localStorage.getItem("token") || "");
+  const { setFlashMessage } = useFlashMessage();
 
   useEffect(() => {
     api
@@ -21,18 +24,53 @@ function Profile() {
   }, [token]);
 
   function onFileChange(e) {
-    return 1;
+    setUser({ ...user, [e.target.name]: e.target.files[0] });
   }
   function handleChange(e) {
-    return 1;
+    setUser({ ...user, [e.target.name]: e.target.value });
   }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let msgType = "success";
+    let message = "Success";
+
+    const formData = new FormData();
+    await Object.keys(user).forEach((key) => formData.append(key, user[key]));
+
+    writeLog("DEB", `Changed user: ${JSON.stringify(user)}`);
+    writeLog("DEB", `Changed user (formData): ${JSON.stringify(formData)}`);
+
+    const data = await api
+      .patch(`/users/edit`, formData, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        message = response.data.message;
+        return response.data;
+      })
+      .catch((err) => {
+        msgType = "error";
+        if (err.response.data.message) {
+          message = `Error while changing user: ${err.response.data.message}`;
+        } else {
+          message = `Error while changing user: ${err}`;
+        }
+        return err.response.data;
+      });
+
+    setFlashMessage(message, msgType);
+  }
+
   return (
     <section>
       <div className={styles.profile_header}>
         <h1>Perfil</h1>
         <p>Preview Imagem</p>
       </div>
-      <form className={formStyles.form_container}>
+      <form onSubmit={handleSubmit} className={formStyles.form_container}>
         <Input
           text="Imagem"
           type="file"
