@@ -1,7 +1,7 @@
 import api from "../utils/api";
 
 import { useState, useEffect } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import writeLog from "../utils/write-log";
 import useFlashMessage from "./useFlashMessage";
 
@@ -53,7 +53,7 @@ export default function useAuth() {
     setAuthenticated(false);
     localStorage.removeItem("token");
     api.defaults.headers.Authorization = undefined;
-    redirect("/");
+    navigate("/");
 
     setFlashMessage(msgText, msgType);
   }

@@ -1,10 +1,24 @@
 import { useState, useEffect } from "react";
+import api from "../../../utils/api";
 import styles from "./Profile.module.css";
 import formStyles from "../../form/form.module.css";
 import Input from "../../form/input";
 
 function Profile() {
   const [user, setUser] = useState({});
+  const [token] = useState(localStorage.getItem("token") || "");
+
+  useEffect(() => {
+    api
+      .get("users/checkuser", {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        setUser(response.data);
+      });
+  }, [token]);
 
   function onFileChange(e) {
     return 1;
@@ -39,7 +53,7 @@ function Profile() {
           name="name"
           placeholder="Digite seu nome"
           handleOnChange={handleChange}
-          value={user.nome || ""}
+          value={user.name || ""}
         />
         <Input
           text="Telefone"
