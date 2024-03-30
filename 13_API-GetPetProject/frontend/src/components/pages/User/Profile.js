@@ -5,11 +5,14 @@ import formStyles from "../../form/form.module.css";
 import Input from "../../form/input";
 import useFlashMessage from "../../../hooks/useFlashMessage";
 import writeLog from "../../../utils/write-log";
+import RoundedImage from "../../layout/RoundedImage";
 
 function Profile() {
   const [user, setUser] = useState({});
+  const [preview, setPreview] = useState();
   const [token] = useState(localStorage.getItem("token") || "");
   const { setFlashMessage } = useFlashMessage();
+  const myAppAPI = process.env.REACT_APP_API || "http://localhost:5000";
 
   useEffect(() => {
     api
@@ -24,6 +27,7 @@ function Profile() {
   }, [token]);
 
   function onFileChange(e) {
+    setPreview(e.target.files[0]);
     setUser({ ...user, [e.target.name]: e.target.files[0] });
   }
   function handleChange(e) {
@@ -37,10 +41,9 @@ function Profile() {
     const formData = new FormData();
     await Object.keys(user).forEach((key) => formData.append(key, user[key]));
 
-    writeLog("DEB", `Changed user: ${JSON.stringify(user)}`);
-    writeLog("DEB", `Changed user (formData): ${JSON.stringify(formData)}`);
+    writeLog("DEB", `Changed user data: ${JSON.stringify(user)}`);
 
-    const data = await api
+    await api
       .patch(`/users/edit`, formData, {
         headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
@@ -68,7 +71,16 @@ function Profile() {
     <section>
       <div className={styles.profile_header}>
         <h1>Perfil</h1>
-        <p>Preview Imagem</p>
+        {(user.image || preview) && (
+          <RoundedImage
+            src={
+              preview
+                ? URL.createObjectURL(preview)
+                : `${myAppAPI}/images/users/${user.image}`
+            }
+            alt={user.name}
+          />
+        )}
       </div>
       <form onSubmit={handleSubmit} className={formStyles.form_container}>
         <Input
