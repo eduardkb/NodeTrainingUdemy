@@ -23,6 +23,35 @@ function MyPets() {
       });
   }, [token]);
 
+  async function removePet(id) {
+    let msgType = "success";
+    let message = "";
+
+    await api
+      .delete(`/pets/${id}`, {
+        Headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+        },
+      })
+      .then((response) => {
+        message = response.data.message;
+        const updatedPets = pets.filter((pet) => pet._id !== id);
+        setPets(updatedPets);
+        return response.data;
+      })
+      .catch((err) => {
+        msgType = "error";
+        if (err.response.data.message) {
+          message = err.response.data.message;
+        } else {
+          message = `Erro ao adicionar pet: ${err}`;
+        }
+        return err.response.data;
+      });
+
+    setFlashMessage(message, msgType);
+  }
+
   return (
     <section>
       <div className={styles.petslist_header}>
@@ -48,7 +77,13 @@ function MyPets() {
                       </button>
                     )}
                     <Link to={`/pet/edit/${pet.id}`}>Editar</Link>
-                    <button>Excluir </button>
+                    <button
+                      onClick={() => {
+                        removePet(pet._id);
+                      }}
+                    >
+                      Excluir
+                    </button>
                   </>
                 ) : (
                   <p>Pet já adotado</p>
