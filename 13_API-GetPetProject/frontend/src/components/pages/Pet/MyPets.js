@@ -61,7 +61,7 @@ function MyPets() {
       <div className={styles.petslist_container}>
         {pets.length > 0 &&
           pets.map((pet) => (
-            <div className={styles.petlist_row} key={pet.id}>
+            <div className={styles.petlist_row} key={pet._id}>
               <RoundedImage
                 src={`${myAppAPI}/images/pets/${pet.images[0]}`}
                 alt={pet.name}
@@ -76,7 +76,7 @@ function MyPets() {
                         Concluir Adoçao
                       </button>
                     )}
-                    <Link to={`/pet/edit/${pet.id}`}>Editar</Link>
+                    <Link to={`/pet/edit`}>Editar</Link>
                     <button
                       onClick={() => {
                         removePet(pet._id);
