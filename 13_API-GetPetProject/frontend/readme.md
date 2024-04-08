@@ -4,7 +4,8 @@
 
 ## ToDo
 
--
+- when token ivalid inside autheniticated area page stops with error
+- 404 page not found not working
 
 ## Intro
 

@@ -14,12 +14,16 @@ function MyPets() {
   useEffect(() => {
     api
       .get("/pets/mypets", {
-        Headers: {
+        headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
         },
       })
       .then((response) => {
         setPets(response.data.pets);
+      })
+      .catch((err) => {
+        console.log(console.log(`Bearer ${JSON.parse(token)}`));
+        console.log(`Err: ${err}`);
       });
   }, [token]);
 
@@ -29,7 +33,7 @@ function MyPets() {
 
     await api
       .delete(`/pets/${id}`, {
-        Headers: {
+        headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
         },
       })
