@@ -22,7 +22,7 @@ function Home() {
       <div className={styles.pet_container}>
         {pets.length > 0 &&
           pets.map((pet) => (
-            <div className={styles.pet_card}>
+            <div key={pet._id} className={styles.pet_card}>
               <div
                 style={{
                   backgroundImage: `url(${myAppAPI}/images/pets/${pet.images[0]})`,
@@ -39,7 +39,7 @@ function Home() {
               {pet.available ? (
                 <Link to={`pet/${pet._id}`}>Mais Detalhes</Link>
               ) : (
-                <p className={styles.adopted_text}>Mais Detalhes</p>
+                <p className={styles.adopted_text}>Já Adotado</p>
               )}
             </div>
           ))}
