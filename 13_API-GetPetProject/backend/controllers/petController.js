@@ -266,15 +266,12 @@ module.exports = class PetController {
       updatedData.color = color;
 
       // image upload
-      if (images.length === 0) {
-        return res
-          .status(422)
-          .json({ message: "Upload de imagem do pet é obrigatório." });
+      if (images.length > 0) {
+        updatedData.images = [];
+        images.map((image) => {
+          updatedData.images.push(image.filename);
+        });
       }
-      updatedData.images = [];
-      images.map((image) => {
-        updatedData.images.push(image.filename);
-      });
 
       // update pet
       await Pet.findByIdAndUpdate(id, updatedData);

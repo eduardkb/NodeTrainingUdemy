@@ -33,7 +33,7 @@ function App() {
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/pet/mypets" element={<MyPets />} />
             <Route path="/pet/add" element={<AddPet />} />
-            <Route path="/pet/edit" element={<EditPet />} />
+            <Route path="/pet/edit/:id" element={<EditPet />} />
             <Route path="*" element={<MyPets />} />
           </Routes>
         </Container>

@@ -80,7 +80,7 @@ function MyPets() {
                         Concluir Adoçao
                       </button>
                     )}
-                    <Link to={`/pet/edit`}>Editar</Link>
+                    <Link to={`/pet/edit/${pet._id}`}>Editar</Link>
                     <button
                       onClick={() => {
                         removePet(pet._id);
