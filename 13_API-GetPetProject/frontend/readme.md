@@ -6,6 +6,8 @@
 
 - when token ivalid inside autheniticated area page stops with error
 - 404 page not found not working
+- loading placeholder enquanto esta carregando pets
+- no edit. alterar id no endereço gera exception
 
 ## Intro
 
