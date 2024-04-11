@@ -23,14 +23,21 @@ function Home() {
         {pets.length > 0 &&
           pets.map((pet) => (
             <div key={pet._id} className={styles.pet_card}>
-              <div
-                style={{
-                  backgroundImage: `url(${myAppAPI}/images/pets/${pet.images[0]})`,
-                }}
-                className={styles.pet_card_image}
-              >
-                {" "}
-              </div>
+              {pet.images[0] === undefined ? (
+                <div
+                  style={{
+                    backgroundImage: `url(${myAppAPI}/images/pets/pets.placeholder)`,
+                  }}
+                  className={styles.pet_card_image}
+                ></div>
+              ) : (
+                <div
+                  style={{
+                    backgroundImage: `url(${myAppAPI}/images/pets/${pet.images[0]})`,
+                  }}
+                  className={styles.pet_card_image}
+                ></div>
+              )}
 
               <h3>{pet.name}</h3>
               <p>

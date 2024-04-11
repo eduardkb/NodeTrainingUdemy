@@ -66,11 +66,20 @@ function MyPets() {
         {pets.length > 0 &&
           pets.map((pet) => (
             <div className={styles.petlist_row} key={pet._id}>
-              <RoundedImage
-                src={`${myAppAPI}/images/pets/${pet.images[0]}`}
-                alt={pet.name}
-                width="px75"
-              />
+              {pet.images[0] === undefined ? (
+                <RoundedImage
+                  src={`${myAppAPI}/images/pets/pets.placeholder`}
+                  alt={pet.name}
+                  width="px75"
+                />
+              ) : (
+                <RoundedImage
+                  src={`${myAppAPI}/images/pets/${pet.images[0]}`}
+                  alt={pet.name}
+                  width="px75"
+                />
+              )}
+
               <span className="bold">{pet.name}</span>
               <div className={styles.actions}>
                 {pet.available ? (
