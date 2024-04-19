@@ -16,10 +16,13 @@ function Navbar() {
       </div>
       <ul>
         <li>
-          <Link to="/">Adotar</Link>
+          <Link to="/">Pets</Link>
         </li>
         {authenticated ? (
           <>
+            <li>
+              <Link to="/pet/myadoptions">Minhas Adoções</Link>
+            </li>
             <li>
               <Link to="/pet/mypets">Meus Pets</Link>
             </li>
