@@ -19,7 +19,14 @@ function EditPet() {
         },
       })
       .then((response) => {
-        setPet(response.data.pet);
+        if (response.data.pet) {
+          setPet(response.data.pet);
+        } else {
+          setPet({});
+        }
+      })
+      .catch((err) => {
+        setPet({ errID: id });
       });
   }, [token, id]);
 
@@ -54,12 +61,20 @@ function EditPet() {
 
   return (
     <section>
-      <div className={styles.addpet_header}>
-        <h1>Editando o Pet: {pet.name}</h1>
-        <p>Atualizar dados</p>
-      </div>
-      {pet.name && (
-        <PetForm handleSubmit={updatePet} btnText="Atualizar" petData={pet} />
+      {pet.name ? (
+        <>
+          <div className={styles.addpet_header}>
+            <h1>Editando o Pet: {pet.name}</h1>
+            <p>Atualizar dados</p>
+          </div>
+          <PetForm handleSubmit={updatePet} btnText="Atualizar" petData={pet} />
+        </>
+      ) : (
+        <>
+          <div className={styles.addpet_header}>
+            <p>Pet com id "{pet.errID}" nao Encontrado</p>
+          </div>
+        </>
       )}
     </section>
   );

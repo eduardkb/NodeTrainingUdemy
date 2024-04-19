@@ -12,9 +12,18 @@ function PetDetails() {
   const myAppAPI = process.env.REACT_APP_API || "http://localhost:5000";
 
   useEffect(() => {
-    api.get(`/pets/${id}`).then((response) => {
-      setPet(response.data.pet);
-    });
+    api
+      .get(`/pets/${id}`)
+      .then((response) => {
+        if (response.data.pet) {
+          setPet(response.data.pet);
+        } else {
+          setPet({ errID: id });
+        }
+      })
+      .catch((err) => {
+        setPet({ errID: id });
+      });
   }, [id]);
 
   async function schedule() {
@@ -43,7 +52,7 @@ function PetDetails() {
 
   return (
     <>
-      {pet.name && (
+      {pet.name ? (
         <section className={styles.pet_details_container}>
           <div className={styles.pet_details_header}>
             <h1>Conhecendo o Pet: {pet.name}</h1>
@@ -73,6 +82,10 @@ function PetDetails() {
             </p>
           )}
         </section>
+      ) : (
+        <div className={styles.pet_details_header}>
+          <p>Pet com ID "{pet.errID}" nao encontrado</p>
+        </div>
       )}
     </>
   );

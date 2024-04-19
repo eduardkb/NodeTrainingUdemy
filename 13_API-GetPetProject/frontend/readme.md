@@ -4,9 +4,9 @@
 
 ## ToDo
 
+- implement top level error handling
 - when token ivalid inside autheniticated area page stops with error
-- loading placeholder enquanto esta carregando pets
-- na pagina editar pet. alterar id no endereço gera exception
+- implement loading placeholdeer while getting pets from DB
 
 ## Intro
 
