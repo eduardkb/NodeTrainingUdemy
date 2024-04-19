@@ -5,6 +5,7 @@ import RoundedImage from "../../layout/RoundedImage";
 
 function MyAdoptions() {
   const [pets, setPets] = useState([]);
+  const [apiErr, setApiErr] = useState(false);
   const [token] = useState(localStorage.getItem("token") || "");
   const myAppAPI = process.env.REACT_APP_API || "http://localhost:5000";
 
@@ -16,7 +17,11 @@ function MyAdoptions() {
         },
       })
       .then((res) => {
+        setApiErr(false);
         setPets(res.data.pets);
+      })
+      .catch((err) => {
+        setApiErr(true);
       });
   }, [token]);
 
@@ -62,7 +67,16 @@ function MyAdoptions() {
             </div>
           ))
         ) : (
-          <p>Ainda nao há adoçoes de pets</p>
+          <>
+            {apiErr ? (
+              <>
+                <p>Erro ao recuperar minhas adoçoes</p>
+                <p>Faça login novamente</p>
+              </>
+            ) : (
+              <p>Ainda nao há adoçoes de pets</p>
+            )}
+          </>
         )}
       </div>
     </section>

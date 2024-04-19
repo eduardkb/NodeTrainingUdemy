@@ -5,7 +5,7 @@
 ## ToDo
 
 - implement top level error handling
-- when token ivalid inside autheniticated area page stops with error
+- On MyAdoptions.js and Profile.js when ApiErr = true create button that logs off and goes to login screen
 - implement loading placeholdeer while getting pets from DB
 
 ## Intro
