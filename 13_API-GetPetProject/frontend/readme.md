@@ -5,6 +5,7 @@
 ## ToDo
 
 - implement top level error handling
+- my pets page when token is invalid, and user has pets, says no pets found. give error and later log off and force new login
 - On MyAdoptions.js and Profile.js when ApiErr = true create button that logs off and goes to login screen
 - implement loading placeholdeer while getting pets from DB
 
