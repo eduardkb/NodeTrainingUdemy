@@ -12,6 +12,10 @@ const swaggerIni = async (expApp) => {
       title: "Pet Application API",
       description: "API to manage users and pets for 'Get a Pet' application",
     },
+    externalDocs: {
+      description: "Download swagger-definition.json",
+      url: `${srvURL}/swaggerdefinition.json`,
+    },
     servers: [
       {
         url: srvURL,
@@ -39,12 +43,12 @@ const swaggerIni = async (expApp) => {
             },
             password: {
               type: "string",
-              description: "User Name",
+              description: "User Password",
               example: "johndoe1234",
             },
             confirmpassword: {
               type: "string",
-              confirmpassword: "User Name",
+              description: "User Confirm Password",
               example: "johndoe1234",
             },
           },
@@ -74,7 +78,7 @@ const swaggerIni = async (expApp) => {
             },
             confirmpassword: {
               type: "string",
-              confirmpassword: "User Confirm Password",
+              description: "User Confirm Password",
               example: "johndoe1234",
             },
             image: {
@@ -147,7 +151,7 @@ const swaggerIni = async (expApp) => {
   };
 
   try {
-    const outputFile = "./helper/swagger-output.json";
+    const outputFile = "./helper/swagger-definition.json";
     const endpointsFiles = [
       "./routes/petRoutes.js",
       "./routes/userRoutes.js",
@@ -156,13 +160,17 @@ const swaggerIni = async (expApp) => {
     await swaggerAutogen(outputFile, endpointsFiles, doc);
 
     expApp.use(bodyParser.json());
-    const swaggerFile = require("./swagger-output.json");
+    const swaggerFile = require("./swagger-definition.json");
     expApp.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile));
     writeLog(
       "DEB",
       "Swagger",
       "Swagger file generated and initialized successfully."
     );
+    expApp.get("/swaggerdefinition.json", (req, res) => {
+      res.setHeader("Content-Type", "application/json");
+      res.send(swaggerFile);
+    });
   } catch (error) {
     writeLog("DEB", "SwaggerErr", `Error while initializing swagger: ${error}`);
   }

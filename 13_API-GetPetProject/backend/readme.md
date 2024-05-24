@@ -4,10 +4,10 @@
 
 ## To-Do
 
-- images
-  - make option to upload images to azure
-  - write log to a file
-  - send logs to azure blob storage
+- SECURITY ISSUE: admin re-created with standard password if users email is modified. verify if there is a user with "isAdmin"="true".
+- make option to upload images to azure
+- write log to a file
+- send logs to azure blob storage
 
 ## Intro
 
