@@ -1,14 +1,9 @@
 const { Sequelize } = require("sequelize");
 
-var sequelize = new Sequelize(
-  "ekb-devnode-sqldbs",
-  "eduardkb",
-  "Edu@rdkb1701",
-  {
-    host: "ekb-devnode-sqlsrv.database.windows.net",
-    dialect: "mssql",
-  }
-);
+var sequelize = new Sequelize("ekb-devnode-sqldbs", "azuser", "AzUserP@ss17", {
+  host: "ekb-devnode-sqlsrv.database.windows.net",
+  dialect: "mssql",
+});
 
 //Conn string from Azure:
 // Driver={ODBC Driver 18 for SQL Server};
